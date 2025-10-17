@@ -458,6 +458,8 @@
     <Content Include="Resources\Written Test 32 Sechdule.png" />
     <Content Include="Resources\Written Test 32.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Licenses\LocalLicenses\Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

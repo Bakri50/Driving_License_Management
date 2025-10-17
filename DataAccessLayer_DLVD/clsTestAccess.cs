@@ -91,7 +91,7 @@ namespace DataAccessLayer_DLVD
         }
 
 
-        static public byte NumberOfTestsPassed(int LocalDrivingLicenseApplicationID)
+        static public int NumberOfTestsPassed(int LocalDrivingLicenseApplicationID)
         {
 
             int Number = 0;
