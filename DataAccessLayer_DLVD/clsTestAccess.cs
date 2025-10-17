@@ -90,5 +90,41 @@ namespace DataAccessLayer_DLVD
             return TestID;
         }
 
+
+        static public byte NumberOfTestsPassed(int LocalDrivingLicenseApplicationID)
+        {
+
+            int Number = 0;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = @"select * from TestAppointments inner join Tests on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                           where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and Tests.TestResult = 1";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+      
+
+            try
+            {
+
+                connection.Open();
+                Object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int id))
+                {
+                    Number = id;
+                }
+
+            }
+            catch (Exception)
+            {
+                Number = 0;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return Number;
+        }
     }
 }

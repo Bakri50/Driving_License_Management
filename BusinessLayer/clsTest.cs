@@ -24,6 +24,10 @@ namespace BusinessLayer
         _Mode = enMode.AddNew;
         }
 
+       public static byte NumberOfTestsPassed(int LocalDrivingApplicationID)
+        {
+             return clsTestAccess.NumberOfTestsPassed(LocalDrivingApplicationID);
+        }
 
         bool _AddNew()
         {

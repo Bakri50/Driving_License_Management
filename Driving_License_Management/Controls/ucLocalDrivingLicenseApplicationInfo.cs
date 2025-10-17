@@ -54,7 +54,7 @@ namespace Driving_License_Management.Controls
             LocalDrivingLicenseApplicationID = LDLApplication.LocalDrivingLicenseApplicationID;
             lblLocalDrivingLicenseApplicationID.Text = LocalDrivingLicenseApplicationID.ToString();
             lblAppliedFor.Text = clsLicenseClass.Find(LDLApplication.LicenseClassID).ClassName ;
-            lblPassedTests.Text = "0/3";
+            lblPassedTests.Text = clsTest.NumberOfTestsPassed(LDLApplication.LocalDrivingLicenseApplicationID).ToString();
             ucApplicationBasicInfo1.LoadApplicationInfo(LDLApplication.ApplicationID);
         }
         private void _ResetLocalDrivingLicenseApplicationInfo()

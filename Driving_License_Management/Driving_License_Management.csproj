@@ -136,6 +136,12 @@
     <Compile Include="Licenses\Controls\ucDriverLicenses.Designer.cs">
       <DependentUpon>ucDriverLicenses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\LocalLicenses\frmIssueDrivingLicenceFirstTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\LocalLicenses\frmIssueDrivingLicenceFirstTime.Designer.cs">
+      <DependentUpon>frmIssueDrivingLicenceFirstTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +299,9 @@
     <EmbeddedResource Include="Licenses\Controls\ucDriverLicenses.resx">
       <DependentUpon>ucDriverLicenses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\LocalLicenses\frmIssueDrivingLicenceFirstTime.resx">
+      <DependentUpon>frmIssueDrivingLicenceFirstTime.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tests\frmAddUpdateTestAppointment.resx">
       <DependentUpon>frmAddUpdateTestAppointment.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,5 +458,6 @@
     <Content Include="Resources\Written Test 32 Sechdule.png" />
     <Content Include="Resources\Written Test 32.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
