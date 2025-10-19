@@ -12,9 +12,16 @@ namespace Driving_License_Management.Licenses.LocalLicenses
 {
     public partial class frmDriverLicenseInfo : Form
     {
-        public frmDriverLicenseInfo()
+        int _ApplicationID;
+        public frmDriverLicenseInfo(int ApplicationID)
         {
+            _ApplicationID = ApplicationID;
             InitializeComponent();
+        }
+
+        private void frmDriverLicenseInfo_Load(object sender, EventArgs e)
+        {
+            ucLocalDriver_sLicense1.LoadLicenseInfoByApplicationID(_ApplicationID);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

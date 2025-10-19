@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BusinessLayer;
 using Driving_License_Management.Tests;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Driving_License_Management.Licenses.LocalLicenses;
 
 namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 {
@@ -213,24 +214,35 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
                 scheduleTestToolStripMenuItem1.Enabled = true;
             }
 
+
             if (_DoseApplicationPassAllTests(ID) && LDLApplication.ApplicationStatus != (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled)
             {
                 
                     issueToolStripMenuItem1.Enabled = true;
-                showLicenseToolStripMenuItem.Enabled = false;
                 scheduleTestToolStripMenuItem1.Enabled = false;
             }
             else {
 
                 issueToolStripMenuItem1.Enabled = false;
-                showLicenseToolStripMenuItem.Enabled = false;
                 scheduleTestToolStripMenuItem1.Enabled = true;
 
             }
 
+            if (clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID))
+            {
+                issueToolStripMenuItem1.Enabled = false;
+
+                showLicenseToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                issueToolStripMenuItem1.Enabled = true;
+
+                showLicenseToolStripMenuItem.Enabled = false;
+            }
 
 
-            
+
         }
 
         private bool _DoseApplicationPassAllTests(int ID)
@@ -286,5 +298,22 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 
         }
 
+        private void issueToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgv.CurrentRow.Cells[0].Value;
+            frmIssueDrivingLicenceFirstTime frm = new frmIssueDrivingLicenceFirstTime(ID);
+            frm.ShowDialog();
+            _RfreshData();
+
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgv.CurrentRow.Cells[0].Value;
+            clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
+
+            frmDriverLicenseInfo frm = new frmDriverLicenseInfo(LDLApplication.ApplicationID);
+            frm.ShowDialog();
+        }
     }
 }

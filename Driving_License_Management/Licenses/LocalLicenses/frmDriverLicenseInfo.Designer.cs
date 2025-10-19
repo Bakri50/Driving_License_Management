@@ -94,6 +94,10 @@
             this.Text = "Driver License Info";
             ((System.ComponentModel.ISupportInitialize)(this.pbTestTypeImage)).EndInit();
             this.ResumeLayout(false);
+            //
+            //load
+            //
+            this.Load += new System.EventHandler(this.frmDriverLicenseInfo_Load);
 
         }
 

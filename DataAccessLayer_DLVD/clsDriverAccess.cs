@@ -82,5 +82,129 @@ namespace DataAccessLayer_DLVD
             return DriverID;
         }
 
+        static public bool GetDriverByDriverID(int DriverID, ref int PersonID,ref int CreatedByUserID,ref DateTime CreatedDate)
+        {
+        
+
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = "Select *From Drivers Where DriverID = @DriverID";
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@DriverID", DriverID);
+
+
+            try
+            {
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    PersonID = (int)reader["PersonID"];
+                    CreatedDate = (DateTime)reader["CreatedDate"];
+                    CreatedByUserID = (int)reader["CreatedDate"];
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+
+                connection.Close();
+            }
+
+            return IsFound;
+
+        
+
+    
+
+}
+
+        static public bool GetDriverByPersonID(int PersonID, ref int DriverID, ref int CreatedByUserID, ref DateTime CreatedDate)
+        {
+
+
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = "Select *From Drivers Where PersonID = @PersonID";
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@PersonID", PersonID);
+
+
+            try
+            {
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    DriverID = (int)reader["DriverID"];
+                    CreatedDate = (DateTime)reader["CreatedDate"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+                }
+
+                reader.Close();
+            }
+            catch (Exception )
+            {
+                return false;
+            }
+            finally
+            {
+
+                connection.Close();
+            }
+
+            return IsFound;
+
+
+
+
+
+        }
+
+        static public bool IsDriverExistByPersonID(int PersonID) {
+
+
+                bool IsFound = false;
+                SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+                string query = "SELECT Found = 1 FROM Drivers where PersonID = @PersonID";
+
+                SqlCommand cmd = new SqlCommand(query, connection);
+
+                cmd.Parameters.AddWithValue("@PersonID", PersonID);
+
+                try
+                {
+
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    IsFound = reader.HasRows;
+                    reader.Close();
+                }
+                catch (Exception)
+                {
+                return IsFound;
+            }
+            finally
+                {
+                    connection.Close();
+                }
+
+                return IsFound;
+
+            
+
+        }
     }
 }

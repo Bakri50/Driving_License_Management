@@ -116,6 +116,8 @@
             this.Name = "frmIssueDrivingLicenceFirstTime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Driving Licence For FirstTime";
+            this.Load += new System.EventHandler(this.frmIssueDrivingLicenceFirstTime_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
