@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer_DLVD;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,10 @@ namespace BusinessLayer
             return null;
         }
 
+        static public DataTable GetAllLicensesWithDriverID(int DriverID)
+        {
+            return clsLicenseAccess.GetAllLicensesWithDriverID(DriverID);
+        }
         public bool Save()
         {
             return _AddNew();

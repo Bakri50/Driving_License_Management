@@ -11,6 +11,7 @@ using BusinessLayer;
 using Driving_License_Management.Tests;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Driving_License_Management.Licenses.LocalLicenses;
+using Driving_License_Management.Licenses;
 
 namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 {
@@ -201,7 +202,9 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
                 editToolStripMenuItem.Enabled = false;
                 CancelToolStripMenuItem.Enabled = false;
                 scheduleTestToolStripMenuItem1.Enabled = false;
-                if(LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled) 
+                issueToolStripMenuItem1.Enabled = false;
+
+                if (LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled) 
                     return;
                 deleteToolStripMenuItem.Enabled = false;
            
@@ -215,28 +218,31 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             }
 
 
-            if (_DoseApplicationPassAllTests(ID) && LDLApplication.ApplicationStatus != (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled)
+            if (_DoseApplicationPassAllTests(ID) 
+                && LDLApplication.ApplicationStatus != (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled
+                && !clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID))
             {
                 
-                    issueToolStripMenuItem1.Enabled = true;
+                issueToolStripMenuItem1.Enabled = true;
                 scheduleTestToolStripMenuItem1.Enabled = false;
             }
             else {
-
-                issueToolStripMenuItem1.Enabled = false;
+                if (!clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID){
+                }
                 scheduleTestToolStripMenuItem1.Enabled = true;
+                issueToolStripMenuItem1.Enabled = false;
+                showLicenseToolStripMenuItem.Enabled = false;
 
             }
 
             if (clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID))
             {
-                issueToolStripMenuItem1.Enabled = false;
 
                 showLicenseToolStripMenuItem.Enabled = true;
+
             }
             else
             {
-                issueToolStripMenuItem1.Enabled = true;
 
                 showLicenseToolStripMenuItem.Enabled = false;
             }
@@ -313,6 +319,15 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
 
             frmDriverLicenseInfo frm = new frmDriverLicenseInfo(LDLApplication.ApplicationID);
+            frm.ShowDialog();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgv.CurrentRow.Cells[0].Value;
+            clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
+
+            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(LDLApplication.ApplicationID);
             frm.ShowDialog();
         }
     }

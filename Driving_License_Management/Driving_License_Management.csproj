@@ -136,6 +136,12 @@
     <Compile Include="Licenses\Controls\ucDriverLicenses.Designer.cs">
       <DependentUpon>ucDriverLicenses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\frmPersonLicensesHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmPersonLicensesHistory.Designer.cs">
+      <DependentUpon>frmPersonLicensesHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\LocalLicenses\Controls\ucDriver%27sLicenseInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -316,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controls\ucDriverLicenses.resx">
       <DependentUpon>ucDriverLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmPersonLicensesHistory.resx">
+      <DependentUpon>frmPersonLicensesHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\LocalLicenses\Controls\ucDriver%27sLicenseInfo.resx">
       <DependentUpon>ucDriver%27sLicenseInfo.cs</DependentUpon>

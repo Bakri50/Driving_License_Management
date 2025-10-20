@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DataAccessLayer_DLVD
 {
@@ -154,5 +156,47 @@ namespace DataAccessLayer_DLVD
 
 
         }
+
+        static public DataTable GetAllLicensesWithDriverID(int DriverID)
+        {
+
+
+            DataTable dt = new DataTable();
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = @"select LicenseID as 'Licenses ID' ,ApplicationID as 'App ID', LicenseClass As 'Class Name',IssueDate As 'Issue Date',
+                                    ExpirationDate As 'Expiration Date', IsActive As 'Is Active'
+                                    from Licenses 
+                                    where DriverID = @DriverID";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@DriverID", DriverID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+
+                return dt;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+        
+            
+
+        }
+
+
     }
 }

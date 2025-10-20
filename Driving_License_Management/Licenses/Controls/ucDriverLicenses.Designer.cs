@@ -86,13 +86,14 @@
             this.showLicenseInfoToolStripMenuItem.Name = "showLicenseInfoToolStripMenuItem";
             this.showLicenseInfoToolStripMenuItem.Size = new System.Drawing.Size(226, 32);
             this.showLicenseInfoToolStripMenuItem.Text = "Show License Info";
+            this.showLicenseInfoToolStripMenuItem.Click += new System.EventHandler(this.showLicenseInfoToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tcDriverLicenses);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1053, 333);
+            this.groupBox1.Size = new System.Drawing.Size(1071, 333);
             this.groupBox1.TabIndex = 132;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Driver Licenses";
@@ -104,7 +105,7 @@
             this.tcDriverLicenses.Location = new System.Drawing.Point(16, 36);
             this.tcDriverLicenses.Name = "tcDriverLicenses";
             this.tcDriverLicenses.SelectedIndex = 0;
-            this.tcDriverLicenses.Size = new System.Drawing.Size(1032, 288);
+            this.tcDriverLicenses.Size = new System.Drawing.Size(1052, 288);
             this.tcDriverLicenses.TabIndex = 131;
             // 
             // tpLocalLicenses
@@ -116,7 +117,7 @@
             this.tpLocalLicenses.Location = new System.Drawing.Point(4, 29);
             this.tpLocalLicenses.Name = "tpLocalLicenses";
             this.tpLocalLicenses.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLocalLicenses.Size = new System.Drawing.Size(1024, 255);
+            this.tpLocalLicenses.Size = new System.Drawing.Size(1044, 255);
             this.tpLocalLicenses.TabIndex = 0;
             this.tpLocalLicenses.Text = "Local";
             this.tpLocalLicenses.UseVisualStyleBackColor = true;
@@ -174,7 +175,7 @@
             this.dgvLocalLicensesHistory.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLocalLicensesHistory.RowHeadersWidth = 62;
             this.dgvLocalLicensesHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLocalLicensesHistory.Size = new System.Drawing.Size(996, 168);
+            this.dgvLocalLicensesHistory.Size = new System.Drawing.Size(1004, 168);
             this.dgvLocalLicensesHistory.TabIndex = 132;
             this.dgvLocalLicensesHistory.TabStop = false;
             // 
@@ -187,7 +188,7 @@
             this.tbInternationalLicenses.Location = new System.Drawing.Point(4, 29);
             this.tbInternationalLicenses.Name = "tbInternationalLicenses";
             this.tbInternationalLicenses.Padding = new System.Windows.Forms.Padding(3);
-            this.tbInternationalLicenses.Size = new System.Drawing.Size(1024, 255);
+            this.tbInternationalLicenses.Size = new System.Drawing.Size(1044, 255);
             this.tbInternationalLicenses.TabIndex = 1;
             this.tbInternationalLicenses.Text = "International";
             this.tbInternationalLicenses.UseVisualStyleBackColor = true;
@@ -230,7 +231,7 @@
             this.dgvInternationalLicensesHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInternationalLicensesHistory.ContextMenuStrip = this.cmsInterenationalLicenseHistory;
             this.dgvInternationalLicensesHistory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvInternationalLicensesHistory.Location = new System.Drawing.Point(14, 45);
+            this.dgvInternationalLicensesHistory.Location = new System.Drawing.Point(19, 45);
             this.dgvInternationalLicensesHistory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvInternationalLicensesHistory.MultiSelect = false;
             this.dgvInternationalLicensesHistory.Name = "dgvInternationalLicensesHistory";
@@ -255,7 +256,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "ucDriverLicenses";
-            this.Size = new System.Drawing.Size(1064, 339);
+            this.Size = new System.Drawing.Size(1073, 339);
             this.cmsInterenationalLicenseHistory.ResumeLayout(false);
             this.cmsLocalLicenseHistory.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

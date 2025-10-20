@@ -24,12 +24,13 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
         {
            
             _License = clsLicense.FindByApplicationID(ApplicationID);
-            clsPerson _Person = clsPerson.FindPerson(clsDriver.FindByDriverID(_License.DriverID).PersonID);
 
             if (_License == null) {
                 MessageBox.Show("License Not Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
             }
+            clsPerson _Person = clsPerson.FindPerson(clsDriver.FindByDriverID(_License.DriverID).PersonID);
+
             lblClass.Text = clsLicenseClass.Find(_License.LicenseClassID).ClassName;
             lblDriverID.Text = _License.DriverID.ToString();
             lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
