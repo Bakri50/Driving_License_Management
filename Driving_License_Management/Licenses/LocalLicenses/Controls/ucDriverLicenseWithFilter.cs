@@ -14,7 +14,19 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
     {
         public ucDriverLicenseWithFilter()
         {
+            
             InitializeComponent();
         }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            ucLocalDriver_sLicense1.LoadLicenseInfoByLicenseID(Convert.ToInt32(txtLicenseID.Text));
+        }
+
+        private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e) {
+        
+                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
     }
 }

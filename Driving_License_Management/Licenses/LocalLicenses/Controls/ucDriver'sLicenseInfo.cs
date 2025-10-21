@@ -64,6 +64,52 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
             pbPersonImage.ImageLocation = _Person.ImagePath;
 
         }
-      
+
+        public void LoadLicenseInfoByLicenseID(int LicenseID)
+        {
+
+            _License = clsLicense.FindByLicenseID(LicenseID);
+
+            if (_License == null)
+            {
+                MessageBox.Show("License Not Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            clsPerson _Person = clsPerson.FindPerson(clsDriver.FindByDriverID(_License.DriverID).PersonID);
+
+            lblClass.Text = clsLicenseClass.Find(_License.LicenseClassID).ClassName;
+            lblDriverID.Text = _License.DriverID.ToString();
+            lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
+            lblFullName.Text = clsLocalDrivingLicenseApplication.FindByApplicationID(_License.ApplicationID).FullName;
+            lblGendor.Text = (_Person.Gendor == 0) ? "Male" : "Female";
+            lblIsActive.Text = (_License.IsActive == 1) ? "Yes" : "No";
+            lblIsDetained.Text = (_License.IsActive == 1) ? "No" : "Yes";
+            lblIssueDate.Text = _License.IssueDate.ToShortDateString();
+
+            switch (_License.IssueReason)
+            {
+                case 1:
+                    lblIssueReason.Text = "FirstTime";
+                    break;
+                case 2:
+                    lblIssueReason.Text = "Renew";
+                    break;
+                case 3:
+                    lblIssueReason.Text = "Replacement for Damaged";
+                    break;
+                case 4:
+                    lblIssueReason.Text = "Replacement for Lost";
+                    break;
+                default:
+                    break;
+            }
+            lblLicenseID.Text = _License.LicenseID.ToString();
+            lblNationalNo.Text = _Person.NationalNo;
+            lblNotes.Text = _License.Notes.ToString();
+            lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
+            pbPersonImage.ImageLocation = _Person.ImagePath;
+
+        }
+
     }
 }

@@ -40,7 +40,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.scheduleTestToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.scheduleVisionTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,7 +148,7 @@
             this.toolStripSeparator1,
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem,
-            this.CancelToolStripMenuItem,
+            this.cancelToolStripMenuItem,
             this.toolStripSeparator2,
             this.scheduleTestToolStripMenuItem1,
             this.issueToolStripMenuItem1,
@@ -185,12 +185,12 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
-            // CancelToolStripMenuItem
+            // cancelToolStripMenuItem
             // 
-            this.CancelToolStripMenuItem.Name = "CancelToolStripMenuItem";
-            this.CancelToolStripMenuItem.Size = new System.Drawing.Size(338, 32);
-            this.CancelToolStripMenuItem.Text = "Cancel  Application";
-            this.CancelToolStripMenuItem.Click += new System.EventHandler(this.canceledToolStripMenuItem_Click);
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(338, 32);
+            this.cancelToolStripMenuItem.Text = "Cancel  Application";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.canceledToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -366,7 +366,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CancelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scheduleTestToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem issueToolStripMenuItem1;
         private System.Windows.Forms.DataGridView dgv;

@@ -196,55 +196,70 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
 
-            if (LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled ||
-               LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Completed)
+
+
+
+            if (LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled)
             {
                 editToolStripMenuItem.Enabled = false;
-                CancelToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+                cancelToolStripMenuItem.Enabled = false;
                 scheduleTestToolStripMenuItem1.Enabled = false;
                 issueToolStripMenuItem1.Enabled = false;
-
-                if (LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled) 
-                    return;
-                deleteToolStripMenuItem.Enabled = false;
-           
+                showLicenseToolStripMenuItem.Enabled = false;
+                return;
+                
             }
             else
             {
                 editToolStripMenuItem.Enabled = true;
                 deleteToolStripMenuItem.Enabled = true;
-                CancelToolStripMenuItem.Enabled = true;
+                cancelToolStripMenuItem.Enabled = true;
                 scheduleTestToolStripMenuItem1.Enabled = true;
-            }
-
-
-            if (_DoseApplicationPassAllTests(ID) 
-                && LDLApplication.ApplicationStatus != (int)clsLocalDrivingLicenseApplication.enStatus.Cancelled
-                && !clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID))
-            {
-                
                 issueToolStripMenuItem1.Enabled = true;
-                scheduleTestToolStripMenuItem1.Enabled = false;
-            }
-            else {
-                if (!clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID){
-                }
-                scheduleTestToolStripMenuItem1.Enabled = true;
-                issueToolStripMenuItem1.Enabled = false;
-                showLicenseToolStripMenuItem.Enabled = false;
-
-            }
-
-            if (clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID))
-            {
-
                 showLicenseToolStripMenuItem.Enabled = true;
+            }
 
+
+            if (LDLApplication.ApplicationStatus == (int)clsLocalDrivingLicenseApplication.enStatus.Completed)
+            {
+                editToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+                cancelToolStripMenuItem.Enabled = false;
+                scheduleTestToolStripMenuItem1.Enabled = false;
+                issueToolStripMenuItem1.Enabled = false;
+                showLicenseToolStripMenuItem.Enabled = true;
+                return;
             }
             else
             {
-
+                editToolStripMenuItem.Enabled = true;
+                deleteToolStripMenuItem.Enabled = true;
+                cancelToolStripMenuItem.Enabled = true;
+                scheduleTestToolStripMenuItem1.Enabled = true;
+                issueToolStripMenuItem1.Enabled = true;
                 showLicenseToolStripMenuItem.Enabled = false;
+
+            }
+
+            if (clsTest.DoseApplicationPassTest(ID,1))
+            {
+                editToolStripMenuItem.Enabled=false;
+            }
+            else
+            {
+                editToolStripMenuItem.Enabled=true;
+            }
+
+            if (_DoseApplicationPassAllTests(ID))
+            {
+                scheduleTestToolStripMenuItem1.Enabled=false;
+                issueToolStripMenuItem1.Enabled = true;
+            }
+            else
+            {
+                scheduleTestToolStripMenuItem1.Enabled = true;
+                issueToolStripMenuItem1.Enabled = false;
             }
 
 

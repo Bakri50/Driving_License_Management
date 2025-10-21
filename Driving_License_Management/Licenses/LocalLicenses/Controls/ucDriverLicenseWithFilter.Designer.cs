@@ -68,6 +68,7 @@
             this.txtLicenseID.Name = "txtLicenseID";
             this.txtLicenseID.Size = new System.Drawing.Size(407, 26);
             this.txtLicenseID.TabIndex = 17;
+            this.txtLicenseID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLicenseID_KeyPress);
             // 
             // label1
             // 
