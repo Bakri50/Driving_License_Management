@@ -97,16 +97,16 @@
     <Compile Include="Controls\ucPersonInfoWithFilter.Designer.cs">
       <DependentUpon>ucPersonInfoWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ucSchedule.cs">
+    <Compile Include="Tests\Controls\ucSchedule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ucSchedule.Designer.cs">
+    <Compile Include="Tests\Controls\ucSchedule.Designer.cs">
       <DependentUpon>ucSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ucScheduled.cs">
+    <Compile Include="Tests\Controls\ucScheduled.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ucScheduled.Designer.cs">
+    <Compile Include="Tests\Controls\ucScheduled.Designer.cs">
       <DependentUpon>ucScheduled.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ucUserInformation.cs">
@@ -305,10 +305,10 @@
     <EmbeddedResource Include="Controls\ucPersonInfoWithFilter.resx">
       <DependentUpon>ucPersonInfoWithFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ucSchedule.resx">
+    <EmbeddedResource Include="Tests\Controls\ucSchedule.resx">
       <DependentUpon>ucSchedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ucScheduled.resx">
+    <EmbeddedResource Include="Tests\Controls\ucScheduled.resx">
       <DependentUpon>ucScheduled.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucUserInformation.resx">

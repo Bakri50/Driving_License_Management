@@ -88,7 +88,7 @@
             this.ucLocalDriver_sLicense1.Size = new System.Drawing.Size(974, 299);
             this.ucLocalDriver_sLicense1.TabIndex = 19;
             // 
-            // ucDriverLicenseWithFilter
+            // 
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

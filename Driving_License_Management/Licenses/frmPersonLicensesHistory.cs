@@ -23,7 +23,7 @@ namespace Driving_License_Management.Licenses
 
         private void frmPersonLicensesHistory_Load(object sender, EventArgs e) { 
         
-        clsApplication Application = clsApplication.FindApplication(_ApplicationID);
+        clsApplication Application = clsApplication.FindBaseApplication(_ApplicationID);
         ucDriverLicenses1.LoadData(Application.ApplicantPersonID);
         ucPersonInfoWithFilter1.LoadPersonInfo(Application.ApplicantPersonID);
         ucPersonInfoWithFilter1.FilterEnabeled = false;

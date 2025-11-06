@@ -55,7 +55,7 @@ namespace Driving_License_Management.Controls
 
         public void LoadApplicationInfo(int ApplicationID)
         {
-            _Application = clsApplication.FindApplication(ApplicationID);
+            _Application = clsApplication.FindBaseApplication(ApplicationID);
             if (_Application == null)
             {
                 ResetApplicationInfo();

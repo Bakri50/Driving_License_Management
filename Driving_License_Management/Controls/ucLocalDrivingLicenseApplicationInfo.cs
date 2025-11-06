@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Driving_License_Management.Licenses.LocalLicenses;
 
 namespace Driving_License_Management.Controls
 {
@@ -67,5 +68,16 @@ namespace Driving_License_Management.Controls
 
         }
 
+        private void llShowLicenceInfo_Click(object sender, EventArgs e)
+        {
+            if (!clsLicense.IsLicenseExistWithApplicationID(LDLApplication.ApplicationID)) {
+
+                MessageBox.Show("An erro occurred, Not has Licence", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmDriverLicenseInfo frm = new frmDriverLicenseInfo(LDLApplication.ApplicationID);
+            frm.ShowDialog();
+        }
     }
 }

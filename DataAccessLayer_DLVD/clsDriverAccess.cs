@@ -16,7 +16,7 @@ namespace DataAccessLayer_DLVD
         {
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = @"select Drivers.DriverID, People.PersonID,People.NationalNo, People.FirstName + ' ' + People.SecondName + ' ' + ISNULL( People.ThirdName,'')  + ' ' +
+            string query = @"select distinct Drivers.DriverID, People.PersonID,People.NationalNo, People.FirstName + ' ' + People.SecondName + ' ' + ISNULL( People.ThirdName,'')  + ' ' +
                             + People.LastName As FullName , Licenses.IsActive As ActiveLicenses
                             From Drivers inner join People 
                             on Drivers.PersonID = People.PersonID inner join Licenses on Licenses.DriverID = Drivers.DriverID";

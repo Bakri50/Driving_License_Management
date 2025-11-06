@@ -11,14 +11,15 @@ namespace DataAccessLayer_DLVD
     public class clsTestAppointmentAccess
     {
 
-        static public DataTable GetAllTestAppointmentswithLDLApplicationID(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        static public DataTable GetAllTestAppointmentsPerTestType(int LocalDrivingLicenseApplicationID, int TestTypeID)
         {
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
             string query = @"SELECT TestAppointmentID, AppointmentDate, PaidFees ,IsLocked
                         FROM TestAppointments " +
-                        "where  LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID";
+                        "where  LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID " +
+                        "Order by TestAppointmentID desc ";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -129,7 +130,6 @@ namespace DataAccessLayer_DLVD
 
         }
 
-
         static public int LockTestAppointment(int TestAppointmentID)
         {
 
@@ -213,6 +213,57 @@ namespace DataAccessLayer_DLVD
 
         }
 
+        static public bool GetLastTestAppointment(int LocalDrivingLicenseApplicationID, int TestTypeID, ref int TestAppointmentID, ref DateTime AppointmentDate, ref decimal PaidFees, ref int RetakeTestApplicationID, ref byte IsLocked, ref int CreatedByUserID)
+        {
+
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = @"Select top 1 *From TestAppointments where TestTypeID = @TestTypeID
+                             LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
+                            order by TestAppointmentID desc";
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+
+
+            try
+            {
+
+                connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    TestAppointmentID = (int)reader["TestAppointmentID"];
+                    AppointmentDate = (DateTime)reader["AppointmentDate"];
+                    PaidFees = Convert.ToDecimal(reader["PaidFees"]);
+
+                    if (reader["RetakeTestApplicationID"] == DBNull.Value) RetakeTestApplicationID = 0;
+                    else RetakeTestApplicationID = (int)reader["RetakeTestApplicationID"];
+                    IsLocked = Convert.ToByte(reader["IsLocked"]);
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+
+                connection.Close();
+            }
+
+            return IsFound;
+
+        }
+
 
         static public bool GetTestAppointmentByTestTypeIDAndLDlApplicationID(int TestTypeID,  int LocalDrivingLicenseApplicationID, ref int TestAppointmentID, ref DateTime AppointmentDate, ref decimal PaidFees, ref int RetakeTestApplicationID, ref byte IsLocked, ref int CreatedByUserID)
         {
@@ -241,7 +292,8 @@ namespace DataAccessLayer_DLVD
                     LocalDrivingLicenseApplicationID = (int)reader["LocalDrivingLicenseApplicationID"];
                     AppointmentDate = (DateTime)reader["AppointmentDate"];
                     PaidFees = Convert.ToDecimal(reader["PaidFees"]);
-                    RetakeTestApplicationID = (int)reader["RetakeTestApplicationID"];
+                    if (reader["RetakeTestApplicationID"] == DBNull.Value) RetakeTestApplicationID = 0;
+                   else  RetakeTestApplicationID = (int)reader["RetakeTestApplicationID"];
                     IsLocked = Convert.ToByte(reader["IsLocked"]);
                     CreatedByUserID = (int)reader["CreatedByUserID"];
                 }
@@ -265,8 +317,8 @@ namespace DataAccessLayer_DLVD
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = "select Found = 1 from TestAppointments " +
-                "where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID  and IsLocked = @IsLocked ";
+            string query = "select  Found = 1 from TestAppointments " +
+                "where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID  and IsLocked = @IsLocked ORDER BY TestAppointmentID DESC";
             SqlCommand cmd = new SqlCommand(query, connection);
 
             cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
@@ -302,7 +354,7 @@ namespace DataAccessLayer_DLVD
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
             string query = @"select Count(*) from TestAppointments 
                             where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
-                            and TestTypeID = 1 and IsLocked = 1";
+                            and TestTypeID = @TestTypeID and IsLocked = 1";
             SqlCommand cmd = new SqlCommand(query, connection);
 
             cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
@@ -331,6 +383,43 @@ namespace DataAccessLayer_DLVD
             return Trial;
         }
 
+        public static int GetTestID(int TestAppointmentID)
+        {
+            int TestID = -1;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = @"SELECT TestID FROM Tests
+                            WHERE TestAppointmentID = @TestAppointmentID ";
 
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@TestAppointmentID", @TestAppointmentID);
+
+            try
+            {
+
+                connection.Open();
+                Object result = cmd.ExecuteScalar();
+                if (result != null && int.TryParse(result.ToString(), out int id))
+                {
+                    TestID = id;
+                }
+
+            }
+            catch (Exception)
+            {
+                return TestID;
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return TestID;
+        }
     }
+      
+
+    
 }

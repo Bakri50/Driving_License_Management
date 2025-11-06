@@ -28,24 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucPersonInfoWithFilter1 = new Driving_License_Management.Controls.ucPersonInfoWithFilter();
+            this.ucSchedule1 = new Driving_License_Management.Controls.ucSchedule();
             this.SuspendLayout();
             // 
-            // ucPersonInfoWithFilter1
+            // ucSchedule1
             // 
-            this.ucPersonInfoWithFilter1.FilterEnabeled = true;
-            this.ucPersonInfoWithFilter1.Location = new System.Drawing.Point(29, 41);
-            this.ucPersonInfoWithFilter1.Name = "ucPersonInfoWithFilter1";
-            this.ucPersonInfoWithFilter1.ShowAddPerson = true;
-            this.ucPersonInfoWithFilter1.Size = new System.Drawing.Size(970, 475);
-            this.ucPersonInfoWithFilter1.TabIndex = 0;
+            this.ucSchedule1.Location = new System.Drawing.Point(203, 65);
+            this.ucSchedule1.Name = "ucSchedule1";
+            this.ucSchedule1.Size = new System.Drawing.Size(552, 718);
+            this.ucSchedule1.TabIndex = 0;
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 528);
-            this.Controls.Add(this.ucPersonInfoWithFilter1);
+            this.ClientSize = new System.Drawing.Size(1038, 795);
+            this.Controls.Add(this.ucSchedule1);
             this.Name = "Test";
             this.Text = "Test";
             this.Load += new System.EventHandler(this.Test_Load);
@@ -55,6 +53,6 @@
 
         #endregion
 
-        private Controls.ucPersonInfoWithFilter ucPersonInfoWithFilter1;
+        private Controls.ucSchedule ucSchedule1;
     }
 }

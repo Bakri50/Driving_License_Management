@@ -52,6 +52,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses
 
         private void btnIssueLicense_Click(object sender, EventArgs e)
         {
+          
            _License.LicenseClassID = _LDLApplication.LicenseClassID;
             _License.PaidFees = clsLicenseClass.Find(_License.LicenseClassID).ClassFees;
             _License.Notes = txtNotes.Text;
@@ -92,7 +93,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses
 
             _LDLApplication.Complete();
             MessageBox.Show("Saved Succesfuly with License ID = " + _License.LicenseID, "Inforamtion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            btnClose.Enabled = false;
 
 
         }

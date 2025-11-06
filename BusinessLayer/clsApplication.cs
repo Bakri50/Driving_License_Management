@@ -85,7 +85,7 @@ namespace BusinessLayer
             Mode = enMode.Update;
         }
 
-        static public clsApplication FindApplication(int ApplicationID)
+        static public clsApplication FindBaseApplication(int ApplicationID)
         {
             int ApplicantPersonID = -1;
            DateTime ApplicationDate = DateTime.Now;

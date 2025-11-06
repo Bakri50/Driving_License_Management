@@ -54,6 +54,7 @@ namespace Driving_License_Management.Tests
 
             if (_Test.Save())
             {
+                ucScheduled1.TestID = _Test.TestID;
                 MessageBox.Show("Saved Succesfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clsTestAppointment.Lock(_TestAppointmentID);
                 rbFaild.Enabled = false;

@@ -17,7 +17,7 @@ namespace Driving_License_Management.Tests.TestTypes
         clsTestType _TestType;
         public frmEditTestType(int ID)
         {
-            _TestType = clsTestType.FindTestType(ID);
+            _TestType = clsTestType.Find(ID);
             InitializeComponent();
         }
 

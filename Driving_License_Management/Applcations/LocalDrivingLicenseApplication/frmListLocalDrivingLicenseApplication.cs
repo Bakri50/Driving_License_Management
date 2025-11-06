@@ -143,7 +143,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LDLApplicationID);
 
 
-            if (clsApplication.FindApplication(LDLApplication.ApplicationID).Cancel())
+            if (clsApplication.FindBaseApplication(LDLApplication.ApplicationID).Cancel())
             {
                 MessageBox.Show("Successfuly", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _RfreshData();

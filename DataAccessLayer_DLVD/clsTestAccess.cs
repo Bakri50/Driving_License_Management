@@ -90,7 +90,6 @@ namespace DataAccessLayer_DLVD
             return TestID;
         }
 
-
         static public int NumberOfTestsPassed(int LocalDrivingLicenseApplicationID)
         {
 
@@ -126,5 +125,7 @@ namespace DataAccessLayer_DLVD
 
             return Number;
         }
+
+        
     }
 }

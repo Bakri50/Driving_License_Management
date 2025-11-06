@@ -26,13 +26,19 @@ namespace Driving_License_Management.Tests
         void _LoadData()
         {
             LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LDLApplicationID);
+
             if (LDLApplication == null)
             {
                 MessageBox.Show("Application not exist!");
+                btnAddNewAppointment.Enabled = false;
+                takeTestToolStripMenuItem.Enabled = false;
+                editToolStripMenuItem.Enabled = false;
+                
             }
 
             ucLocalDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(LDLApplication.LocalDrivingLicenseApplicationID);
-            dgv.DataSource = clsTestAppointment.GetAllTestAppointmentwithLDLApplicationID(_LDLApplicationID,_TestTypeID);
+
+            dgv.DataSource = clsTestAppointment.GetAllTestAppointmentsPerTestType(_LDLApplicationID,_TestTypeID);
 
         }
         private void frmTestAppointment_Load(object sender, EventArgs e)
@@ -64,6 +70,7 @@ namespace Driving_License_Management.Tests
                 _LoadData();
                 return;
             }
+
             
             frmAddUpdateTestAppointment frm = new frmAddUpdateTestAppointment(_LDLApplicationID, _TestTypeID);
             frm.ShowDialog();
@@ -73,6 +80,15 @@ namespace Driving_License_Management.Tests
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
+            if (clsTestAppointment.DoseApplicationHasLockedTestAppointment(_LDLApplicationID, _TestTypeID))
+            {
+                frmAddUpdateTestAppointment frm1 = new frmAddUpdateTestAppointment(ID, true);
+                frm1.ShowDialog();
+                _LoadData();
+                return;
+            }
+           
+
             frmAddUpdateTestAppointment frm = new frmAddUpdateTestAppointment(ID);
             frm.ShowDialog();
             _LoadData();
@@ -92,7 +108,7 @@ namespace Driving_License_Management.Tests
         {
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
             
-            if(clsTestAppointment.Find(ID).IsLocked == 1)
+            if(clsTestAppointment.Find(ID).IsLocked1 == 1)
             {
                 takeTestToolStripMenuItem.Enabled = false;
                 editToolStripMenuItem.Enabled = false;

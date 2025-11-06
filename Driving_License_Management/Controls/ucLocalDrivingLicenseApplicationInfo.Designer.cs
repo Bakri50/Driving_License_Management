@@ -205,6 +205,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
+            // 
+            // llShowLicenceInfo
+            // 
+            this.llShowLicenceInfo.Click += new System.EventHandler(this.llShowLicenceInfo_Click);
+
         }
 
         #endregion

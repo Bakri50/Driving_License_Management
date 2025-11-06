@@ -54,8 +54,11 @@ namespace Driving_License_Management.Controls
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_TestAppointment.LocalDrivingLicenseApplicationID);
             lblDrivingClass.Text = clsLicenseClass.Find(LDLApplication.LicenseClassID).ClassName;
             lblFullName.Text = LDLApplication.FullName;
-            lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_TestAppointment.LocalDrivingLicenseApplicationID, _TestAppointment.TestTypeID).ToString();
-            lblFees.Text = clsTestType.FindTestType(_TestAppointment.TestTypeID).Fees.ToString();
+            lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_TestAppointment.LocalDrivingLicenseApplicationID, _TestAppointment.TestTypeID1).ToString();
+            if (_TestAppointment.RetakeTestApplicationID > 0) {
+                lblFees.Text = (clsTestType.Find(_TestAppointment.TestTypeID1).Fees + clsApplication.FindBaseApplication(_TestAppointment.RetakeTestApplicationID).PaidFees).ToString();
+            }
+            else lblFees.Text = clsTestType.Find(_TestAppointment.TestTypeID1).Fees.ToString();
             lblDate.Text = _TestAppointment.AppointmentDate.ToShortDateString();
 
         }

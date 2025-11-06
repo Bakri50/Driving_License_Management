@@ -204,7 +204,7 @@
             this.lblUserMessage.Name = "lblUserMessage";
             this.lblUserMessage.Size = new System.Drawing.Size(524, 25);
             this.lblUserMessage.TabIndex = 188;
-            this.lblUserMessage.Text = "Cannot Sechule, Vision Test Should be Passed First.";
+           // this.lblUserMessage.Text = "Cannot Sechule, Vision Test Should be Passed First.";
             this.lblUserMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDrivingClass

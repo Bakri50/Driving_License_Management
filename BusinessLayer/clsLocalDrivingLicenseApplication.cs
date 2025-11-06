@@ -43,7 +43,7 @@ namespace BusinessLayer
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
             ApplcationType = clsApplcationType.Find(ApplicationTypeID);
-            clsLicenseClass licenseClass = clsLicenseClass.Find(LicenseClassID);
+            LicenseClass = clsLicenseClass.Find(LicenseClassID);
 
             Mode = enMode.Update;
 
@@ -68,7 +68,7 @@ namespace BusinessLayer
 
             if (IsFound)
             {
-                clsApplication Application = clsApplication.FindApplication(ApplicationID);
+                clsApplication Application = clsApplication.FindBaseApplication(ApplicationID);
 
                 return new clsLocalDrivingLicenseApplication(LocalDrivingLicenseApplicationID, LisenseClass,
                     Application.ApplicationID, Application.ApplicantPersonID,Application.ApplicationDate,
@@ -90,7 +90,7 @@ namespace BusinessLayer
 
             if (IsFound)
             {
-                clsApplication Application = clsApplication.FindApplication(ApplicationID);
+                clsApplication Application = clsApplication.FindBaseApplication(ApplicationID);
 
                 return new clsLocalDrivingLicenseApplication(LocalDrivingLicenseApplicationID, LisenseClass,
                     Application.ApplicationID, Application.ApplicantPersonID, Application.ApplicationDate,
@@ -100,6 +100,23 @@ namespace BusinessLayer
             }
             return null;
         }
+
+        public bool DoseAttendTestType(clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationAccess.DoseAttendTestType(this.LocalDrivingLicenseApplicationID, (int)TestType);
+        }
+
+        public static bool IsThereAnActiveTestApointments(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationAccess.IsThereAnActiveTestApointment(LocalDrivingLicenseApplicationID, (int)TestType);
+        }
+
+        public static bool DoesPassTestType(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationAccess.DoesPassTestType(LocalDrivingLicenseApplicationID, (int)TestType);
+        }
+
+
         private bool _AddNew()
         {
             this.LocalDrivingLicenseApplicationID = clsLocalDrivingLicenseApplicationAccess.AddNewLocalDrivingLicenseApplication(

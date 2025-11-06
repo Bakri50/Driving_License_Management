@@ -10,6 +10,12 @@ namespace BusinessLayer
 {
     public class clsTestType
     {
+        public enum enTestType
+        {
+            Vision = 1,
+            Written = 2,
+            Street = 3
+        }
         public int TestTypeID { get; set; }
         public string TestTypeTitle { get; set; }
         public string TestTypeDescription { get; set; }
@@ -28,7 +34,7 @@ namespace BusinessLayer
             return clsTestTypeAccess.GetAllTestTypes();
         }
 
-        static public clsTestType FindTestType(int TestTypeID)
+        static public clsTestType Find(int TestTypeID)
         {
             string TestTypeTitle = "";
             string TestTypeDescription = "";

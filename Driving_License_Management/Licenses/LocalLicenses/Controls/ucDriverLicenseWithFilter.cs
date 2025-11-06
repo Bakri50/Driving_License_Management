@@ -18,6 +18,15 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
             InitializeComponent();
         }
 
+        bool _FilterEnabeld = true;
+
+        public bool FilterEnabeld
+        {
+            get { return _FilterEnabeld; }
+            set {  _FilterEnabeld = value;
+                gbFilters.Enabled = _FilterEnabeld;
+            }
+        }
         private void btnFind_Click(object sender, EventArgs e)
         {
             ucLocalDriver_sLicense1.LoadLicenseInfoByLicenseID(Convert.ToInt32(txtLicenseID.Text));
