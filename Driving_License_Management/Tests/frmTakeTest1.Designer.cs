@@ -103,7 +103,6 @@
             this.ucScheduled1.Name = "ucScheduled1";
             this.ucScheduled1.Size = new System.Drawing.Size(434, 551);
             this.ucScheduled1.TabIndex = 13;
-            this.ucScheduled1.TestID = 0;
             // 
             // frmTakeTest1
             // 

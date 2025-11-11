@@ -17,9 +17,9 @@ namespace DataAccessLayer_DLVD
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
             string query = @"SELECT TestAppointmentID, AppointmentDate, PaidFees ,IsLocked
-                        FROM TestAppointments " +
-                        "where  LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID " +
-                        "Order by TestAppointmentID desc ";
+                        FROM TestAppointments 
+                        where  LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and TestTypeID = @TestTypeID
+                        Order by TestAppointmentID desc ";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -55,10 +55,10 @@ namespace DataAccessLayer_DLVD
 
             int AppointmentID = -1;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = "INSERT INTO [dbo].[TestAppointments]  ([TestTypeID] , [LocalDrivingLicenseApplicationID]," +
-                " [AppointmentDate] , [PaidFees] , [RetakeTestApplicationID] , [IsLocked] , [CreatedByUserID])" +
-                " VALUES (@TestTypeID, @LocalDrivingLicenseApplicationID , @AppointmentDate ," +
-                " @PaidFees , @RetakeTestApplicationID , @IsLocked , @CreatedByUserID) select SCOPE_IDENTITY()";
+            string query = @"INSERT INTO [dbo].[TestAppointments]  ([TestTypeID] , [LocalDrivingLicenseApplicationID],
+                 [AppointmentDate] , [PaidFees] , [RetakeTestApplicationID] , [IsLocked] , [CreatedByUserID])
+                  VALUES (@TestTypeID, @LocalDrivingLicenseApplicationID , @AppointmentDate ,
+                 @PaidFees , @RetakeTestApplicationID , @IsLocked , @CreatedByUserID) select SCOPE_IDENTITY()";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -66,7 +66,7 @@ namespace DataAccessLayer_DLVD
             cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
             cmd.Parameters.AddWithValue("@AppointmentDate", AppointmentDate);
             cmd.Parameters.AddWithValue("@PaidFees", PaidFees);
-            if(RetakeTestApplicationID == 0) cmd.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
+            if(RetakeTestApplicationID == -1) cmd.Parameters.AddWithValue("@RetakeTestApplicationID", DBNull.Value);
             else cmd.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
             cmd.Parameters.AddWithValue("@IsLocked", 0);
             cmd.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);

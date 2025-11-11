@@ -14,12 +14,12 @@ namespace Driving_License_Management.Tests
     public partial class frmTestAppointment : Form
     {
         int _LDLApplicationID = -1;
-        int _TestTypeID;
+        clsTestType.enTestType _TestType;
         clsLocalDrivingLicenseApplication LDLApplication;
-        public frmTestAppointment(int LDLApplicationID, int TestID)
+        public frmTestAppointment(int LDLApplicationID, clsTestType.enTestType TestType)
         {
             _LDLApplicationID = LDLApplicationID;
-            _TestTypeID = TestID;   
+            _TestType = TestType;
             InitializeComponent();
         }
 
@@ -33,12 +33,12 @@ namespace Driving_License_Management.Tests
                 btnAddNewAppointment.Enabled = false;
                 takeTestToolStripMenuItem.Enabled = false;
                 editToolStripMenuItem.Enabled = false;
-                
+
             }
 
             ucLocalDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(LDLApplication.LocalDrivingLicenseApplicationID);
 
-            dgv.DataSource = clsTestAppointment.GetAllTestAppointmentsPerTestType(_LDLApplicationID,_TestTypeID);
+            dgv.DataSource = clsTestAppointment.GetAllTestAppointmentsPerTestType(_LDLApplicationID, (int)_TestType);
 
         }
         private void frmTestAppointment_Load(object sender, EventArgs e)
@@ -50,48 +50,50 @@ namespace Driving_License_Management.Tests
         private void btnAddNewAppointment_Click(object sender, EventArgs e)
         {
 
-            if (clsTest.DoseApplicationPassTest(_LDLApplicationID, _TestTypeID))
+
+
+            if (LDLApplication.IsThereAnActiveTestApointments(_TestType))
             {
 
-                MessageBox.Show("This Application Already pass The test", "Not Allow", MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("This Application Already Has An Active Appointment", "Not Allow", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
 
-            if (clsTestAppointment.DoseApplicationHasActiveTestAppointment(_LDLApplicationID, _TestTypeID))
-            {
-                MessageBox.Show("This Application Already has active appointment", "Not Allow", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-             }
+            clsTest LastTest = LDLApplication.GetLastTestPerTestType(_TestType);
 
-            if(clsTestAppointment.DoseApplicationHasLockedTestAppointment(_LDLApplicationID, _TestTypeID))
+            if (LastTest == null)
             {
-                frmAddUpdateTestAppointment frm1 = new frmAddUpdateTestAppointment(_LDLApplicationID, _TestTypeID, true);
+
+                frmAddUpdateTestAppointment frm1 = new frmAddUpdateTestAppointment(_LDLApplicationID, _TestType);
                 frm1.ShowDialog();
-                _LoadData();
+                frmTestAppointment_Load(null, null);
+                return;
+
+            }
+
+            if (LastTest.TestResult == 1)
+            {
+                MessageBox.Show("This Person Already Pass This Test", "Not Allow", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
-            frmAddUpdateTestAppointment frm = new frmAddUpdateTestAppointment(_LDLApplicationID, _TestTypeID);
-            frm.ShowDialog();
-            _LoadData();
+            frmAddUpdateTestAppointment frm2 = new frmAddUpdateTestAppointment(LastTest.TestAppointmentInfo.LocalDrivingLicenseApplicationID, _TestType);
+            frm2.ShowDialog();
+            frmTestAppointment_Load(null, null);
+
         }
+
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int ID = (int)dgv.CurrentRow.Cells[0].Value;
-            if (clsTestAppointment.DoseApplicationHasLockedTestAppointment(_LDLApplicationID, _TestTypeID))
-            {
-                frmAddUpdateTestAppointment frm1 = new frmAddUpdateTestAppointment(ID, true);
-                frm1.ShowDialog();
-                _LoadData();
-                return;
-            }
+            int TestAppointmentID = (int)dgv.CurrentRow.Cells[0].Value;
+
+            frmAddUpdateTestAppointment frm1 = new frmAddUpdateTestAppointment(_LDLApplicationID, _TestType,TestAppointmentID);
+            frm1.ShowDialog();
+            _LoadData();
+            
            
 
-            frmAddUpdateTestAppointment frm = new frmAddUpdateTestAppointment(ID);
-            frm.ShowDialog();
-            _LoadData();
         }
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,16 +101,16 @@ namespace Driving_License_Management.Tests
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
             //frmT frm = new frmTakeTest(ID);
             //frm.ShowDialog();
-            frmTakeTest1 frm = new frmTakeTest1(ID);
+            frmTakeTest1 frm = new frmTakeTest1(ID, _TestType);
             frm.ShowDialog();
             _LoadData();
         }
 
         private void cmsApplications_Opening(object sender, EventArgs e)
         {
-            int ID = (int)dgv.CurrentRow.Cells[0].Value;
+            int TestAppointmentID = (int)dgv.CurrentRow.Cells[0].Value;
             
-            if(clsTestAppointment.Find(ID).IsLocked1 == 1)
+            if(clsTestAppointment.Find(TestAppointmentID).IsLocked == true)
             {
                 takeTestToolStripMenuItem.Enabled = false;
                 editToolStripMenuItem.Enabled = false;

@@ -10,10 +10,131 @@ namespace DataAccessLayer_DLVD
 {
     public class clsTestAccess
     {
-        
 
 
+        public static bool GetTestInfoByID(int TestID,
+           ref int TestAppointmentID, ref byte TestResult,
+           ref string Notes, ref int CreatedByUserID)
+        {
+            bool IsFound = false;
 
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+
+            string query = "SELECT * FROM Tests WHERE TestID = @TestID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@TestID", TestID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    // The record was found
+                    IsFound = true;
+
+                    TestAppointmentID = (int)reader["TestAppointmentID"];
+                    TestResult = Convert.ToByte(reader["TestResult"]);
+                    if (reader["Notes"] == DBNull.Value)
+
+                        Notes = "";
+                    else
+                        Notes = (string)reader["Notes"];
+
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+                }
+                else
+                {
+                    // The record was not found
+                    IsFound = false;
+                }
+
+                reader.Close();
+
+
+            }
+            catch (Exception)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+        static public bool GetLastTestPerPersonIDAndClassLicenseIDAndTestTypeID(int PersonID, int LicenseClassID, int TestTypeID, ref int TestID, ref int TestAppointmentID,
+          ref byte TestResult, ref string Notes, ref int CreatedByUserID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = @"SELECT  top 1 Tests.TestID, 
+                Tests.TestAppointmentID, Tests.TestResult, 
+			    Tests.Notes, Tests.CreatedByUserID, Applications.ApplicantPersonID
+                FROM            LocalDrivingLicenseApplications INNER JOIN
+                Tests INNER JOIN
+                TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID 
+
+                ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID
+                INNER JOIN
+                Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                WHERE        (Applications.ApplicantPersonID = @PersonID) 
+                        AND (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID)
+                        AND ( TestAppointments.TestTypeID=@TestTypeID)
+                ORDER BY Tests.TestAppointmentID DESC"; ;
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.AddWithValue("@PersonID", PersonID);
+            cmd.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
+            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+
+            try
+            {
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    IsFound = true;
+                    TestID = (int)reader["TestID"];
+                    TestAppointmentID = (int)reader["TestAppointmentID"];
+                    TestResult = Convert.ToByte(reader["TestResult"]);
+                    if (reader["Notes"] == DBNull.Value)
+
+                        Notes = "";
+                    else
+                        Notes = (string)reader["Notes"];
+
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+                }
+                else
+                {
+                    IsFound = false;
+                }
+
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
         public static bool DoseApplicationPassTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
         {
             bool IsFound = false;
@@ -48,6 +169,45 @@ namespace DataAccessLayer_DLVD
             return IsFound;
         }
 
+        public static DataTable GetAllTests()
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+
+            string query = "SELECT * FROM Tests order by TestID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+
+                {
+                    dt.Load(reader);
+                }
+
+                reader.Close();
+
+
+            }
+
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dt;
+
+        }
+
         static public int TakeTest(int TestAppointmentID,
            byte TestResult, string Notes, int CreatedByUserID)
         {
@@ -57,7 +217,9 @@ namespace DataAccessLayer_DLVD
             string query = "INSERT INTO [dbo].[Tests]  ([TestAppointmentID] , [TestResult]," +
                 " [Notes] , [CreatedByUserID])" +
                 " VALUES (@TestAppointmentID, @TestResult , @Notes ," +
-                " @CreatedByUserID) select SCOPE_IDENTITY()";
+                " @CreatedByUserID)" +
+                " UPDATE TestAppointments SET  IsLocked = 1 WHERE TestAppointmentID = @TestAppointmentID" +
+                " SELECT SCOPE_IDENTITY()";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -90,7 +252,47 @@ namespace DataAccessLayer_DLVD
             return TestID;
         }
 
-        static public int NumberOfTestsPassed(int LocalDrivingLicenseApplicationID)
+        public static bool UpdateTest(int TestID, int TestAppointmentID, byte TestResult,
+        string Notes, int CreatedByUserID)
+        {
+
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+
+            string query = @"Update  Tests  
+                            set TestAppointmentID = @TestAppointmentID,
+                                TestResult=@TestResult,
+                                Notes = @Notes,
+                                CreatedByUserID=@CreatedByUserID
+                                where TestID = @TestID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@TestID", TestID);
+            command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            command.Parameters.AddWithValue("@TestResult", TestResult);
+            command.Parameters.AddWithValue("@Notes", Notes);
+            command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return (rowsAffected > 0);
+        }
+        static public int GetPassedTestCount(int LocalDrivingLicenseApplicationID)
         {
 
             int Number = 0;
@@ -126,6 +328,11 @@ namespace DataAccessLayer_DLVD
             return Number;
         }
 
+
         
+
+
+        
+
     }
 }

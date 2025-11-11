@@ -15,37 +15,59 @@ namespace Driving_License_Management.Tests
     public partial class frmTakeTest1 : Form
     {
 
-        int _TestAppointmentID;
-        clsTest _Test;
+        private int _TestAppointmentID;
+        private clsTestType.enTestType _TestType;
 
-        public delegate bool DataBakcEventHandler(object sender, bool IsTakeTest);
+        private int _TestID = -1;
+        private clsTest _Test;
 
-        public event DataBakcEventHandler DataBack;
-        public frmTakeTest1()
-        {
-            InitializeComponent();
-        }
-        public frmTakeTest1(int TestAppointmentID)
+       
+
+   
+        public frmTakeTest1(int TestAppointmentID, clsTestType.enTestType TestType)
         {
             _TestAppointmentID = TestAppointmentID;
+            _TestType = TestType;
             InitializeComponent();
         }
 
         private void frmTakeTest1_Load(object sender, EventArgs e)
         {
-            if (!this.DesignMode) {
 
-                if (this._TestAppointmentID > 0)
-                {
-                    ucScheduled1.LoadInfo(_TestAppointmentID);
-                    _Test = new clsTest();
-                    
-                }
+                ucScheduled1.TestType = _TestType;
+                ucScheduled1.LoadInfo(_TestAppointmentID);
+                
+                _TestID = ucScheduled1.TestID;
+            if (_TestID != -1)
+            {
+                _Test = clsTest.Find(_TestID);
+
+                if (_Test.TestResult == 1)
+                    rbPass.Checked = true;
+
+                else rbFaild.Checked = true;
+
+                txbNotes.Text = _Test.Notes;
+
+                rbFaild.Enabled = false;
+                rbPass.Enabled = false;
             }
+
+            else
+                _Test = new clsTest();
+
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+            if (MessageBox.Show("Are you sure you want to save? After that you cannot change the Pass/Fail results after you save?.",
+                     "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No
+            )
+            {
+                return;
+            }
 
             _Test.TestAppointmentID = _TestAppointmentID;
             _Test.Notes = txbNotes.Text;
@@ -54,13 +76,11 @@ namespace Driving_License_Management.Tests
 
             if (_Test.Save())
             {
-                ucScheduled1.TestID = _Test.TestID;
                 MessageBox.Show("Saved Succesfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clsTestAppointment.Lock(_TestAppointmentID);
                 rbFaild.Enabled = false;
                 rbPass.Enabled = false;
-                txbNotes.Enabled = false;
-                btnSave.Enabled = false;
+            
             }
             else
             {

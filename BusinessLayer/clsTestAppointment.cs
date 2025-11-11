@@ -12,14 +12,12 @@ namespace BusinessLayer
     {
        enum enMode { AddNew = 0, Update = 1 }
        public int TestAppointmentID { get; set; }
-       public int TestTypeID1 { get; set; }
        public clsTestType.enTestType TestTypeID {  get; set; }
        public int LocalDrivingLicenseApplicationID { get; set; }
        public DateTime AppointmentDate { get; set; }
        public decimal PaidFees { get; set; }
        public int RetakeTestApplicationID { get; set; }
        public clsApplication RetakeTestApplicationInfo { get; set; }
-       public byte IsLocked1 { get; set; }
        public bool IsLocked { get; set; }
        public int CreatedByUserID   { get; set; }
 
@@ -46,19 +44,17 @@ namespace BusinessLayer
 
 
 
-        clsTestAppointment(int testAppointmentID, int testTypeID1, clsTestType.enTestType testTypeID, int localDrivingLicenseApplicationID, 
-            DateTime appointmentDate, decimal paidFees, int retakeTestApplicationID, byte isLocked1, byte isLocked,
+        clsTestAppointment(int testAppointmentID, clsTestType.enTestType testTypeID, int localDrivingLicenseApplicationID, 
+            DateTime appointmentDate, decimal paidFees, int retakeTestApplicationID, byte isLocked,
             int createdByUserID)
         {
             TestAppointmentID=testAppointmentID;
-            TestTypeID1=testTypeID1;
             TestTypeID = testTypeID;
             LocalDrivingLicenseApplicationID=localDrivingLicenseApplicationID;
             AppointmentDate=appointmentDate;
             PaidFees=paidFees;
             RetakeTestApplicationID=retakeTestApplicationID;
             RetakeTestApplicationInfo = clsApplication.FindBaseApplication(retakeTestApplicationID);
-            IsLocked1=isLocked1;
             IsLocked=(isLocked == 1) ? true : false ;
             CreatedByUserID=createdByUserID;
             _Mode=enMode.Update;
@@ -86,8 +82,8 @@ namespace BusinessLayer
             bool IsFound = clsTestAppointmentAccess.GetTestAppointmentByID(TestAppointmentID, ref TestTypeID,
                 ref LocalDrivingLicenseApplicationID, ref AppointmentDate, ref PaidFees, ref RetakeTestApplicationID, ref IsLocked, ref CreatedByUserID);
             if (IsFound) { 
-            return new clsTestAppointment(TestAppointmentID,TestTypeID, (clsTestType.enTestType)TestTypeID,
-                LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,RetakeTestApplicationID,IsLocked,IsLocked,CreatedByUserID);
+            return new clsTestAppointment(TestAppointmentID, (clsTestType.enTestType)TestTypeID,
+                LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,RetakeTestApplicationID,IsLocked,CreatedByUserID);
             }
             return null;
         }
@@ -107,8 +103,8 @@ namespace BusinessLayer
                 ref  TestAppointmentID, ref AppointmentDate, ref PaidFees, ref RetakeTestApplicationID, ref IsLocked, ref CreatedByUserID);
             if (IsFound)
             {
-                return new clsTestAppointment(TestAppointmentID, TestTypeID, (clsTestType.enTestType)TestTypeID,
-                    LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, RetakeTestApplicationID, IsLocked,IsLocked, CreatedByUserID);
+                return new clsTestAppointment(TestAppointmentID, (clsTestType.enTestType)TestTypeID,
+                    LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, RetakeTestApplicationID,IsLocked, CreatedByUserID);
             }
             return null;
         }
@@ -128,8 +124,8 @@ namespace BusinessLayer
                 ref TestAppointmentID, ref AppointmentDate, ref PaidFees, ref RetakeTestApplicationID, ref IsLocked, ref CreatedByUserID);
             if (IsFound)
             {
-                return new clsTestAppointment(TestAppointmentID, TestTypeID, (clsTestType.enTestType)TestTypeID,
-                    LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, RetakeTestApplicationID, IsLocked,IsLocked, CreatedByUserID);
+                return new clsTestAppointment(TestAppointmentID, (clsTestType.enTestType)TestTypeID,
+                    LocalDrivingLicenseApplicationID, AppointmentDate, PaidFees, RetakeTestApplicationID,IsLocked, CreatedByUserID);
             }
             return null;
         }
@@ -151,9 +147,9 @@ namespace BusinessLayer
         {
             return clsTestAppointmentAccess.LockTestAppointment(this.TestAppointmentID) > 0;
         }
-        static public int TotalTrialPerTest(int LocalDrivingLicenseApplicationID, int TestTypeID)
+        static public int TotalTrialPerTest(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestTypeID)
         {
-            return clsTestAppointmentAccess.TotalTrialPerTest(LocalDrivingLicenseApplicationID , TestTypeID);
+            return clsTestAppointmentAccess.TotalTrialPerTest(LocalDrivingLicenseApplicationID , (int)TestTypeID);
         }
 
 
@@ -163,7 +159,7 @@ namespace BusinessLayer
         }
         bool _AddNew()
         {
-            TestAppointmentID = clsTestAppointmentAccess.AddNew(TestTypeID1,
+            TestAppointmentID = clsTestAppointmentAccess.AddNew((int)TestTypeID,
                 LocalDrivingLicenseApplicationID,AppointmentDate,PaidFees,CreatedByUserID,RetakeTestApplicationID);
             return (TestAppointmentID > 0);
         }

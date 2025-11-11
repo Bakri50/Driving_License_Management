@@ -268,10 +268,10 @@ namespace DataAccessLayer_DLVD
             bool IsAttended = false;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
 
-            string query = @"SELECT TOP 1 FROM LocalDrivingLicenseApplication 
+            string query = @"SELECT TOP 1 * FROM LocalDrivingLicenseApplications
                             INNER JOIN TestAppointments ON  LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID
-                            INNER JOIN Tests ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID
-                            WHERE (LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplication ) AND ( Tests.TestTypeID  = @TestTypeID)
+                          
+                            WHERE (LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID ) AND ( TestAppointments.TestTypeID  = @TestTypeID)
                             ORDER BY TestAppointments.TestAppointmentID desc";
 
             SqlCommand cmd = new SqlCommand(query, connection);
@@ -395,5 +395,6 @@ namespace DataAccessLayer_DLVD
             return Result;
 
         }
+
     }
 }

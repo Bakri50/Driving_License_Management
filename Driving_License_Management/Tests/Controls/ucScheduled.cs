@@ -14,17 +14,55 @@ namespace Driving_License_Management.Controls
     public partial class ucScheduled : UserControl
     {
 
-        clsTestAppointment _TestAppointment;
-        int _TestID;
+        int _TestAppointmentID;
 
+
+        clsTestAppointment _TestAppointment;
+        
+        clsTestType.enTestType _TestType = clsTestType.enTestType.Vision;
+        public clsTestType.enTestType TestType
+        {
+            get { return _TestType; }
+            set
+            {
+
+                _TestType = value;
+
+                switch (_TestType)
+                {
+                    case clsTestType.enTestType.Vision:
+                        lblTitle.Text = "Vision Test";
+                        pbTestTypeImage.ImageLocation = @"..\..\..\Storge\Icons\Icons\Vision 512.png";
+                        break;
+                    case clsTestType.enTestType.Written:
+                        lblTitle.Text = "Written Test";
+                        pbTestTypeImage.ImageLocation = @"..\..\..\Storge\Icons\Icons\Written Test 512.png";
+                        break;
+                    case clsTestType.enTestType.Street:
+                        lblTitle.Text = "Street Test";
+                        pbTestTypeImage.ImageLocation = @"..\..\..\Storge\Icons\Icons\driving-test 512.png";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        int _LDLApplicationID;
+        clsLocalDrivingLicenseApplication _LDLApplication;
+
+        int _TestID = -1;
+
+        public int TestAppointmentID
+        {
+            get
+            {
+                return _TestAppointmentID;
+            }
+        }
         public int TestID
         {
             get { return _TestID; }
-            set
-            {
-                _TestID = value;
-                lblTestID.Text = _TestID.ToString();
-            }
         }
 
         public ucScheduled()
@@ -50,27 +88,29 @@ namespace Driving_License_Management.Controls
         private void _FillInfo()
         {
 
-            lblLocalDrivingLicenseAppID.Text = _TestAppointment.LocalDrivingLicenseApplicationID.ToString();
-            clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_TestAppointment.LocalDrivingLicenseApplicationID);
-            lblDrivingClass.Text = clsLicenseClass.Find(LDLApplication.LicenseClassID).ClassName;
-            lblFullName.Text = LDLApplication.FullName;
-            lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_TestAppointment.LocalDrivingLicenseApplicationID, _TestAppointment.TestTypeID1).ToString();
-            if (_TestAppointment.RetakeTestApplicationID > 0) {
-                lblFees.Text = (clsTestType.Find(_TestAppointment.TestTypeID1).Fees + clsApplication.FindBaseApplication(_TestAppointment.RetakeTestApplicationID).PaidFees).ToString();
-            }
-            else lblFees.Text = clsTestType.Find(_TestAppointment.TestTypeID1).Fees.ToString();
-            lblDate.Text = _TestAppointment.AppointmentDate.ToShortDateString();
+            _LDLApplicationID = _TestAppointment.LocalDrivingLicenseApplicationID;
+            lblTestID.Text = _TestAppointment.TestID.ToString();
 
-        }
-        private void _ResetInfo()
-        {
-            lblLocalDrivingLicenseAppID.Text = "[????]";
-            lblLocalDrivingLicenseAppID.Text = "[????]";
-            lblDrivingClass.Text = "[????]";
-            lblFullName.Text = "[????]";
-            lblTrial.Text = "[????]";
-            lblFees.Text = "[????]";
-            lblDate.Text = "[??/??/????]";
+
+            _LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LDLApplicationID);
+
+            
+            if (_LDLApplication == null) {
+                MessageBox.Show("No Test Local Driving License Application with ID = " + TestAppointmentID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
+            lblLocalDrivingLicenseAppID.Text =_LDLApplicationID.ToString();
+            lblDrivingClass.Text = _LDLApplication.LicenseClass.ClassName;
+            lblFullName.Text = _LDLApplication.FullName;
+
+            lblTrial.Text = _LDLApplication.TotalTrialPerTest(TestType).ToString();
+            lblFees.Text = _TestAppointment.PaidFees.ToString();
+            lblDate.Text = _TestAppointment.AppointmentDate.ToShortDateString();
+            lblTestID.Text = (_TestAppointment.TestID == -1) ? "Not Taken Yet" : _TestAppointment.TestID.ToString();
+
         }
 
     }

@@ -111,12 +111,26 @@ namespace BusinessLayer
             return clsLocalDrivingLicenseApplicationAccess.IsThereAnActiveTestApointment(LocalDrivingLicenseApplicationID, (int)TestType);
         }
 
+        public  bool IsThereAnActiveTestApointments(clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationAccess.IsThereAnActiveTestApointment(this.LocalDrivingLicenseApplicationID, (int)TestType);
+        }
+
         public static bool DoesPassTestType(int LocalDrivingLicenseApplicationID, clsTestType.enTestType TestType)
         {
             return clsLocalDrivingLicenseApplicationAccess.DoesPassTestType(LocalDrivingLicenseApplicationID, (int)TestType);
         }
 
 
+        public clsTest GetLastTestPerTestType(clsTestType.enTestType TestType)
+        {
+            return clsTest.FindTestByPersonIDAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestType);
+        }
+
+        public int TotalTrialPerTest(clsTestType.enTestType TestType)
+        {
+            return clsTestAppointment.TotalTrialPerTest(this.LocalDrivingLicenseApplicationID, TestType);
+        }
         private bool _AddNew()
         {
             this.LocalDrivingLicenseApplicationID = clsLocalDrivingLicenseApplicationAccess.AddNewLocalDrivingLicenseApplication(

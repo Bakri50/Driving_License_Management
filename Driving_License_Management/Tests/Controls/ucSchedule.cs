@@ -113,17 +113,16 @@ namespace Driving_License_Management.Controls
                 lblRetakeTestAppID.Text = "N/A";
             }
 
-            lblLocalDrivingLicenseAppID.Text = _TestAppointment.LocalDrivingLicenseApplicationID.ToString();
+            lblLocalDrivingLicenseAppID.Text = _LDLApplicationID.ToString();
             lblDrivingClass.Text = LDLApplication.LicenseClass.ClassName;
             lblFullName.Text = LDLApplication.FullName;
 
-            lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_TestAppointment.LocalDrivingLicenseApplicationID, _TestAppointment.TestTypeID1).ToString();
+            lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_LDLApplicationID, TestType).ToString();
             
             if(_Mode == enMode.AddNew)
             {
                 dtpTestDate.Value = DateTime.Now;
                 lblFees.Text = clsTestType.Find((int)_TestType).Fees.ToString();
-                lblLocalDrivingLicenseAppID.Text = "N/A";
 
                 _TestAppointment = new clsTestAppointment();
             }

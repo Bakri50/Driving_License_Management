@@ -137,7 +137,7 @@
             this.lblTotalFees.Name = "lblTotalFees";
             this.lblTotalFees.Size = new System.Drawing.Size(62, 25);
             this.lblTotalFees.TabIndex = 206;
-            this.lblTotalFees.Text = "[$$$]";
+            this.lblTotalFees.Text = "0";
             // 
             // label9
             // 
@@ -159,7 +159,7 @@
             this.lblRetakeAppFees.Name = "lblRetakeAppFees";
             this.lblRetakeAppFees.Size = new System.Drawing.Size(62, 25);
             this.lblRetakeAppFees.TabIndex = 203;
-            this.lblRetakeAppFees.Text = "[$$$]";
+            this.lblRetakeAppFees.Text = "0";
             // 
             // label7
             // 
