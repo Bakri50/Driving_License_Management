@@ -9,106 +9,76 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+
 
 namespace Driving_License_Management.Licenses.LocalLicenses.Controls
 {
     public partial class ucLocalDriver_sLicense : UserControl
     {
+
+        int _LicenseID;
         clsLicense _License;
+
+        public int LicenseID{ get { return _LicenseID; } }
+        public clsLicense SelectedLicense{ get { return _License; } }
+
+
         public ucLocalDriver_sLicense()
         {
             InitializeComponent();
         }
 
-        public void LoadLicenseInfoByApplicationID(int ApplicationID)
+        private void _LoadDriverImage()
         {
-           
-            _License = clsLicense.FindByApplicationID(ApplicationID);
-
-            if (_License == null) {
-                MessageBox.Show("License Not Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return;
-            }
-            clsPerson _Person = clsPerson.FindPerson(clsDriver.FindByDriverID(_License.DriverID).PersonID);
-
-            lblClass.Text = clsLicenseClass.Find(_License.LicenseClassID).ClassName;
-            lblDriverID.Text = _License.DriverID.ToString();
-            lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
-            lblFullName.Text = clsLocalDrivingLicenseApplication.FindByApplicationID(ApplicationID).FullName;
-            lblGendor.Text = (_Person.Gendor == 0)? "Male": "Female";
-            lblIsActive.Text = (_License.IsActive == 1) ? "Yes" : "No";
-            lblIsDetained.Text = (_License.IsActive == 1) ? "No" : "Yes";
-            lblIssueDate.Text = _License.IssueDate.ToShortDateString();
-
-            switch (_License.IssueReason)
+            string ImagePath;
+            if (_License.DriverInfo.PersonInfo.Gendor == 0)
             {
-                case 1:
-                    lblIssueReason.Text = "FirstTime";
-                    break;
-                case 2:
-                    lblIssueReason.Text = "Renew";
-                    break;
-                case 3:
-                    lblIssueReason.Text = "Replacement for Damaged";
-                    break;
-                case 4:
-                    lblIssueReason.Text = "Replacement for Lost";
-                    break;
-                default:
-                    break;
+                //@"..\..\..\Storge\Icons\Icons\Vision 512.png"
+                ImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
             }
-            lblLicenseID.Text = _License.LicenseID.ToString();
-            lblNationalNo.Text = _Person.NationalNo;
-            lblNotes.Text = _License.Notes.ToString();
-            lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            pbPersonImage.ImageLocation = _Person.ImagePath;
+            else ImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";
 
+            string DriverImagePath = _License.DriverInfo.PersonInfo.ImagePath;
+            if (DriverImagePath != "")
+            {
+                ImagePath = DriverImagePath;
+            }
+
+            if (File.Exists(ImagePath))
+            {
+                pbPersonImage.Load(ImagePath);
+            }
         }
+     
 
         public void LoadLicenseInfoByLicenseID(int LicenseID)
         {
-
-            _License = clsLicense.FindByLicenseID(LicenseID);
+            _LicenseID = LicenseID;
+            _License = clsLicense.FindByLicenseID(_LicenseID);
 
             if (_License == null)
             {
-                MessageBox.Show("License Not Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could Not Find License with ID = " + _LicenseID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            clsPerson _Person = clsPerson.FindPerson(clsDriver.FindByDriverID(_License.DriverID).PersonID);
 
-            lblClass.Text = clsLicenseClass.Find(_License.LicenseClassID).ClassName;
+
+            lblClass.Text = _License.LicenseClassInfo.ClassName;
             lblDriverID.Text = _License.DriverID.ToString();
             lblExpirationDate.Text = _License.ExpirationDate.ToShortDateString();
-            lblFullName.Text = clsLocalDrivingLicenseApplication.FindByApplicationID(_License.ApplicationID).FullName;
-            lblGendor.Text = (_Person.Gendor == 0) ? "Male" : "Female";
+            lblFullName.Text = _License.DriverInfo.PersonInfo.FullName;
+            lblGendor.Text = (SelectedLicense.DriverInfo.PersonInfo.Gendor == 0) ? "Male" : "Female";
             lblIsActive.Text = (_License.IsActive == 1) ? "Yes" : "No";
             lblIsDetained.Text = (_License.IsActive == 1) ? "No" : "Yes";
             lblIssueDate.Text = _License.IssueDate.ToShortDateString();
-
-            switch (_License.IssueReason)
-            {
-                case 1:
-                    lblIssueReason.Text = "FirstTime";
-                    break;
-                case 2:
-                    lblIssueReason.Text = "Renew";
-                    break;
-                case 3:
-                    lblIssueReason.Text = "Replacement for Damaged";
-                    break;
-                case 4:
-                    lblIssueReason.Text = "Replacement for Lost";
-                    break;
-                default:
-                    break;
-            }
+            lblIssueReason.Text = SelectedLicense.IssueReasonText;
             lblLicenseID.Text = _License.LicenseID.ToString();
-            lblNationalNo.Text = _Person.NationalNo;
+            lblNationalNo.Text = _License.DriverInfo.PersonInfo.NationalNo;
             lblNotes.Text = _License.Notes.ToString();
-            lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            pbPersonImage.ImageLocation = _Person.ImagePath;
-
+            lblDateOfBirth.Text = _License.DriverInfo.PersonInfo.DateOfBirth.ToShortDateString();
+            
+            _LoadDriverImage();
         }
 
     }

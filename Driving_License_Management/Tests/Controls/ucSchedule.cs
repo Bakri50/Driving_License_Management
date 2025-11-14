@@ -114,7 +114,7 @@ namespace Driving_License_Management.Controls
             }
 
             lblLocalDrivingLicenseAppID.Text = _LDLApplicationID.ToString();
-            lblDrivingClass.Text = LDLApplication.LicenseClass.ClassName;
+            lblDrivingClass.Text = LDLApplication.LicenseClassInfo.ClassName;
             lblFullName.Text = LDLApplication.FullName;
 
             lblTrial.Text = clsTestAppointment.TotalTrialPerTest(_LDLApplicationID, TestType).ToString();

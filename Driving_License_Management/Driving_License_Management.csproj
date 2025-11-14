@@ -79,6 +79,12 @@
     <Compile Include="Applcations\LocalDrivingLicenseApplication\frmShowLocaldrivingLicenseApplicationInfo.Designer.cs">
       <DependentUpon>frmShowLocaldrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.Designer.cs">
+      <DependentUpon>frmRenwLocalDrivingLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ucApplicationBasicInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applcations\LocalDrivingLicenseApplication\frmShowLocaldrivingLicenseApplicationInfo.resx">
       <DependentUpon>frmShowLocaldrivingLicenseApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.resx">
+      <DependentUpon>frmRenwLocalDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucApplicationBasicInfo.resx">
       <DependentUpon>ucApplicationBasicInfo.cs</DependentUpon>

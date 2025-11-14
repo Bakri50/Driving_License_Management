@@ -297,7 +297,7 @@ namespace DataAccessLayer_DLVD
 
             int Number = 0;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = @"select * from TestAppointments inner join Tests on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+            string query = @"select Count(*) from TestAppointments inner join Tests on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
                            where LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID and Tests.TestResult = 1";
 
             SqlCommand cmd = new SqlCommand(query, connection);
@@ -310,9 +310,9 @@ namespace DataAccessLayer_DLVD
 
                 connection.Open();
                 Object result = cmd.ExecuteScalar();
-                if (result != null && int.TryParse(result.ToString(), out int id))
+                if (result != null && int.TryParse(result.ToString(), out int Count))
                 {
-                    Number = id;
+                    Number = Count;
                 }
 
             }

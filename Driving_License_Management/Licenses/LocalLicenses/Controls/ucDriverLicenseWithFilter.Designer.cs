@@ -59,6 +59,8 @@
             this.btnFind.Size = new System.Drawing.Size(66, 57);
             this.btnFind.TabIndex = 18;
             this.btnFind.UseVisualStyleBackColor = true;
+            btnFind.Click += new System.EventHandler(this.btnFind_Click);
+
             // 
             // txtLicenseID
             // 

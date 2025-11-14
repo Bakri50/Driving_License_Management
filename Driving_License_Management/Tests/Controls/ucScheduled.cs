@@ -103,7 +103,7 @@ namespace Driving_License_Management.Controls
 
 
             lblLocalDrivingLicenseAppID.Text =_LDLApplicationID.ToString();
-            lblDrivingClass.Text = _LDLApplication.LicenseClass.ClassName;
+            lblDrivingClass.Text = _LDLApplication.LicenseClassInfo.ClassName;
             lblFullName.Text = _LDLApplication.FullName;
 
             lblTrial.Text = _LDLApplication.TotalTrialPerTest(TestType).ToString();

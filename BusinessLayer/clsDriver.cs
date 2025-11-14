@@ -11,19 +11,34 @@ namespace BusinessLayer
 {
     public class clsDriver
     {
-       public int DriverID;
-       public int PersonID;
-       public int CreatedByUserID ;
-       public DateTime CreatedTime ;
 
-        public clsDriver() { }
+        public enum enMode { AddNew = 0, Update = 1 };
+        public enMode Mode = enMode.AddNew;
+
+        public clsPerson PersonInfo;
+
+        public int DriverID { set; get; }
+        public int PersonID { set; get; }
+        public int CreatedByUserID { set; get; }
+
+        public DateTime CreatedTime { set; get; }
+
+        public clsDriver() {
+
+            this.DriverID = -1;
+            this.PersonID = -1;
+            this.CreatedByUserID = -1;    
+
+        }
 
         public clsDriver(int driverID, int personID, int createdByUserID, DateTime createdTime)
         {
             this.DriverID = driverID;
             this.PersonID = personID;
+            this.PersonInfo = clsPerson.FindPerson(PersonID);
             this.CreatedByUserID = createdByUserID;
             this.CreatedTime = createdTime;
+            Mode = enMode.Update;
         }
 
         static public DataTable GetAllDrivers()
@@ -58,6 +73,14 @@ namespace BusinessLayer
             return (DriverID > 0);
         }
 
+        private bool _Update()
+        {
+            //call DataAccess Layer 
+
+            return clsDriverAccess.UpdateDriver(this.DriverID, this.PersonID, this.CreatedByUserID);
+        }
+
+
         static public clsDriver FindByDriverID(int DriverID)
         {
             int PersonID = -1;
@@ -73,9 +96,19 @@ namespace BusinessLayer
             else return null;
         }
 
+
         public bool Save()
         {
-            return _AddNew();
+            switch (Mode)
+            {
+                case enMode.AddNew:
+                    return _AddNew();
+                case enMode.Update:
+                    return _Update();
+                default:
+                    break;
+            }
+            return false;
         }
 
     }

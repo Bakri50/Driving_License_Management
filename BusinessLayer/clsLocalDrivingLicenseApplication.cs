@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DataAccessLayer_DLVD;
 
+
 namespace BusinessLayer
 {
 
@@ -15,10 +16,9 @@ namespace BusinessLayer
         enum enMode { AddNew = 1, Update = 2 };
 
         public int LocalDrivingLicenseApplicationID { get; set; }
-       // public int ApplicationID { get; set; }
         public int LicenseClassID { get; set; }
 
-        public clsLicenseClass LicenseClass;
+        public clsLicenseClass LicenseClassInfo;
 
         enMode Mode = enMode.AddNew;
         public clsLocalDrivingLicenseApplication()
@@ -43,7 +43,7 @@ namespace BusinessLayer
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
             ApplcationType = clsApplcationType.Find(ApplicationTypeID);
-            LicenseClass = clsLicenseClass.Find(LicenseClassID);
+            LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
 
             Mode = enMode.Update;
 
@@ -121,7 +121,14 @@ namespace BusinessLayer
             return clsLocalDrivingLicenseApplicationAccess.DoesPassTestType(LocalDrivingLicenseApplicationID, (int)TestType);
         }
 
-
+        public bool DosePassAllTest()
+        {
+            return clsTest.PassedAllTests(this.LocalDrivingLicenseApplicationID);
+        }
+        public int GetActiveLicenseID()
+        {
+            return clsLicenseAccess.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID);
+        }
         public clsTest GetLastTestPerTestType(clsTestType.enTestType TestType)
         {
             return clsTest.FindTestByPersonIDAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestType);
@@ -130,6 +137,48 @@ namespace BusinessLayer
         public int TotalTrialPerTest(clsTestType.enTestType TestType)
         {
             return clsTestAppointment.TotalTrialPerTest(this.LocalDrivingLicenseApplicationID, TestType);
+        }
+
+        public int IssueLicenseForFirstTime(string Notes, int CreatedByUserID)
+        {
+            int DriverID;
+            clsDriver Driver = clsDriver.FindByPersonID(this.PersonInfo.PersonID);
+
+            if (Driver == null)
+            {
+                Driver.PersonID = this.PersonInfo.PersonID;
+                Driver.CreatedTime = DateTime.Now;
+                Driver.CreatedByUserID = CreatedByUserID;
+
+                if (Driver.Save())
+                {
+                    DriverID = Driver.DriverID;
+                }
+                else return -1;
+            }
+
+            else DriverID = Driver.DriverID;
+
+            clsLicense License  = new clsLicense();
+
+            License.DriverID = DriverID;
+            License.IssueDate = DateTime.Now;
+            License.ExpirationDate = DateTime.Now.AddYears(LicenseClassInfo.DefaultValidityLength);
+            License.ApplicationID = this.ApplicationID;
+            License.IssueReason = clsLicense.enIssueReason.FirstTime;
+            License.LicenseClassID = this.LicenseClassID;
+            License.PaidFees = LicenseClassInfo.ClassFees;
+            License.CreatedByUserID = CreatedByUserID;
+            License.IsActive = 1;
+            License.Notes = Notes;
+            if (License.Save())
+            {
+                this.SetComplete();
+                return License.LicenseID;
+            }
+            return -1;
+
+
         }
         private bool _AddNew()
         {

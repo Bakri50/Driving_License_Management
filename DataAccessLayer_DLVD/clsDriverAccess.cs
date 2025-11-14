@@ -82,6 +82,43 @@ namespace DataAccessLayer_DLVD
             return DriverID;
         }
 
+        public static bool UpdateDriver(int DriverID, int PersonID, int CreatedByUserID)
+        {
+
+            int rowsAffected = 0;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            //we dont update the createddate for the driver.
+            string query = @"Update  Drivers  
+                            set PersonID = @PersonID,
+                                CreatedByUserID = @CreatedByUserID
+                                where DriverID = @DriverID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@DriverID", DriverID);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+            command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            finally
+            {
+                connection.Close();
+            }
+
+            return (rowsAffected > 0);
+        }
+
+
         static public bool GetDriverByDriverID(int DriverID, ref int PersonID,ref int CreatedByUserID,ref DateTime CreatedDate)
         {
         

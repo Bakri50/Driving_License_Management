@@ -123,6 +123,7 @@ namespace BusinessLayer
             return clsApplicationAccess.GetActiveApplicationID(PersonID, (int)ApplicationType);
         }
 
+        
         public int GetActiveApplicationID(clsApplication.enApplicationType ApplicationType)
         {
             return clsApplicationAccess.GetActiveApplicationID(this.ApplicantPersonID, (int)ApplicationType);
@@ -160,12 +161,12 @@ namespace BusinessLayer
             return clsApplicationAccess.Delete(this.ApplicationID) > 0;
         }
 
-        public bool Cancel()
+        public bool SetCancel()
         {
             return (clsApplicationAccess.UpdateStatus(this.ApplicationID, (int)enStatus.Cancelled) > 0);
         }
 
-        public bool Complete()
+        public bool SetComplete()
         {
             return (clsApplicationAccess.UpdateStatus(this.ApplicationID, (int)enStatus.Completed) > 0);
         }

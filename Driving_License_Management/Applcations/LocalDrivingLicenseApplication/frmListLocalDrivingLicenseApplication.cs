@@ -143,7 +143,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LDLApplicationID);
 
 
-            if (clsApplication.FindBaseApplication(LDLApplication.ApplicationID).Cancel())
+            if (clsApplication.FindBaseApplication(LDLApplication.ApplicationID).SetCancel())
             {
                 MessageBox.Show("Successfuly", "information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _RfreshData();
@@ -333,7 +333,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
 
-            frmDriverLicenseInfo frm = new frmDriverLicenseInfo(LDLApplication.ApplicationID);
+            frmDriverLicenseInfo frm = new frmDriverLicenseInfo(LDLApplication.GetActiveLicenseID());
             frm.ShowDialog();
         }
 
