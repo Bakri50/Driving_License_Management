@@ -54,7 +54,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
             txtLicenseID.Text = _LicenseID.ToString();
             ucLocalDriver_sLicense1.LoadLicenseInfoByLicenseID(_LicenseID);
 
-            if(OnLicenseSelected != null && FilterEnabeld)
+            if(OnLicenseSelected != null && FilterEnabeld && ucLocalDriver_sLicense1.SelectedLicense != null)
             {
                 OnLicenseSelected(LicenseID);
             }

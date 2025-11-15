@@ -18,6 +18,7 @@ namespace Driving_License_Management.Applcations.RenewLocalDrivingLicense
     public partial class frmRenwLocalDrivingLicense : Form
     {
         int _NewLicenseID = -1;
+        clsLicense _NewLicense;
         public frmRenwLocalDrivingLicense()
         {
             InitializeComponent();
@@ -41,17 +42,18 @@ namespace Driving_License_Management.Applcations.RenewLocalDrivingLicense
         {
             int OldLicenseID = obj;
             lblOldLicenseID.Text = (OldLicenseID != -1) ? OldLicenseID.ToString() : "[???]";
-            if (OldLicenseID != -1) {
+            llShowLicenseHistory.Enabled = (OldLicenseID != -1);
+            if (OldLicenseID == -1) {
                     return;
             }
             lblLicenseFees.Text = ucDriverLicenseWithFilter1.SelectedLicense.PaidFees.ToString();
             txtNotes.Text = ucDriverLicenseWithFilter1.SelectedLicense.Notes.ToString();
 
             int DefaultValidatylength = ucDriverLicenseWithFilter1.SelectedLicense.LicenseClassInfo.DefaultValidityLength;
-            lblExpirationDate.Text = (DateTime.Now.AddYears(DefaultValidatylength)).ToShortDateString();
+            //lblExpirationDate.Text = (DateTime.Now.AddYears(DefaultValidatylength)).ToShortDateString();
             lblTotalFees.Text = (Convert.ToSingle(lblApplicationFees.Text) + Convert.ToSingle(lblLicenseFees.Text)).ToString();
 
-            if (ucDriverLicenseWithFilter1.SelectedLicense.IsExpired())
+            if (!ucDriverLicenseWithFilter1.SelectedLicense.IsExpired())
             {
                 MessageBox.Show("Selected License is not yet expiared, it will expire on: " +(ucDriverLicenseWithFilter1.SelectedLicense.ExpirationDate).ToShortDateString(), "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error); btnRenewLicense.Enabled = false;
                 return;
@@ -96,6 +98,7 @@ namespace Driving_License_Management.Applcations.RenewLocalDrivingLicense
 
             if (NewLicense != null) {
 
+                _NewLicenseID = NewLicense.LicenseID;
                 MessageBox.Show("The License Has been renewed with ID = " + NewLicense.LicenseID, "License issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 lblApplicationID.Text = NewLicense.ApplicationID.ToString();
                 lblRenewedLicenseID.Text = NewLicense.LicenseID.ToString();

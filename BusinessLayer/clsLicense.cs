@@ -208,6 +208,8 @@ namespace BusinessLayer
                 return null ;
             }
 
+            DeactivateCurrentLicense();
+
             return NewLicense;
         }
 
