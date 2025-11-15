@@ -88,7 +88,7 @@
             this.manageTestTypesToolStripMenuItem});
             this.userToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(142, 80);
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(142, 78);
             this.userToolStripMenuItem.Text = "Applications";
             // 
             // drivingToolStripMenuItem
@@ -137,6 +137,7 @@
             this.replacemrntForLosOrDamegedLicenseToolStripMenuItem.Name = "replacemrntForLosOrDamegedLicenseToolStripMenuItem";
             this.replacemrntForLosOrDamegedLicenseToolStripMenuItem.Size = new System.Drawing.Size(490, 34);
             this.replacemrntForLosOrDamegedLicenseToolStripMenuItem.Text = "Replacemrnt For Lose or Damaged License";
+            this.replacemrntForLosOrDamegedLicenseToolStripMenuItem.Click += new System.EventHandler(this.replacemrntForLosOrDamegedLicenseToolStripMenuItem_Click);
             // 
             // reaToolStripMenuItem
             // 
@@ -191,7 +192,7 @@
             this.peopleToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
             this.peopleToolStripMenuItem.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(89, 80);
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(89, 78);
             this.peopleToolStripMenuItem.Text = "People";
             this.peopleToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
@@ -199,7 +200,7 @@
             // driversToolStripMenuItem
             // 
             this.driversToolStripMenuItem.Name = "driversToolStripMenuItem";
-            this.driversToolStripMenuItem.Size = new System.Drawing.Size(94, 80);
+            this.driversToolStripMenuItem.Size = new System.Drawing.Size(94, 78);
             this.driversToolStripMenuItem.Text = "Drivers";
             this.driversToolStripMenuItem.Click += new System.EventHandler(this.driversToolStripMenuItem_Click);
             // 
@@ -207,7 +208,7 @@
             // 
             this.usersToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(77, 80);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(77, 78);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
@@ -220,7 +221,7 @@
             this.SignOutToolStripMenuItem});
             this.accountSettingToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountSettingToolStripMenuItem.Name = "accountSettingToolStripMenuItem";
-            this.accountSettingToolStripMenuItem.Size = new System.Drawing.Size(180, 80);
+            this.accountSettingToolStripMenuItem.Size = new System.Drawing.Size(180, 78);
             this.accountSettingToolStripMenuItem.Text = "Account Settings";
             // 
             // CurrentUserToolStripMenuItem

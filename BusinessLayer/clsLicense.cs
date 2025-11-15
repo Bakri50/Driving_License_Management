@@ -213,6 +213,50 @@ namespace BusinessLayer
             return NewLicense;
         }
 
+        public clsLicense ReplaceLicense(enIssueReason IssueReason, int CreatedByUserID)
+        {
+            clsApplication RenwApplication = new clsApplication();
+
+            RenwApplication.ApplicantPersonID = this.DriverInfo.PersonID;
+            RenwApplication.ApplicationDate = DateTime.Now;
+            RenwApplication.ApplicationStatus = (int)clsApplication.enStatus.Completed;
+            RenwApplication.ApplicationTypeID = (IssueReason == enIssueReason.DamagedReplacement)? (int)clsApplication.enApplicationType.ReplacementforaDamagedDrivingLicense:
+                (int)clsApplication.enApplicationType.ReplacementforaLostDrivingLicense;
+   
+            RenwApplication.PaidFees = clsApplcationType.Find(RenwApplication.ApplicationTypeID).Fees;
+            RenwApplication.CreatedByUserID = CreatedByUserID;
+            RenwApplication.LastStatusDate = DateTime.Now;
+
+            if (!RenwApplication.Save())
+            {
+                return null;
+            }
+
+            clsLicense NewLicense = new clsLicense();
+
+            NewLicense.ApplicationID = RenwApplication.ApplicationID;
+            NewLicense.DriverID = this.DriverID;
+            NewLicense.LicenseClassID = this.LicenseClassID;
+            NewLicense.IssueDate = DateTime.Now;
+            int DefaultValidityLength = this.LicenseClassInfo.DefaultValidityLength;
+            NewLicense.ExpirationDate = DateTime.Now.AddYears(DefaultValidityLength);
+            NewLicense.Notes = this.Notes;
+            NewLicense.PaidFees = this.LicenseClassInfo.ClassFees;
+            NewLicense.IsActive = 1;
+            NewLicense.IssueReason = IssueReason;
+            NewLicense.CreatedByUserID = CreatedByUserID;
+
+
+            if (!NewLicense.Save())
+            {
+                return null;
+            }
+
+            DeactivateCurrentLicense();
+
+            return NewLicense;
+        }
+
         private bool DeactivateCurrentLicense()
         {
             return clsLicenseAccess.DeactivateLicense(this.LicenseID);

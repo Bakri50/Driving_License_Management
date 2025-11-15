@@ -85,6 +85,12 @@
     <Compile Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.Designer.cs">
       <DependentUpon>frmRenwLocalDrivingLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applcations\ReplaceLostOrDamagedLicense\frmReplaceLostOrDamagedLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applcations\ReplaceLostOrDamagedLicense\frmReplaceLostOrDamagedLicense.Designer.cs">
+      <DependentUpon>frmReplaceLostOrDamagedLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ucApplicationBasicInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.resx">
       <DependentUpon>frmRenwLocalDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applcations\ReplaceLostOrDamagedLicense\frmReplaceLostOrDamagedLicense.resx">
+      <DependentUpon>frmReplaceLostOrDamagedLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucApplicationBasicInfo.resx">
       <DependentUpon>ucApplicationBasicInfo.cs</DependentUpon>

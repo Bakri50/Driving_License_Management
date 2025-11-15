@@ -11,6 +11,7 @@ using BusinessLayer;
 using Driving_License_Management.Applcations.Applcations_Types;
 using Driving_License_Management.Applcations.LocalDrivingLicenseApplication;
 using Driving_License_Management.Applcations.RenewLocalDrivingLicense;
+using Driving_License_Management.Applcations.ReplaceLostOrDamagedLicense;
 using Driving_License_Management.GlobalClasses;
 using Driving_License_Management.Tests.TestTypes;
 using Driving_License_Management.Users;
@@ -112,6 +113,12 @@ namespace Driving_License_Management
         private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmRenwLocalDrivingLicense frm = new frmRenwLocalDrivingLicense();
+            frm.ShowDialog();
+        }
+
+        private void replacemrntForLosOrDamegedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLostOrDamagedLicense frm = new frmReplaceLostOrDamagedLicense();
             frm.ShowDialog();
         }
     }

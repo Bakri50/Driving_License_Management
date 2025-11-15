@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Driving_License_Management.Applcations.Applcations_Types;
 using Driving_License_Management.Applcations.LocalDrivingLicenseApplication;
 using Driving_License_Management.Applcations.RenewLocalDrivingLicense;
+using Driving_License_Management.Applcations.ReplaceLostOrDamagedLicense;
 using Driving_License_Management.Login;
 using Driving_License_Management.People;
 using Driving_License_Management.Users;
