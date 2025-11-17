@@ -91,7 +91,7 @@ namespace BusinessLayer
 
         bool _AddNew()
         {
-            LicenseID = clsLicenseAccess.AddNewLicense(ApplicationID, DriverID,
+            LicenseID = clsLicenseAccess.AddNew(ApplicationID, DriverID,
                 LicenseClassID, IssueDate, ExpirationDate, Notes,PaidFees,IsActive,Convert.ToByte(IssueReason),CreatedByUserID);
             return (LicenseID > 0);
         }
@@ -100,7 +100,7 @@ namespace BusinessLayer
         {
             //call DataAccess Layer 
 
-            return clsLicenseAccess.UpdateLicense(this.ApplicationID, this.LicenseID, this.DriverID, this.LicenseClassID,
+            return clsLicenseAccess.Update(this.ApplicationID, this.LicenseID, this.DriverID, this.LicenseClassID,
                this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees,
                this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
         }
@@ -161,11 +161,7 @@ namespace BusinessLayer
             }
             return null;
         }
-        static public DataTable GetAllLicensesWithDriverID(int DriverID)
-        {
-            return clsLicenseAccess.GetAllLicensesWithDriverID(DriverID);
-        }
-        public static DataTable GetDriverLicenses(int DriverID)
+        static public DataTable GetDriverLicenses(int DriverID)
         {
             return clsLicenseAccess.GetDriverLicenses(DriverID);
         }

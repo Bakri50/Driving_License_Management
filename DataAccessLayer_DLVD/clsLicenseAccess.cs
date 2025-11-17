@@ -14,7 +14,7 @@ namespace DataAccessLayer_DLVD
 {
     public class clsLicenseAccess
     {
-        static public int AddNewLicense(int ApplicationID, int DriverID, int LicenseClassID, DateTime IssueDate, DateTime ExpirationDate,
+        static public int AddNew(int ApplicationID, int DriverID, int LicenseClassID, DateTime IssueDate, DateTime ExpirationDate,
              string Notes, decimal PaidFees, byte IsActive, byte IssueReason,
              int CreatedByUserID)
         {
@@ -64,7 +64,7 @@ namespace DataAccessLayer_DLVD
             return LicenseID;
         }
 
-        public static bool UpdateLicense(int LicenseID, int ApplicationID, int DriverID, int LicenseClass,
+        public static bool Update(int LicenseID, int ApplicationID, int DriverID, int LicenseClass,
             DateTime IssueDate, DateTime ExpirationDate, string Notes,
             decimal PaidFees, byte IsActive, byte IssueReason, int CreatedByUserID)
         {
@@ -357,45 +357,6 @@ namespace DataAccessLayer_DLVD
 
         }
 
-        static public DataTable GetAllLicensesWithDriverID(int DriverID)
-        {
-
-
-            DataTable dt = new DataTable();
-            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = @"select LicenseID as 'Licenses ID' ,ApplicationID as 'App ID', LicenseClasses.ClassName As 'Class Name',IssueDate As 'Issue Date',
-                                    ExpirationDate As 'Expiration Date', IsActive As 'Is Active'
-                                    from Licenses   INNER JOIN LicenseClasses ON LicenseClasses.LicenseClassID = Licenses.LicenseClass
-                                    where DriverID = @DriverID";
-
-            SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@DriverID", DriverID);
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    dt.Load(reader);
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-
-                return dt;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return dt;
-        
-            
-
-        }
 
         public static int GetActiveLicenseIDByPersonID(int PersonID, int LicenseClassID)
         {

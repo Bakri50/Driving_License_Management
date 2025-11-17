@@ -40,6 +40,7 @@ namespace BusinessLayer
             this.LastStatusDate = LastStatusDate;
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
+
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
             ApplcationType = clsApplcationType.Find(ApplicationTypeID);

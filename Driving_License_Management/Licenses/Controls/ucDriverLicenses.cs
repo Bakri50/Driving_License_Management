@@ -24,7 +24,7 @@ namespace Driving_License_Management.Licenses.Controls
 
         private void LoadLocalLicenses()
         {
-            _dtLocalDrivingLicenses = clsLicense.GetAllLicensesWithDriverID(_Driver.DriverID);
+            _dtLocalDrivingLicenses = clsLicense.GetDriverLicenses(_Driver.DriverID);
             dgvLocalLicensesHistory.DataSource = _dtLocalDrivingLicenses;
 
             if (dgvLocalLicensesHistory.Rows.Count > 0)
