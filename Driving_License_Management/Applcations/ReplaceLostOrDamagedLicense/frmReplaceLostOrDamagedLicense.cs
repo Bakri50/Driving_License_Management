@@ -118,7 +118,7 @@ namespace Driving_License_Management.Applcations.ReplaceLostOrDamagedLicense
 
         private void llShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(ucDriverLicenseWithFilter1.SelectedLicense.ApplicationID);
+            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(ucDriverLicenseWithFilter1.SelectedLicense.DriverInfo.PersonID);
             frm.ShowDialog();
         }
 

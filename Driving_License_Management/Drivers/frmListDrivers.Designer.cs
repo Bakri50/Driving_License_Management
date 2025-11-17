@@ -37,17 +37,17 @@
             this.lblRecordsCount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvDrivers = new System.Windows.Forms.DataGridView();
-            this.pbDriverImage = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.cmsDrivers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.issueInternationalLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showPersonLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbDriverImage = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDrivers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDriverImage)).BeginInit();
             this.cmsDrivers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDriverImage)).BeginInit();
             this.SuspendLayout();
             // 
             // cbFilterBy
@@ -69,7 +69,7 @@
             // txtFilterValue
             // 
             this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFilterValue.Location = new System.Drawing.Point(407, 247);
+            this.txtFilterValue.Location = new System.Drawing.Point(368, 244);
             this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFilterValue.Name = "txtFilterValue";
             this.txtFilterValue.Size = new System.Drawing.Size(256, 26);
@@ -92,7 +92,7 @@
             // 
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblTitle.Location = new System.Drawing.Point(349, 189);
+            this.lblTitle.Location = new System.Drawing.Point(388, 186);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(446, 53);
             this.lblTitle.TabIndex = 132;
@@ -123,6 +123,7 @@
             this.dgvDrivers.AllowUserToAddRows = false;
             this.dgvDrivers.AllowUserToDeleteRows = false;
             this.dgvDrivers.AllowUserToResizeRows = false;
+            this.dgvDrivers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDrivers.BackgroundColor = System.Drawing.Color.White;
             this.dgvDrivers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDrivers.ContextMenuStrip = this.cmsDrivers;
@@ -142,34 +143,9 @@
             this.dgvDrivers.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDrivers.RowHeadersWidth = 62;
             this.dgvDrivers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDrivers.Size = new System.Drawing.Size(1097, 306);
+            this.dgvDrivers.Size = new System.Drawing.Size(1167, 306);
             this.dgvDrivers.TabIndex = 128;
             this.dgvDrivers.TabStop = false;
-            // 
-            // pbDriverImage
-            // 
-            this.pbDriverImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbDriverImage.InitialImage = null;
-            this.pbDriverImage.Location = new System.Drawing.Point(419, 5);
-            this.pbDriverImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pbDriverImage.Name = "pbDriverImage";
-            this.pbDriverImage.Size = new System.Drawing.Size(308, 179);
-            this.pbDriverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbDriverImage.TabIndex = 131;
-            this.pbDriverImage.TabStop = false;
-            // 
-            // btnClose
-            // 
-            this.btnClose.AutoEllipsis = true;
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(955, 610);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(135, 36);
-            this.btnClose.TabIndex = 127;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // cmsDrivers
             // 
@@ -181,7 +157,7 @@
             this.toolStripSeparator1,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.cmsDrivers.Name = "contextMenuStrip1";
-            this.cmsDrivers.Size = new System.Drawing.Size(310, 112);
+            this.cmsDrivers.Size = new System.Drawing.Size(310, 145);
             // 
             // showDetailsToolStripMenuItem
             // 
@@ -214,13 +190,39 @@
             this.showPersonLicenseHistoryToolStripMenuItem.Name = "showPersonLicenseHistoryToolStripMenuItem";
             this.showPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(309, 32);
             this.showPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            this.showPersonLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicenseHistoryToolStripMenuItem_Click);
+            // 
+            // pbDriverImage
+            // 
+            this.pbDriverImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbDriverImage.InitialImage = null;
+            this.pbDriverImage.Location = new System.Drawing.Point(458, 2);
+            this.pbDriverImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pbDriverImage.Name = "pbDriverImage";
+            this.pbDriverImage.Size = new System.Drawing.Size(308, 179);
+            this.pbDriverImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbDriverImage.TabIndex = 131;
+            this.pbDriverImage.TabStop = false;
+            // 
+            // btnClose
+            // 
+            this.btnClose.AutoEllipsis = true;
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.Location = new System.Drawing.Point(1045, 602);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(135, 36);
+            this.btnClose.TabIndex = 127;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // frmListDrivers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1119, 692);
+            this.ClientSize = new System.Drawing.Size(1193, 692);
             this.Controls.Add(this.cbFilterBy);
             this.Controls.Add(this.txtFilterValue);
             this.Controls.Add(this.label1);
@@ -230,14 +232,14 @@
             this.Controls.Add(this.dgvDrivers);
             this.Controls.Add(this.pbDriverImage);
             this.Controls.Add(this.btnClose);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmListDrivers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List Drivers";
             this.Load += new System.EventHandler(this.frmListDrivers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDrivers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDriverImage)).EndInit();
             this.cmsDrivers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbDriverImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

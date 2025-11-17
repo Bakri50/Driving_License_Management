@@ -342,7 +342,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
             clsLocalDrivingLicenseApplication LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(ID);
 
-            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(LDLApplication.ApplicationID);
+            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(LDLApplication.ApplicantPersonID);
             frm.ShowDialog();
         }
     }

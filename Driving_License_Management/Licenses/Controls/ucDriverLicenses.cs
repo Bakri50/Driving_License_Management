@@ -14,32 +14,87 @@ namespace Driving_License_Management.Licenses.Controls
 {
     public partial class ucDriverLicenses : UserControl
     {
-        int _ApplicationID;
-        DataTable _dt;
+        int _DriverID;
+        clsDriver _Driver;
+        DataTable _dtLocalDrivingLicenses;
         public ucDriverLicenses()
         {
             InitializeComponent();
         }
 
+        private void LoadLocalLicenses()
+        {
+            _dtLocalDrivingLicenses = clsLicense.GetAllLicensesWithDriverID(_Driver.DriverID);
+            dgvLocalLicensesHistory.DataSource = _dtLocalDrivingLicenses;
+
+            if (dgvLocalLicensesHistory.Rows.Count > 0)
+            {
+                dgvLocalLicensesHistory.Columns[0].HeaderText = "Lic.ID";
+                dgvLocalLicensesHistory.Columns[0].Width = 110;
+
+                dgvLocalLicensesHistory.Columns[1].HeaderText = "App.ID";
+                dgvLocalLicensesHistory.Columns[1].Width = 100;
+
+                dgvLocalLicensesHistory.Columns[2].HeaderText = "Class Name";
+                dgvLocalLicensesHistory.Columns[2].Width = 170;
+
+                dgvLocalLicensesHistory.Columns[3].HeaderText = "Issue Date";
+                dgvLocalLicensesHistory.Columns[3].Width = 75;
+
+                dgvLocalLicensesHistory.Columns[4].HeaderText = "Expiration Date";
+                dgvLocalLicensesHistory.Columns[4].Width = 75;
+
+                dgvLocalLicensesHistory.Columns[5].HeaderText = "Is Active";
+                dgvLocalLicensesHistory.Columns[5].Width = 50;
+            }
+        
+            lblLocalLicensesRecords.Text = _dtLocalDrivingLicenses.Rows.Count.ToString();
+            
+
+
+        }
+
         public void LoadData(int PersonID)
         {
             
-            clsDriver Driver = clsDriver.FindByPersonID(PersonID);
-            if (Driver == null)
+             _Driver = clsDriver.FindByPersonID(PersonID);
+
+            if (_Driver == null)
             {
                 MessageBox.Show("No Driver with Person ID = " + PersonID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _DriverID = _Driver.DriverID;
+
+            LoadLocalLicenses();
+
+
+        }
+
+        public void LoadDataByDriverID(int DriverID)
+        {
+            _DriverID = DriverID;
+            _Driver = clsDriver.FindByDriverID(DriverID);
+
+            if (_Driver == null)
+            {
+                MessageBox.Show("No Driver with ID = " + DriverID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
 
-            _dt = clsLicense.GetAllLicensesWithDriverID(Driver.DriverID);
-            dgvLocalLicensesHistory.DataSource = _dt;
-            lblLocalLicensesRecords.Text = _dt.Rows.Count.ToString();
+            LoadLocalLicenses();
+
+
         }
 
 
+        public void CLear()
+        {
+            _dtLocalDrivingLicenses.Clear();
+        }
         private void showLicenseInfoToolStripMenuItem_Click(object sender, EventArgs e) {
 
-            int ID = (int)dgvLocalLicensesHistory.CurrentRow.Cells[1].Value;
+            int ID = (int)dgvLocalLicensesHistory.CurrentRow.Cells[0].Value;
             frmDriverLicenseInfo frm = new frmDriverLicenseInfo(ID);
             frm.ShowDialog();
             

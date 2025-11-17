@@ -51,6 +51,8 @@
             this.ucPersonInfoWithFilter1.ShowAddPerson = true;
             this.ucPersonInfoWithFilter1.Size = new System.Drawing.Size(970, 456);
             this.ucPersonInfoWithFilter1.TabIndex = 1;
+            this.ucPersonInfoWithFilter1.OnPersonSelected += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnPersonSelected);
+
             // 
             // ucDriverLicenses1
             // 

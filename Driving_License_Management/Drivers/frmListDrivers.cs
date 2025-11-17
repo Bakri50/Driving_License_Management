@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Driving_License_Management.Licenses;
 
 namespace Driving_License_Management.Drivers
 {
@@ -47,8 +48,12 @@ namespace Driving_License_Management.Drivers
                 dgvDrivers.Columns[3].HeaderText = "Full Name";
                 dgvDrivers.Columns[3].Width = 280;
 
-                dgvDrivers.Columns[4].HeaderText = "Active Licenses";
-                dgvDrivers.Columns[4].Width = 100;
+
+                dgvDrivers.Columns[4].HeaderText = "Created Date";
+                dgvDrivers.Columns[4].Width = 90;
+                
+                dgvDrivers.Columns[5].HeaderText = "Active Licenses";
+                dgvDrivers.Columns[5].Width = 60;
             }
         }
 
@@ -141,6 +146,14 @@ namespace Driving_License_Management.Drivers
         {
             int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
             frmPersonDetails frm = new frmPersonDetails(PersonID);
+            frm.ShowDialog();
+
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
+            frmPersonLicensesHistory frm = new frmPersonLicensesHistory(PersonID);
             frm.ShowDialog();
 
         }

@@ -363,9 +363,9 @@ namespace DataAccessLayer_DLVD
 
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = @"select LicenseID as 'Licenses ID' ,ApplicationID as 'App ID', LicenseClass As 'Class Name',IssueDate As 'Issue Date',
+            string query = @"select LicenseID as 'Licenses ID' ,ApplicationID as 'App ID', LicenseClasses.ClassName As 'Class Name',IssueDate As 'Issue Date',
                                     ExpirationDate As 'Expiration Date', IsActive As 'Is Active'
-                                    from Licenses 
+                                    from Licenses   INNER JOIN LicenseClasses ON LicenseClasses.LicenseClassID = Licenses.LicenseClass
                                     where DriverID = @DriverID";
 
             SqlCommand cmd = new SqlCommand(query, connection);

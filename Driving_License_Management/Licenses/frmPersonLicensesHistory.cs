@@ -13,20 +13,44 @@ namespace Driving_License_Management.Licenses
 {
     public partial class frmPersonLicensesHistory : Form
     {
-        int _ApplicationID;
-        public frmPersonLicensesHistory(int ApplicationID)
+        int _PersonID = -1;
+
+        public frmPersonLicensesHistory()
         {
-            _ApplicationID = ApplicationID;
+            InitializeComponent();
+        }
+        public frmPersonLicensesHistory(int PersonID)
+        {
+            _PersonID = PersonID;
             InitializeComponent();
         }
 
+        private void ctrlPersonCardWithFilter1_OnPersonSelected(int obj)
+        {
+            _PersonID = obj;
+            if (_PersonID == -1)
+            {
+                ucDriverLicenses1.CLear();
+            }
+            else
+                ucDriverLicenses1.LoadData(_PersonID);
 
-        private void frmPersonLicensesHistory_Load(object sender, EventArgs e) { 
-        
-        clsApplication Application = clsApplication.FindBaseApplication(_ApplicationID);
-        ucDriverLicenses1.LoadData(Application.ApplicantPersonID);
-        ucPersonInfoWithFilter1.LoadPersonInfo(Application.ApplicantPersonID);
-        ucPersonInfoWithFilter1.FilterEnabeled = false;
+        }
+
+        private void frmPersonLicensesHistory_Load(object sender, EventArgs e) {
+
+         if (_PersonID == -1) {
+
+                ucDriverLicenses1.LoadData(_PersonID);
+                ucPersonInfoWithFilter1.LoadPersonInfo(_PersonID);
+                ucPersonInfoWithFilter1.FilterEnabeled = false;
+         }
+            else
+            {
+                ucPersonInfoWithFilter1.Enabled = true;
+                ucPersonInfoWithFilter1.FilterFocus();
+            }
+
         }
         
     }
