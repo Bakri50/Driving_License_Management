@@ -19,7 +19,7 @@ namespace DataAccessLayer_DLVD
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
             string query = "UPDATE InternationalLicenses SET IsActive = 0 WHERE DriverID = @DriverID" +
                
-                "INSERT INTO [dbo].[InternationalLicenses]  ([ApplicationID] , [DriverID]," +
+                " INSERT INTO [dbo].[InternationalLicenses]  ([ApplicationID] , [DriverID]," +
                 " [IssuedUsingLocalLicenseID] , [IssueDate] , [ExpirationDate] , [IsActive],  [CreatedByUserID])" +
                 " VALUES (@ApplicationID, @DriverID , @IssuedUsingLocalLicenseID ," +
                 " @IssueDate , @ExpirationDate , @IsActive, @CreatedByUserID) select SCOPE_IDENTITY()";
@@ -112,7 +112,8 @@ namespace DataAccessLayer_DLVD
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
 
-            string query = "SELECT * FROM InternationalLicenses";
+            string query = @"SELECT * FROM InternationalLicenses
+                              ORDER BY InternationalLicenseID DESC";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -185,7 +186,7 @@ namespace DataAccessLayer_DLVD
             }
 
             return dt;
-
+            
         }
 
         static public bool GetLicenseInfoByLicenseID(int InternationalLicenseID,ref int ApplicationID, ref int DriverID,
@@ -194,7 +195,7 @@ namespace DataAccessLayer_DLVD
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = "Select *From Licenses Where LicenseID = @LicenseID";
+            string query = "Select *From InternationalLicenses Where InternationalLicenseID = @InternationalLicenseID";
 
 
             SqlCommand cmd = new SqlCommand(query, connection);
@@ -246,7 +247,7 @@ namespace DataAccessLayer_DLVD
             string query = @"SELECT TOP 1 InternationalLicenseID
                             FROM InternationalLicenses
                             WHERE
-                            Drivers.DriverID = @DriverID AND GETDATE() BETWEEN IssueDate AND ExpirationDate
+                            DriverID = @DriverID  AND GETDATE() BETWEEN IssueDate AND ExpirationDate
                              ORDER BY ExpirationDate DESC";
 
             SqlCommand command = new SqlCommand(query, connection);

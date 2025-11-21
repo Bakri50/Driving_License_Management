@@ -34,7 +34,6 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
             string ImagePath;
             if (_License.DriverInfo.PersonInfo.Gendor == 0)
             {
-                //@"..\..\..\Storge\Icons\Icons\Vision 512.png"
                 ImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
             }
             else ImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";

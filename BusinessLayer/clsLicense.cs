@@ -177,7 +177,7 @@ namespace BusinessLayer
             RenwApplication.ApplicationTypeID = (int)clsApplication.enApplicationType.RenewDrivingLicenseService;
             RenwApplication.CreatedByUserID = CreatedByUserID;
             RenwApplication.LastStatusDate = DateTime.Now;
-            RenwApplication.PaidFees = clsApplcationType.Find((int)clsApplication.enApplicationType.RenewDrivingLicenseService).Fees;
+            RenwApplication.PaidFees = clsApplicationType.Find((int)clsApplication.enApplicationType.RenewDrivingLicenseService).Fees;
 
             if (!RenwApplication.Save())
             {
@@ -219,7 +219,7 @@ namespace BusinessLayer
             RenwApplication.ApplicationTypeID = (IssueReason == enIssueReason.DamagedReplacement)? (int)clsApplication.enApplicationType.ReplacementforaDamagedDrivingLicense:
                 (int)clsApplication.enApplicationType.ReplacementforaLostDrivingLicense;
    
-            RenwApplication.PaidFees = clsApplcationType.Find(RenwApplication.ApplicationTypeID).Fees;
+            RenwApplication.PaidFees = clsApplicationType.Find(RenwApplication.ApplicationTypeID).Fees;
             RenwApplication.CreatedByUserID = CreatedByUserID;
             RenwApplication.LastStatusDate = DateTime.Now;
 

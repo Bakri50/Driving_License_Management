@@ -39,7 +39,7 @@ namespace Driving_License_Management.Licenses
 
         private void frmPersonLicensesHistory_Load(object sender, EventArgs e) {
 
-         if (_PersonID == -1) {
+         if (_PersonID != -1) {
 
                 ucDriverLicenses1.LoadData(_PersonID);
                 ucPersonInfoWithFilter1.LoadPersonInfo(_PersonID);

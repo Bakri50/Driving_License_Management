@@ -58,7 +58,7 @@ namespace BusinessLayer
 
        public  enMode Mode;
 
-        public clsApplcationType ApplcationType;
+        public clsApplicationType ApplcationType;
 
         public clsUser CreateByUserInfo;
 
@@ -80,7 +80,7 @@ namespace BusinessLayer
             this.CreatedByUserID = CreatedByUserID;
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
-            ApplcationType = clsApplcationType.Find(ApplicationTypeID);
+            ApplcationType = clsApplicationType.Find(ApplicationTypeID);
 
             Mode = enMode.Update;
         }

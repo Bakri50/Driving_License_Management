@@ -31,7 +31,7 @@ namespace Driving_License_Management.Applcations.RenewLocalDrivingLicense
 
             lblApplicationDate.Text = DateTime.Now.ToShortDateString();
             lblIssueDate.Text = DateTime.Now.ToShortDateString();
-            lblApplicationFees.Text = clsApplcationType.Find((int)clsApplication.enApplicationType.RenewDrivingLicenseService).Fees.ToString();
+            lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RenewDrivingLicenseService).Fees.ToString();
             lblExpirationDate.Text = "[???]";
             lblCreatedByUser.Text = clsGlobal.CurrentUser.UserName;
             ucDriverLicenseWithFilter1.txtLicenseIDFocus();

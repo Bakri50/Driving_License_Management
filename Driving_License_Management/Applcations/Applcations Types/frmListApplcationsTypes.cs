@@ -36,7 +36,7 @@ namespace Driving_License_Management.Applcations.Applcations_Types
 
         private void _RefreshData()
         {
-            _dt = clsApplcationType.GetAllAppTypes();
+            _dt = clsApplicationType.GetAllAppTypes();
             dgv.DataSource = _dt;
             lbRecoreds.Text = dgv.Rows.Count.ToString();
 

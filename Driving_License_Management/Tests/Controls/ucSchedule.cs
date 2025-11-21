@@ -102,7 +102,7 @@ namespace Driving_License_Management.Controls
             {
 
                 gbRetakeTestInfo.Enabled = true;
-                lblRetakeAppFees.Text = clsApplcationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
+                lblRetakeAppFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
                 lblTitle.Text = "Scheduale Retake Test";
                 lblRetakeTestAppID.Text = "0";
             }
@@ -274,7 +274,7 @@ namespace Driving_License_Management.Controls
                 Application.ApplicationTypeID = (int)clsApplication.enApplicationType.RetakeTest;
                 Application.ApplicationStatus = Convert.ToByte(clsApplication.enStatus.Completed);
                 Application.LastStatusDate = DateTime.Now;
-                Application.PaidFees = clsApplcationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees;
+                Application.PaidFees = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees;
                 Application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
 
                 if (!Application.Save())

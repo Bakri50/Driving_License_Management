@@ -10,7 +10,7 @@ namespace BusinessLayer
 {
     public class clsInternationalLicense : clsApplication
     {
-        public enum enMode { AddNew = 0, Update = 1 };
+        public enum enMode { AddNew = 1, Update = 2};
         public enMode Mode = enMode.AddNew;
 
 
@@ -24,7 +24,7 @@ namespace BusinessLayer
         public DateTime ExpirationDate { set; get; }
   
         public bool IsActive { set; get; }
-        public int CreatedByUserID { set; get; }
+        public int LicenseCreatedByUserID { set; get; }
 
         public clsInternationalLicense()
         {
@@ -35,7 +35,7 @@ namespace BusinessLayer
             this.IssueDate = DateTime.Now;
             this.ExpirationDate = DateTime.Now;
             this.IsActive = false;
-            this.CreatedByUserID = -1;
+            this.LicenseCreatedByUserID = -1;
             this.DriverInfo = null;
             this.LocalLicenseInfo = null;
 
@@ -43,7 +43,7 @@ namespace BusinessLayer
         }
 
         public clsInternationalLicense(int ApplicationID, int ApplicantPersonID, DateTime ApplicationDate, int ApplicationTypeID,
-           byte ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserIDint,int internationalLicenseID, int driverID, int issuedUsingLocalLicenseID, DateTime issueDate, DateTime expirationDate,  bool isActive, int createdByUserID)
+           byte ApplicationStatus, DateTime LastStatusDate, decimal PaidFees, int CreatedByUserID,int internationalLicenseID, int driverID, int issuedUsingLocalLicenseID, DateTime issueDate, DateTime expirationDate,  bool isActive, int createdByUserID)
         {
 
 
@@ -59,7 +59,7 @@ namespace BusinessLayer
             base.PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
 
 
-            this.InternationalLicenseID = InternationalLicenseID;
+            this.InternationalLicenseID = internationalLicenseID;
             this.ApplicationID = base.ApplicationID;
             this.DriverID = driverID;
             this.DriverInfo = clsDriver.FindByDriverID(DriverID);
@@ -68,14 +68,14 @@ namespace BusinessLayer
             this.IssueDate = issueDate;
             this.ExpirationDate = expirationDate;
             this.IsActive = isActive;
-            this.CreatedByUserID = createdByUserID;
+            this.LicenseCreatedByUserID = createdByUserID;
             this.Mode = enMode.Update;
         }
 
         bool _AddNew()
         {
             InternationalLicenseID = clsInternationalLicenseAccsess.AddNew(ApplicationID, DriverID,
-                IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive, CreatedByUserID);
+                IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive, LicenseCreatedByUserID);
             return (InternationalLicenseID > 0);
         }
 
@@ -83,16 +83,20 @@ namespace BusinessLayer
         {
 
             return  clsInternationalLicenseAccsess.Update(InternationalLicenseID,ApplicationID, DriverID,
-                IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive, CreatedByUserID);
+                IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive, LicenseCreatedByUserID);
         }
        
 
-        static public bool IsLicenceExistByDriverID(int DriverID)
+        static public bool IsLicenceExistAndActiveByDriverID(int DriverID)
         {
 
             return (clsInternationalLicenseAccsess.GetActiveLicenseIDByDriverID(DriverID) > -1);
         }
 
+        static public int GetActiveLicenseIDByDriverID(int DriverID)
+        {
+            return clsInternationalLicenseAccsess.GetActiveLicenseIDByDriverID(DriverID);
+        }
 
         static public clsInternationalLicense Find(int InternationalLicenseID)
         {
@@ -125,12 +129,16 @@ namespace BusinessLayer
 
             return null;
         }
+
         static public DataTable GetDriverLicenses(int DriverID)
         {
             return clsInternationalLicenseAccsess.GetDriverLicenses(DriverID);
         }
 
-
+        static public DataTable GetAllLicenses()
+        {
+            return clsInternationalLicenseAccsess.GetAllLicenses();
+        }
        
       
         public bool IsExpired()

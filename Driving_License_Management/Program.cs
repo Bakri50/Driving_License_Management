@@ -11,6 +11,7 @@ using Driving_License_Management.Login;
 using Driving_License_Management.People;
 using Driving_License_Management.Users;
 using Driving_License_Management.Licenses;
+using Driving_License_Management.Applcations.InternationalLicenseApplication;
 
 namespace Driving_License_Management
 {
@@ -27,7 +28,7 @@ namespace Driving_License_Management
             Application.SetCompatibleTextRenderingDefault(false);
 
            
-            Application.Run(new frmPersonLicensesHistory());
+            Application.Run(new frmLogin());    
         }
     }
 }

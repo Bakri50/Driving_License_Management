@@ -51,7 +51,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             {
                 LDLApication = new clsLocalDrivingLicenseApplication();
                 lbApplicationDate.Text = DateTime.Now.ToShortDateString();
-                lbApplicationFees.Text = ((int)(clsApplcationType.Find((int)clsApplication.enApplicationType.NewLocalDrivingLicenseService)).Fees).ToString();
+                lbApplicationFees.Text = ((int)(clsApplicationType.Find((int)clsApplication.enApplicationType.NewLocalDrivingLicenseService)).Fees).ToString();
                 lbCreatedBy.Text = clsGlobal.CurrentUser.UserName;
                 cmbLicenseClass.SelectedIndex = 2;
                 ucPersonInfoWithFilter1.FilterFocus();
@@ -120,7 +120,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             Application.ApplicationTypeID = 1; //New License
             Application.LastStatusDate = DateTime.Now;
             Application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            Application.PaidFees = clsApplcationType.Find(Application.ApplicationTypeID).Fees;
+            Application.PaidFees = clsApplicationType.Find(Application.ApplicationTypeID).Fees;
         }
         private void _LoadData()
         {

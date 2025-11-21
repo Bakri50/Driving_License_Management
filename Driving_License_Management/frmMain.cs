@@ -16,6 +16,7 @@ using Driving_License_Management.GlobalClasses;
 using Driving_License_Management.Tests.TestTypes;
 using Driving_License_Management.Users;
 using Driving_License_Management.Drivers;
+using Driving_License_Management.Applcations.InternationalLicenseApplication;
 
 
 namespace Driving_License_Management
@@ -99,8 +100,7 @@ namespace Driving_License_Management
 
         private void manageApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmListLocalDrivingLicenseApplication frm = new frmListLocalDrivingLicenseApplication();
-            frm.ShowDialog();
+            return;
         }
 
         private void driversToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,6 +119,24 @@ namespace Driving_License_Management
         private void replacemrntForLosOrDamegedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmReplaceLostOrDamagedLicense frm = new frmReplaceLostOrDamagedLicense();
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddInternationalLicense frm = new frmAddInternationalLicense();
+            frm.ShowDialog();   
+        }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicenseApplication frm = new frmListLocalDrivingLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void internationalLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListInternationalLicenses frm = new frmListInternationalLicenses();
             frm.ShowDialog();
         }
     }

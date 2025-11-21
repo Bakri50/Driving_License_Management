@@ -58,14 +58,14 @@ namespace Driving_License_Management.Applcations.ReplaceLostOrDamagedLicense
 
             lblTitle.Text = "Replacement for Damaged License";
             this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplcationType.Find(_GetApplicationTypeID()).Fees.ToString();    
+            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();    
         }
 
         private void rbLostLicense_CheckedChanged(object sender, EventArgs e)
         {
             lblTitle.Text = "Replacment for Losted License";
             this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplcationType.Find(_GetApplicationTypeID()).Fees.ToString();
+            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
         }
 
         private void ucDriverLicenseWithFilter1_OnLicenseSelected(int obj)

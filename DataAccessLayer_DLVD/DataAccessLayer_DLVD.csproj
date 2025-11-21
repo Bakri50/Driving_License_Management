@@ -45,6 +45,7 @@
     <Compile Include="clsApplicationAccess.cs" />
     <Compile Include="clsConnectionString.cs" />
     <Compile Include="clsCountryAccess.cs" />
+    <Compile Include="clsDetainedLicenseAccess.cs" />
     <Compile Include="clsDriverAccess.cs" />
     <Compile Include="clsInternationalLicenseAccsess.cs" />
     <Compile Include="clsLicenseAccess.cs" />

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Driving_License_Management.Licenses.LocalLicenses;
+using Driving_License_Management.Licenses.InternationalLicenses;
 
 namespace Driving_License_Management.Licenses.Controls
 {
@@ -17,6 +18,7 @@ namespace Driving_License_Management.Licenses.Controls
         int _DriverID;
         clsDriver _Driver;
         DataTable _dtLocalDrivingLicenses;
+        DataTable _dtInternationalDrivingLicense;
         public ucDriverLicenses()
         {
             InitializeComponent();
@@ -25,7 +27,10 @@ namespace Driving_License_Management.Licenses.Controls
         private void LoadLocalLicenses()
         {
             _dtLocalDrivingLicenses = clsLicense.GetDriverLicenses(_Driver.DriverID);
+            _dtInternationalDrivingLicense = clsInternationalLicense.GetDriverLicenses(_Driver.DriverID);
+
             dgvLocalLicensesHistory.DataSource = _dtLocalDrivingLicenses;
+            dgvInternationalLicensesHistory.DataSource = _dtInternationalDrivingLicense;
 
             if (dgvLocalLicensesHistory.Rows.Count > 0)
             {
@@ -49,6 +54,7 @@ namespace Driving_License_Management.Licenses.Controls
             }
         
             lblLocalLicensesRecords.Text = _dtLocalDrivingLicenses.Rows.Count.ToString();
+            lblInternationalLicensesRecords.Text = _dtInternationalDrivingLicense.Rows.Count.ToString();
             
 
 
@@ -91,6 +97,7 @@ namespace Driving_License_Management.Licenses.Controls
         public void CLear()
         {
             _dtLocalDrivingLicenses.Clear();
+            _dtInternationalDrivingLicense.Clear();
         }
         private void showLicenseInfoToolStripMenuItem_Click(object sender, EventArgs e) {
 
@@ -98,6 +105,13 @@ namespace Driving_License_Management.Licenses.Controls
             frmDriverLicenseInfo frm = new frmDriverLicenseInfo(ID);
             frm.ShowDialog();
             
+        }
+
+        private void InternationalLicenseHistorytoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ID = (int)dgvInternationalLicensesHistory.CurrentRow.Cells[0].Value;
+            frmInternationalLicenseInfo frm = new frmInternationalLicenseInfo(ID);
+            frm.ShowDialog();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace BusinessLayer
 
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
             CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
-            ApplcationType = clsApplcationType.Find(ApplicationTypeID);
+            ApplcationType = clsApplicationType.Find(ApplicationTypeID);
             LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
 
             Mode = enMode.Update;

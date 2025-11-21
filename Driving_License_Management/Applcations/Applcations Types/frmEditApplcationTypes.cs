@@ -14,10 +14,10 @@ namespace Driving_License_Management.Applcations.Applcations_Types
     public partial class frmEditApplcationTypes : Form
     {
 
-        clsApplcationType _AppType;
+        clsApplicationType _AppType;
         public frmEditApplcationTypes(int ID)
         {
-            _AppType = clsApplcationType.Find(ID);
+            _AppType = clsApplicationType.Find(ID);
             InitializeComponent();
         }
 
