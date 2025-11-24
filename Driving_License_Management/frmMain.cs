@@ -12,10 +12,12 @@ using Driving_License_Management.Applcations.Applcations_Types;
 using Driving_License_Management.Applcations.LocalDrivingLicenseApplication;
 using Driving_License_Management.Applcations.RenewLocalDrivingLicense;
 using Driving_License_Management.Applcations.ReplaceLostOrDamagedLicense;
+using Driving_License_Management.Applcations.ReleaseDetainedLicenses;
 using Driving_License_Management.GlobalClasses;
 using Driving_License_Management.Tests.TestTypes;
 using Driving_License_Management.Users;
 using Driving_License_Management.Drivers;
+using Driving_License_Management.Licenses.DatinedLicenses;
 using Driving_License_Management.Applcations.InternationalLicenseApplication;
 
 
@@ -137,6 +139,24 @@ namespace Driving_License_Management
         private void internationalLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListInternationalLicenses frm = new frmListInternationalLicenses();
+            frm.ShowDialog();
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicenses frm = new frmDetainLicenses();
+            frm.ShowDialog();
+        }
+
+        private void releaseDetainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLisenses frm = new frmReleaseDetainedLisenses();
+            frm.ShowDialog();   
+        }
+
+        private void manageDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDetainedLicenses frm = new frmListDetainedLicenses();
             frm.ShowDialog();
         }
     }

@@ -283,16 +283,8 @@ namespace Driving_License_Management
 
 
 
-        private bool _IsValidEmail(string str)
-        {
-            if (str.EndsWith(".com") && str.Contains("@") && !str.StartsWith("@"))
-            {
-                return true;
-            }
-            return false;
-        }
+       
 
-        //______________________________
 
 
         private void btnClose_Click(object sender, EventArgs e)

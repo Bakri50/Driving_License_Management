@@ -69,7 +69,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
             lblFullName.Text = _License.DriverInfo.PersonInfo.FullName;
             lblGendor.Text = (SelectedLicense.DriverInfo.PersonInfo.Gendor == 0) ? "Male" : "Female";
             lblIsActive.Text = (_License.IsActive == 1) ? "Yes" : "No";
-            lblIsDetained.Text = (_License.IsActive == 1) ? "No" : "Yes";
+            lblIsDetained.Text = (_License.IsDetained()) ? "Yes" : "No";
             lblIssueDate.Text = _License.IssueDate.ToShortDateString();
             lblIssueReason.Text = SelectedLicense.IssueReasonText;
             lblLicenseID.Text = _License.LicenseID.ToString();

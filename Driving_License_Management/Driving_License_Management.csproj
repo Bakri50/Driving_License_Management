@@ -97,6 +97,12 @@
     <Compile Include="Applcations\ReleaseDetainedLicenses\frmListDetainedLicenses.Designer.cs">
       <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applcations\ReleaseDetainedLicenses\frmReleaseDetainedLisenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applcations\ReleaseDetainedLicenses\frmReleaseDetainedLisenses.Designer.cs">
+      <DependentUpon>frmReleaseDetainedLisenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,12 @@
     </Compile>
     <Compile Include="Controls\ucPersonInfoWithFilter.Designer.cs">
       <DependentUpon>ucPersonInfoWithFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\DatinLicenses\frmDetainLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\DatinLicenses\frmDetainLicenses.Designer.cs">
+      <DependentUpon>frmDetainLicenses.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenses\InternationalLicenses\Control\usDriver%27sInternationLicense.cs">
       <SubType>UserControl</SubType>
@@ -347,6 +359,9 @@
     <EmbeddedResource Include="Applcations\ReleaseDetainedLicenses\frmListDetainedLicenses.resx">
       <DependentUpon>frmListDetainedLicenses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applcations\ReleaseDetainedLicenses\frmReleaseDetainedLisenses.resx">
+      <DependentUpon>frmReleaseDetainedLisenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applcations\RenewLocalDrivingLicense\frmRenwLocalDrivingLicense.resx">
       <DependentUpon>frmRenwLocalDrivingLicense.cs</DependentUpon>
     </EmbeddedResource>
@@ -361,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucPersonInfoWithFilter.resx">
       <DependentUpon>ucPersonInfoWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\DatinLicenses\frmDetainLicenses.resx">
+      <DependentUpon>frmDetainLicenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\InternationalLicenses\Control\usDriver%27sInternationLicense.resx">
       <DependentUpon>usDriver%27sInternationLicense.cs</DependentUpon>

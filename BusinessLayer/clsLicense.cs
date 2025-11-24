@@ -264,6 +264,23 @@ namespace BusinessLayer
 
         }
 
+        public bool IsDetained()
+        {
+            return clsDetainedLicense.IsDetained(this.LicenseID);
+        }
+
+        public int Detain(float FineFess, int CreatedByUserID)
+        {
+            clsDetainedLicense DetainedLicense = new clsDetainedLicense();
+
+            DetainedLicense.LicenseID = this.LicenseID;
+            DetainedLicense.DetainDate = DateTime.Now;
+            DetainedLicense.FineFess = FineFess;
+            DetainedLicense.CreatedByUserID = CreatedByUserID;
+
+            if (!DetainedLicense.Save()) { return -1; }
+            return DetainedLicense.DetainID;
+        }
         public bool Save()
         {
             switch (Mode)

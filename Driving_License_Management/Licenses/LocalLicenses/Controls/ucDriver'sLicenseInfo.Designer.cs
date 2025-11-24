@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblIsDetained = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.lblIssueReason = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblDriverID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblIsDetained = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -83,17 +83,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblIsDetained
-            // 
-            this.lblIsDetained.AutoSize = true;
-            this.lblIsDetained.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsDetained.Location = new System.Drawing.Point(641, 225);
-            this.lblIsDetained.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblIsDetained.Name = "lblIsDetained";
-            this.lblIsDetained.Size = new System.Drawing.Size(75, 29);
-            this.lblIsDetained.TabIndex = 278;
-            this.lblIsDetained.Text = "[????]";
             // 
             // label11
             // 
@@ -496,7 +485,7 @@
             // 
             this.lblDriverID.AutoSize = true;
             this.lblDriverID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDriverID.Location = new System.Drawing.Point(641, 149);
+            this.lblDriverID.Location = new System.Drawing.Point(641, 225);
             this.lblDriverID.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDriverID.Name = "lblDriverID";
             this.lblDriverID.Size = new System.Drawing.Size(75, 29);
@@ -514,14 +503,25 @@
             this.label4.TabIndex = 279;
             this.label4.Text = "Driver ID:";
             // 
+            // lblIsDetained
+            // 
+            this.lblIsDetained.AutoSize = true;
+            this.lblIsDetained.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsDetained.Location = new System.Drawing.Point(641, 152);
+            this.lblIsDetained.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblIsDetained.Name = "lblIsDetained";
+            this.lblIsDetained.Size = new System.Drawing.Size(75, 29);
+            this.lblIsDetained.TabIndex = 282;
+            this.lblIsDetained.Text = "[????]";
+            // 
             // ucLocalDriver_sLicense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblIsDetained);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblDriverID);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblIsDetained);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.lblIssueReason);
@@ -580,8 +580,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblIsDetained;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblIssueReason;
@@ -621,5 +619,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblDriverID;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblIsDetained;
     }
 }

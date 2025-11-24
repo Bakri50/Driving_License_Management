@@ -59,6 +59,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
                 OnLicenseSelected(LicenseID);
             }
 
+
         }
 
 
@@ -78,7 +79,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
         {
             txtLicenseID.Focus();
         }
-        private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e) {
+        private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e){
         
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             if(e.KeyChar == 13)
