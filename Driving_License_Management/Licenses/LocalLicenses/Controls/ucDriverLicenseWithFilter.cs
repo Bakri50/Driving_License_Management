@@ -48,6 +48,7 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
         public int LicenseID { get { return _LicenseID; } set { _LicenseID = value; } }
         public clsLicense SelectedLicense { get { return ucLocalDriver_sLicense1.SelectedLicense; } }
 
+
         public void LoadLicenseInfo(int LicenseID)
         {
             _LicenseID = LicenseID;

@@ -92,7 +92,7 @@
             this.manageTestTypesToolStripMenuItem});
             this.userToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(142, 80);
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(197, 80);
             this.userToolStripMenuItem.Text = "Applications";
             // 
             // drivingToolStripMenuItem

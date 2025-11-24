@@ -19,6 +19,8 @@ namespace BusinessLayer
        public int ReleasedByUserID{ set; get; }
        public DateTime ReleaseDate{ set; get; }
        public int ReleaseApplicationID { set; get; }
+
+        public clsUser CreatedByUserInfo;
        public enum enMode { AddNew =  0, Update = 1 }
         enMode Mode;
        public clsDetainedLicense() { 
@@ -41,6 +43,8 @@ namespace BusinessLayer
             ReleasedByUserID = releasedByUserID;
             ReleaseDate = releaseDate;
             ReleaseApplicationID = releaseApplicationID;
+            CreatedByUserInfo = clsUser.FindUser(CreatedByUserID);
+
             Mode = enMode.Update;
 
         }
@@ -129,9 +133,9 @@ namespace BusinessLayer
             return clsDetainedLicenseAccess.IsLicenseDetained(LicenseID) ;
         }
 
-        public bool ReleaseLicense()
+        public bool ReleaseLicense(int ReleasedByUserID, int ReleaseApplicationID)
         {
-           return clsDetainedLicenseAccess.ReleaseDetainedLicense(this.DetainID, this.ReleasedByUserID, this.ReleaseApplicationID);
+           return clsDetainedLicenseAccess.ReleaseDetainedLicense(this.DetainID, ReleasedByUserID, ReleaseApplicationID);
         }
 
     }

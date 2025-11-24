@@ -23,7 +23,6 @@ namespace Driving_License_Management.Licenses.LocalLicenses.Controls
         public int LicenseID{ get { return _LicenseID; } }
         public clsLicense SelectedLicense{ get { return _License; } }
 
-
         public ucLocalDriver_sLicense()
         {
             InitializeComponent();

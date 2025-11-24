@@ -508,6 +508,7 @@
     <Content Include="Resources\Address 32.png" />
     <Content Include="Resources\Application Types 512.png" />
     <Content Include="Resources\Applications 64.png" />
+    <None Include="Resources\Applications 641.png" />
     <Content Include="Resources\Applications.png" />
     <Content Include="Resources\ApplicationTitle.png" />
     <Content Include="Resources\ApplicationType.png" />

@@ -61,12 +61,17 @@ namespace Driving_License_Management.Licenses.DatinedLicenses
                 return;
             }
 
+            if (MessageBox.Show("Are you sure you want to detained this license detained", "Conferm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
             _LicenseID = ucDriverLicenseWithFilter1.LicenseID;
             _DetainID = ucDriverLicenseWithFilter1.SelectedLicense.Detain(float.Parse(txtFineFees.Text), clsGlobal.CurrentUser.UserID);
 
             if (_DetainID == -1) {
 
-                MessageBox.Show("An Error Occurred", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to detained this license", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

@@ -29,7 +29,7 @@ namespace BusinessLayer
         public byte IsActive { set; get; }
         public enIssueReason IssueReason { set; get; }
         public static string GetIssueReasonText(enIssueReason IssueReason)
-        {
+                {
 
             switch (IssueReason)
             {
@@ -54,6 +54,9 @@ namespace BusinessLayer
             }
         }    
         public int CreatedByUserID { set; get; }
+
+        public clsDetainedLicense DetainedInfo;
+
 
         public clsLicense() {
             this.LicenseID = -1;
@@ -87,6 +90,7 @@ namespace BusinessLayer
             IsActive = isActive;
             IssueReason = issueReason;
             CreatedByUserID = createdByUserID;
+            DetainedInfo = clsDetainedLicense.FindByLicenseID(this.LicenseID);
         }
 
         bool _AddNew()
@@ -280,6 +284,35 @@ namespace BusinessLayer
 
             if (!DetainedLicense.Save()) { return -1; }
             return DetainedLicense.DetainID;
+        }
+
+        public bool ReleaseDetained(int CreatedByUserID, ref int ApplicationID)
+        {
+            clsApplication Application = new clsApplication();
+            clsApplicationType ApplicationType = clsApplicationType.Find((int)clsApplication.enApplicationType.ReleaseDetainedDrivingLicsense);
+
+            Application.ApplicantPersonID = this.DriverInfo.PersonID;
+            Application.ApplicationDate = DateTime.Now;
+            Application.ApplicationStatus = 3; //Complated
+            Application.CreatedByUserID = CreatedByUserID;
+            Application.ApplicationTypeID = ApplicationType.ApplicationTypeID;
+            Application.PaidFees = ApplicationType.Fees;
+            Application.LastStatusDate = DateTime.Now;
+
+            if (!Application.Save())
+            {
+
+                return false;
+            }
+
+            ApplicationID = Application.ApplicationID;
+
+            if (!DetainedInfo.ReleaseLicense(CreatedByUserID,Application.ApplicationID))
+            {
+
+                return false;
+            }
+            return true;
         }
         public bool Save()
         {
