@@ -27,8 +27,8 @@ namespace Driving_License_Management
         clsPerson _Person;
 
         //This Default Images
-        string _MaleImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
-        string _FemaleImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";
+         string _MaleImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
+         string _FemaleImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";
 
         public delegate void DataBakEventHandler(object sender, int PersonID);
 

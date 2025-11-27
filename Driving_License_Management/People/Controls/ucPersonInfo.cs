@@ -28,6 +28,9 @@ namespace Driving_License_Management
             get { return _PersonID; }
         }
 
+        // Default images
+        string _MaleImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
+        string _FemaleImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";
 
         public void LoadPersonInfo(int PersonID)
         {
@@ -72,7 +75,9 @@ namespace Driving_License_Management
             this.lblEmail.Text = _Person.Email;
             this.linkLabel1.Visible = true;
 
-            // For Photo
+            
+
+            // For pesonal photo
             if (_Person.ImagePath != "")
             {
                 if (File.Exists(_Person.ImagePath))
@@ -81,16 +86,15 @@ namespace Driving_License_Management
                 }
                 else {
                     if (_Person.Gendor == 0) {
-                        pBox.ImageLocation = @"D:\Projects\Storge\Icons\Icons\Male 512.png";
+                        pBox.ImageLocation = _MaleImagePath;
                     }
-                    else pBox.ImageLocation = @"D:\Projects\Storge\Icons\Icons\Male 512.png";
+                    else pBox.ImageLocation = _FemaleImagePath;
 
                     MessageBox.Show("Could not find this image: = " + _Person.ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                        ;
                 }
             }
-            //if (_Person.Gendor == 0) pBoxGendor.Image = Resources.Man_32;
-            //else pBoxGendor.Image = Resources.Woman_32;
+    
 
         }
 
@@ -101,13 +105,13 @@ namespace Driving_License_Management
             this.lblFullName.Text = "[???]";
             this.lblNationalNo.Text = "[???]";
             this.lblGendor.Text = "[???]";
-            this.pBoxGendor.Image = Resources.Man_32;
+            this.pBoxGendor.ImageLocation = _MaleImagePath;
             this.lblAddress.Text = "[???]";
             this.lblDateOfBirth.Text = "[???]";
             this.lblPhone.Text = "[???]";
             this.lblCountry.Text = "[???]";
             this.lblEmail.Text = "[???]";
-            this.pBox.Image = Resources.Male_512;
+            this.pBox.ImageLocation = _FemaleImagePath;
             this.linkLabel1.Visible = false;
         }
         public ucPersonInfo()
@@ -115,12 +119,7 @@ namespace Driving_License_Management
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form frm = new frmAddUpdatePerson(_PersonID);
-            frm.ShowDialog();
-            LoadPersonInfo(_PersonID);
-        }
+     
 
         private void ucPersonInfo_Load(object sender, EventArgs e)
         {
@@ -139,82 +138,6 @@ namespace Driving_License_Management
 
         }
 
-        //public string lbPersonID
-        //{
-        //    get { return this.lblPersonID.Text; }
-        //    set {  this.lblPersonID.Text = value;}
-        //}
-
-        //public string lbFullName
-        //{
-        //    get { return this.lblFullName.Text; }
-        //    set { this.lblFullName.Text = value; }
-        //}
-
-        //public string lbNationalNo
-        //{
-        //    get { return this.lblNationalNo.Text; }
-        //    set { this.lblNationalNo.Text = value; }
-        //}
-
-        //public string lbGendor
-        //{
-        //    get { return this.lblGendor.Text; }
-        //    set { this.lblGendor.Text = value; }
-        //}
-
-        //public string lbEmail
-        //{
-        //    get { return this.lblEmail.Text; }
-        //    set { this.lblEmail.Text = value; }
-        //}
-
-        //public string lbAddress
-        //{
-        //    get { return this.lblAddress.Text; }
-        //    set { this.lblAddress.Text = value; }
-        //}
-
-        //public string lbDateOfBirth
-        //{
-        //    get { return this.lblDateOfBirth.Text; }
-        //    set { this.lblDateOfBirth.Text = value; }
-        //}
-
-        //public string lbPhone
-        //{
-        //    get { return this.lblPhone.Text; }
-        //    set { this.lblPhone.Text = value; }
-        //}
-
-        //public string lbCountry
-        //{
-        //    get { return this.lblCountry.Text; }
-        //    set { this.lblCountry.Text = value; }
-        //}
-
-        //public LinkLabel linkLabel
-        //{
-        //    get { return this.linkLabel1 as LinkLabel; }
-        //    set { this.linkLabel1 = value; }
-        //}
-
-        //public PictureBox pictureBox
-        //{
-        //    get { return this.pBox as PictureBox; }
-        //    set { this.pBox = value; }
-        //}
-
-
-        //public event EventHandler LinkLabelClicked;
-
-        //private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        //{
-        //    if(LinkLabelClicked != null)
-        //    {
-        //        LinkLabelClicked(this, EventArgs.Empty);
-        //    }
-        //}
 
 
     }

@@ -22,12 +22,6 @@ namespace Driving_License_Management
             _PersonID = personID;
         }
 
-        //void ucPersonInfo1LinkLabelClick(object sender, EventArgs e)
-        //{
-        //    Form frm = new frmAddNewPerson(_PersonID);
-        //    frm.ShowDialog();
-        //}
-
         private void frmPersonDetails_Load(object sender, EventArgs e)
         {
             ucPersonInfo1.LoadPersonInfo(_PersonID);
