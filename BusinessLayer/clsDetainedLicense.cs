@@ -43,7 +43,7 @@ namespace BusinessLayer
             ReleasedByUserID = releasedByUserID;
             ReleaseDate = releaseDate;
             ReleaseApplicationID = releaseApplicationID;
-            CreatedByUserInfo = clsUser.FindUser(CreatedByUserID);
+            CreatedByUserInfo = clsUser.Find(CreatedByUserID);
 
             Mode = enMode.Update;
 

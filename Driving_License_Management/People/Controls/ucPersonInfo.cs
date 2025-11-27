@@ -117,7 +117,7 @@ namespace Driving_License_Management
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Form frm = new frmAddNewPerson(_PersonID);
+            Form frm = new frmAddUpdatePerson(_PersonID);
             frm.ShowDialog();
             LoadPersonInfo(_PersonID);
         }
@@ -129,7 +129,7 @@ namespace Driving_License_Management
 
         private void linkLabel1_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddNewPerson frm = new frmAddNewPerson(_PersonID); 
+            frmAddUpdatePerson frm = new frmAddUpdatePerson(_PersonID); 
             frm.ShowDialog();
             LoadPersonInfo(_PersonID);
         }

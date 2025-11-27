@@ -132,7 +132,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             lbDLApplicationID.Text = LDLApication.LocalDrivingLicenseApplicationID.ToString();
             lbApplicationDate.Text = LDLApication.ApplicationDate.ToString();
             lbApplicationFees.Text = LDLApication.PaidFees.ToString();
-            clsUser CurrentUser = clsUser.FindUser(LDLApication.CreatedByUserID);
+            clsUser CurrentUser = clsUser.Find(LDLApication.CreatedByUserID);
 
             if (CurrentUser != null) lbCreatedBy.Text = CurrentUser.UserName; else lbCreatedBy.Text = "";
 

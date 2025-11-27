@@ -30,7 +30,7 @@ namespace DataAccessLayer_DLVD
                 }
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return dt;
@@ -43,7 +43,7 @@ namespace DataAccessLayer_DLVD
             return dt;
         }
 
-        static public int AddNew(int PersonID, string UserName, string Password, byte IsActive)
+        static public int AddNew(int PersonID, string UserName, string Password, bool IsActive)
         {
 
             int UserID = -1;
@@ -70,8 +70,9 @@ namespace DataAccessLayer_DLVD
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                return UserID;
             }
             finally
             {
@@ -82,7 +83,7 @@ namespace DataAccessLayer_DLVD
 
         }
 
-        static public int Update(int UserID, int PersonID, string UserName, string Password, byte IsActive)
+        static public int Update(int UserID, int PersonID, string UserName, string Password, bool IsActive)
         {
 
             int result = 0;
@@ -108,7 +109,7 @@ namespace DataAccessLayer_DLVD
                 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             finally
@@ -155,7 +156,7 @@ namespace DataAccessLayer_DLVD
 
         }
 
-        static public bool GetUserInfoByUserName(string UserName,  ref int PersonID, ref int UserID, ref string Password, ref byte IsActive)
+        static public bool GetUserInfoByUserName(string UserName,  ref int PersonID, ref int UserID, ref string Password, ref bool IsActive)
         {
 
             bool IsFound = false;
@@ -178,14 +179,14 @@ namespace DataAccessLayer_DLVD
                     UserID = (int)reader["UserID"];
                     PersonID = (int)reader["PersonID"];
                     Password = reader["Password"].ToString();
-                    IsActive = Convert.ToByte(reader["IsActive"]);
+                    IsActive = Convert.ToBoolean(reader["IsActive"]);
 
 
                 }
 
                 reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
               IsFound = false;
             }
@@ -199,7 +200,7 @@ namespace DataAccessLayer_DLVD
 
         }
 
-        static public bool GetUserInfoByID(int UserID, ref int PersonID, ref string UserName, ref string Password, ref byte IsActive)
+        static public bool GetUserInfoByID(int UserID, ref int PersonID, ref string UserName, ref string Password, ref bool IsActive)
         {
 
             bool IsFound = false;
@@ -222,7 +223,7 @@ namespace DataAccessLayer_DLVD
                     UserName = reader["UserName"].ToString();
                     PersonID = (int)reader["PersonID"];
                     Password = reader["Password"].ToString();
-                    IsActive = Convert.ToByte(reader["IsActive"]);
+                    IsActive = Convert.ToBoolean(reader["IsActive"]);
 
 
                 }
@@ -231,6 +232,49 @@ namespace DataAccessLayer_DLVD
             }
             catch (Exception ex)
             {
+            }
+            finally
+            {
+
+                connection.Close();
+            }
+
+            return IsFound;
+
+        }
+
+        static public bool GetByUsernameAndPassword(string UserName, string Password,ref int UserID, ref int PersonID,ref bool IsActive)
+        {
+
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+            string query = "Select * From Users Where UserName = @UserName and Password = @Password";
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@UserName", UserName);
+            cmd.Parameters.AddWithValue("@Password", Password);
+
+
+            try
+            {
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    IsFound = true;
+                    UserID = (int)reader["UserID"];
+                    PersonID = (int)reader["PersonID"];
+                    IsActive = Convert.ToBoolean(reader["IsActive"]);
+
+                }
+
+                reader.Close();
+            }
+            catch (Exception )
+            {
+                return false;
             }
             finally
             {
@@ -280,44 +324,6 @@ namespace DataAccessLayer_DLVD
 
         }
 
-        static public bool IsExistWithUserNameAndPassword(string UserName, string Password)
-        {
-
-            bool IsFound = false;
-            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
-            string query = "Select Found = 1 From Users Where UserName = @UserName and Password = @Password";
-
-
-            SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("@UserName", UserName);
-            cmd.Parameters.AddWithValue("@Password", Password);
-
-
-            try
-            {
-
-                connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    IsFound = true;
-
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-
-                connection.Close();
-            }
-
-            return IsFound;
-
-        }
 
         static public int Delete(int UserID)
         {

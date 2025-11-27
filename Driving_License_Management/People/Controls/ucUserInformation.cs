@@ -33,7 +33,7 @@ namespace Driving_License_Management.Controls
         }
         public void LoadUserInfo(int UserID)
         {
-            _User = clsUser.FindUser(UserID);
+            _User = clsUser.Find(UserID);
 
             if (_User == null)
             {

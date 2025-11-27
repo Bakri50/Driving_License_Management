@@ -79,7 +79,7 @@ namespace BusinessLayer
             this.PaidFees = PaidFees;
             this.CreatedByUserID = CreatedByUserID;
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
-            CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
+            CreateByUserInfo = clsUser.Find(CreatedByUserID);
             ApplcationType = clsApplicationType.Find(ApplicationTypeID);
 
             Mode = enMode.Update;

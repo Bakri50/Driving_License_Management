@@ -19,6 +19,7 @@ using Driving_License_Management.Users;
 using Driving_License_Management.Drivers;
 using Driving_License_Management.Licenses.DatinedLicenses;
 using Driving_License_Management.Applcations.InternationalLicenseApplication;
+using Driving_License_Management.Login;
 
 
 namespace Driving_License_Management
@@ -26,11 +27,12 @@ namespace Driving_License_Management
     public partial class frmMain : Form
     {
         int UserID = -1;
-
+        frmLogin _LoginScreen;
         clsUser _User = clsGlobal.CurrentUser;
 
-        public frmMain()
+        public frmMain(frmLogin LoginScreen)
         {
+            _LoginScreen = LoginScreen;
             InitializeComponent();
         }
 
@@ -40,6 +42,7 @@ namespace Driving_License_Management
             this.DoubleBuffered = true;
             this.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             this.AutoScaleMode = AutoScaleMode.Dpi;
+
 
             if (_User != null) {
             lbPersonName.Text = _User.Person.FirstName + " " + _User.Person.SecondName;
@@ -78,6 +81,8 @@ namespace Driving_License_Management
         {
             if(DialogResult.Yes == MessageBox.Show("Are you sure", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning,MessageBoxDefaultButton.Button1))
             {
+                _LoginScreen.Show();
+                clsGlobal.CurrentUser = null;
                 this.Close();
             }
         }
@@ -157,6 +162,18 @@ namespace Driving_License_Management
         private void manageDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListDetainedLicenses frm = new frmListDetainedLicenses();
+            frm.ShowDialog();
+        }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicenseApplication frm = new frmListLocalDrivingLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void reaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLisenses frm = new frmReleaseDetainedLisenses();
             frm.ShowDialog();
         }
     }

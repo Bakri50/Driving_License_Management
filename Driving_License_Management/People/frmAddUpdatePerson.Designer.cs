@@ -1,6 +1,6 @@
 ﻿namespace Driving_License_Management
 {
-    partial class frmAddNewPerson
+    partial class frmAddUpdatePerson
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddNewPerson));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddUpdatePerson));
             this.MP_lbRecords = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -122,7 +122,7 @@
             // lblTitle
             // 
             resources.ApplyResources(this.lblTitle, "lblTitle");
-            this.lblTitle.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblTitle.ForeColor = System.Drawing.Color.Crimson;
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
@@ -420,6 +420,7 @@
             // 
             // frmAddNewPerson
             // 
+            this.Text = "Add New Person";
             this.AcceptButton = this.btnSave;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

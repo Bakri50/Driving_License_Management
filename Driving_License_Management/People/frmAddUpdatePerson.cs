@@ -19,27 +19,31 @@ using Driving_License_Management.GlobalClasses;
 
 namespace Driving_License_Management
 {
-    public partial class frmAddNewPerson : Form
+    public partial class frmAddUpdatePerson : Form
     {
-        enum _enMode { AddNew = 0, Update = 1 }
-        int PersonID = -1;
-        _enMode Mode;
+        enum enMode { AddNew = 0, Update = 1 }
+        int _PersonID = -1;
+        enMode _Mode;
         clsPerson _Person;
+
+        //This Default Images
+        string _MaleImagePath = @"..\..\..\Storge\Icons\Icons\Male 512.png";
+        string _FemaleImagePath = @"..\..\..\Storge\Icons\Icons\Female 512.png";
 
         public delegate void DataBakEventHandler(object sender, int PersonID);
 
         public event DataBakEventHandler DataBack;
-        public frmAddNewPerson()
+        public frmAddUpdatePerson()
         {
             InitializeComponent();
-            Mode = _enMode.AddNew;
+            _Mode = enMode.AddNew;
         }
-        public frmAddNewPerson(int ID)
+        public frmAddUpdatePerson(int ID)
         {
             InitializeComponent();
 
-            PersonID = ID;
-            Mode = _enMode.Update;
+            _PersonID = ID;
+            _Mode = enMode.Update;
            
         }
 
@@ -53,22 +57,32 @@ namespace Driving_License_Management
             }
         }
 
+        //for maxmium and minimum birth Date
+        private void BirthDateSetting()
+        {
+            dtpDateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
+            dtpDateOfBirth.MinDate = DateTime.Today.AddYears(-100);
+
+
+        }
+
 
         private void _ResetDefultValues()
         {
             _FillcmbCountrey();
             BirthDateSetting();
 
-            if (Mode == _enMode.AddNew)
+            if (_Mode == enMode.AddNew)
             {
                 cmbCountries.SelectedIndex = cmbCountries.FindString("Sudan");
                 lblTitle.Text = "Add New Person";
+                this.Text = lblTitle.Text;
             }
 
             _Person = new clsPerson();
 
             rbMale.Checked = true;
-            pBoxPersonImage.ImageLocation = @"D:\Projects\Storge\Icons\Icons\Male 512.png";
+            pBoxPersonImage.ImageLocation = _MaleImagePath;
             txbFirstN.Text = "";
             txbSecondN.Text = "";
             txbThirdN.Text = "";
@@ -78,43 +92,8 @@ namespace Driving_License_Management
             txbPhone.Text = "";
             txbAddress.Text = ""; 
 
-
-
-            //else
-            //{
-            //    clsPerson person = clsPerson.FindPerson(PersonID);
-               
-
-
-            //    if (person != null)
-            //    {
-            //        cmbCountries.SelectedIndex = person.NationalityCountryID - 1;
-            //        pB.ImageLocation = person.ImagePath;
-            //        lblTitle.Text = " Update Person";
-
-            //        lblPersonID.Text = PersonID.ToString();
-            //        txbFirstN.Text = person.FirstName;
-            //        txbSecondN.Text = person.SecondName;
-            //        txbThirdN.Text = person.ThirdName;
-            //        txbLastN.Text = person.LastName;
-            //        txbNationalNo.Text = person.NationalNo;
-            //        if (person.Gendor == 0)
-            //        {
-            //            rbMale.Checked = true;
-            //        }
-            //        else rbFamale.Checked = true;
-
-            //        txbEmail.Text = person.Email;
-            //        txbAddress.Text = person.Address;
-            //        dtpDateOfBirth.Value = person.DateOfBirth;
-            //        txbPhone.Text = person.Phone;
-            //        cmbCountries.SelectedValue = person.NationalityCountryID;
-
-            //    }
-
-            //}
-
-            lblRemove.Visible = (pBoxPersonImage.ImageLocation != null);
+            // Dont Show the bottum if the image is the default image or there is no image
+            lblRemove.Visible = (pBoxPersonImage.ImageLocation != _MaleImagePath && pBoxPersonImage.ImageLocation != _FemaleImagePath && pBoxPersonImage.ImageLocation != null);
 
             
         }
@@ -122,7 +101,7 @@ namespace Driving_License_Management
         {
             
 
-                _Person = clsPerson.FindPerson(PersonID);
+                _Person = clsPerson.FindPerson(_PersonID);
 
 
 
@@ -130,8 +109,9 @@ namespace Driving_License_Management
                 {
                     
                     lblTitle.Text = " Update Person";
+                this.Text = lblTitle.Text;
 
-                    lblPersonID.Text = PersonID.ToString();
+                    lblPersonID.Text = _PersonID.ToString();
                     txbFirstN.Text = _Person.FirstName;
                     txbSecondN.Text = _Person.SecondName;
                     txbThirdN.Text = _Person.ThirdName;
@@ -165,27 +145,16 @@ namespace Driving_License_Management
         }
         private void frmAddNewPerson_Load(object sender, EventArgs e)
         {
-            if (!this.DesignMode)
-            {
+            
                 _ResetDefultValues();
-                if (Mode == _enMode.Update) _LoadData();
-            }
+                if (_Mode == enMode.Update) _LoadData();
+            
         }
 
 
-        //for maxmium and minimum birth Date
-        private void BirthDateSetting()
-        {
-            dtpDateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
-            dtpDateOfBirth.MinDate = DateTime.Today.AddYears(-100);
+   
 
-
-        }
-
-        //---------------------------
-
-
-        //for set or remove Image
+        //for set Personal Image
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             openFileDialog1.InitialDirectory = @"C:\";
@@ -199,37 +168,37 @@ namespace Driving_License_Management
 
 
         }
+        //for remove the personal image
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pBoxPersonImage.ImageLocation = null;
-            pBoxPersonImage.Image = null;
+            if(rbMale.Checked) pBoxPersonImage.ImageLocation = _MaleImagePath;
+
+            else pBoxPersonImage.ImageLocation = _FemaleImagePath;
+
             lblRemove.Visible =false;   
         }
 
-        //---------------------------
      
 
 
         private void rbMale_CheckedChanged(object sender, EventArgs e)
         {
-            if (pBoxPersonImage.ImageLocation == null)
+            if (pBoxPersonImage.ImageLocation == null || pBoxPersonImage.ImageLocation == _FemaleImagePath)
             {
-                pBoxPersonImage.ImageLocation = @"D:\Projects\Storge\Icons\Icons\Male 512.png";
+                pBoxPersonImage.ImageLocation = _MaleImagePath;
             }
         }
 
         private void rbFamale_CheckedChanged(object sender, EventArgs e)
         {
-            if (pBoxPersonImage.ImageLocation == null ) {
-                pBoxPersonImage.ImageLocation = @"D:\Projects\Storge\Icons\Icons\Famle 512.png";
+            if (pBoxPersonImage.ImageLocation == null || pBoxPersonImage.ImageLocation == _MaleImagePath) {
+                pBoxPersonImage.ImageLocation = _FemaleImagePath;
             }
         }
 
 
 
         //For Inputs validate
-
-
         private void ValidateEmptyTextBox(object sender, CancelEventArgs e)
         {
             System.Windows.Forms.TextBox Temp = ((System.Windows.Forms.TextBox)sender);
@@ -243,7 +212,6 @@ namespace Driving_License_Management
             {
                 errorProvider1.SetError(Temp, null);
             }
-            // TextBox Temp = ((TextBox)sender);
         }
 
         private void txbNationalNoValidating(object sender, CancelEventArgs e)
@@ -297,7 +265,7 @@ namespace Driving_License_Management
         {
             if (_Person.ImagePath != pBoxPersonImage.ImageLocation) {
 
-                if (_Person.ImagePath != null) {
+                if (_Person.ImagePath != "") {
 
                     try
                     {
@@ -311,7 +279,7 @@ namespace Driving_License_Management
             
             }
 
-            if (pBoxPersonImage.ImageLocation != null) { 
+            if (pBoxPersonImage.ImageLocation != _MaleImagePath && pBoxPersonImage.ImageLocation != _FemaleImagePath && pBoxPersonImage.ImageLocation != null) { 
             
             
                 string sourceFile = pBoxPersonImage.ImageLocation.ToString();
@@ -359,12 +327,12 @@ namespace Driving_License_Management
             if (_Person.Save())
             {
                 MessageBox.Show("Data Saved Successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Mode = _enMode.Update;
+                _Mode = enMode.Update;
                 lblTitle.Text = " Update Person";
-                PersonID = _Person.PersonID;
-                lblPersonID.Text = PersonID.ToString();
+                _PersonID = _Person.PersonID;
+                lblPersonID.Text = _PersonID.ToString();
 
-                DataBack?.Invoke(this, PersonID);
+                DataBack?.Invoke(this, _PersonID);
             }
             else
             {

@@ -126,7 +126,7 @@ namespace Driving_License_Management.Controls
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            frmAddNewPerson frm = new frmAddNewPerson();
+            frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.DataBack += GetNewPersonInfo;
             frm.ShowDialog();
 

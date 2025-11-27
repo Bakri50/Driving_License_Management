@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPeopleList));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,7 @@
             // 
             // showDetailsToolStripMenuItem1
             // 
-//            this.showDetailsToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.PersonDetails_32;
+            this.showDetailsToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("showDetailsToolStripMenuItem1.Image")));
             this.showDetailsToolStripMenuItem1.Name = "showDetailsToolStripMenuItem1";
             this.showDetailsToolStripMenuItem1.Size = new System.Drawing.Size(206, 32);
             this.showDetailsToolStripMenuItem1.Text = "Show Details";
@@ -74,7 +75,7 @@
             // 
             // addNewUserToolStripMenuItem
             // 
-//            this.addNewUserToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.AddPerson_32;
+            this.addNewUserToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewUserToolStripMenuItem.Image")));
             this.addNewUserToolStripMenuItem.Name = "addNewUserToolStripMenuItem";
             this.addNewUserToolStripMenuItem.Size = new System.Drawing.Size(206, 32);
             this.addNewUserToolStripMenuItem.Text = "Add New User";
@@ -82,7 +83,7 @@
             // 
             // editToolStripMenuItem
             // 
-//            this.editToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.edit_32;
+            this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(206, 32);
             this.editToolStripMenuItem.Text = "Edit";
@@ -90,7 +91,7 @@
             // 
             // deleteToolStripMenuItem
             // 
-//            this.deleteToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.Delete_32;
+            this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(206, 32);
             this.deleteToolStripMenuItem.Text = "Delete";
@@ -98,14 +99,14 @@
             // 
             // sendEmailToolStripMenuItem1
             // 
-//            this.sendEmailToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.send_email_32;
+            this.sendEmailToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("sendEmailToolStripMenuItem1.Image")));
             this.sendEmailToolStripMenuItem1.Name = "sendEmailToolStripMenuItem1";
             this.sendEmailToolStripMenuItem1.Size = new System.Drawing.Size(206, 32);
             this.sendEmailToolStripMenuItem1.Text = "Send Email";
             // 
             // callPhoneToolStripMenuItem1
             // 
-//            this.callPhoneToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.call_32;
+            this.callPhoneToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("callPhoneToolStripMenuItem1.Image")));
             this.callPhoneToolStripMenuItem1.Name = "callPhoneToolStripMenuItem1";
             this.callPhoneToolStripMenuItem1.Size = new System.Drawing.Size(206, 32);
             this.callPhoneToolStripMenuItem1.Text = "Call Phone";
@@ -159,8 +160,8 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(389, 186);
+            this.label3.ForeColor = System.Drawing.Color.Crimson;
+            this.label3.Location = new System.Drawing.Point(414, 186);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(312, 46);
             this.label3.TabIndex = 9;
@@ -224,12 +225,12 @@
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-//            this.btnClose.Image = global::Driving_License_Management.Properties.Resources.Close_32;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClose.Location = new System.Drawing.Point(952, 649);
+            this.btnClose.Location = new System.Drawing.Point(966, 649);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(148, 49);
+            this.btnClose.Size = new System.Drawing.Size(146, 43);
             this.btnClose.TabIndex = 87;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -238,8 +239,8 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-//            this.pictureBox1.Image = global::Driving_License_Management.Properties.Resources.People_400;
-            this.pictureBox1.Location = new System.Drawing.Point(321, 12);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(346, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(458, 155);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -250,8 +251,8 @@
             // 
             this.MP_btnAddNew.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.MP_btnAddNew.AutoSize = true;
-//            this.MP_btnAddNew.Image = global::Driving_License_Management.Properties.Resources.Add_Person_40;
-            this.MP_btnAddNew.Location = new System.Drawing.Point(1017, 223);
+            this.MP_btnAddNew.Image = ((System.Drawing.Image)(resources.GetObject("MP_btnAddNew.Image")));
+            this.MP_btnAddNew.Location = new System.Drawing.Point(1029, 223);
             this.MP_btnAddNew.Name = "MP_btnAddNew";
             this.MP_btnAddNew.Size = new System.Drawing.Size(83, 63);
             this.MP_btnAddNew.TabIndex = 5;

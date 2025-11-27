@@ -221,7 +221,7 @@ namespace Driving_License_Management
 
         private void MP_btnAddNew_Click(object sender, EventArgs e)
         {
-            frmAddNewPerson frm = new frmAddNewPerson();
+            frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.ShowDialog();
             _RefreshPepoleData();
         }
@@ -229,7 +229,7 @@ namespace Driving_License_Management
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonID = (int)MP_dgv1.CurrentRow.Cells[0].Value;
-            frmAddNewPerson frm = new frmAddNewPerson(PersonID);
+            frmAddUpdatePerson frm = new frmAddUpdatePerson(PersonID);
             frm.ShowDialog();
             _RefreshPepoleData();
         }
@@ -244,7 +244,7 @@ namespace Driving_License_Management
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddNewPerson frm = new frmAddNewPerson(-1);
+            frmAddUpdatePerson frm = new frmAddUpdatePerson(-1);
             frm.ShowDialog();
             _RefreshPepoleData();
         }

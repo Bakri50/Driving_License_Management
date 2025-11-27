@@ -15,7 +15,6 @@ namespace Driving_License_Management.Login
     public partial class frmLogin : Form
     {
 
-        private clsUser _User;
         public frmLogin()
         {
             InitializeComponent();
@@ -25,6 +24,7 @@ namespace Driving_License_Management.Login
         {
             string Username = "";
             string Password = "";
+
 
             if (clsGlobal.GetStoredCredintial(ref Username, ref Password)) {
 
@@ -37,73 +37,53 @@ namespace Driving_License_Management.Login
                 chkRememberMe.Checked = false;
             }
         }
-        private void txtUsername_Validating(object sender, CancelEventArgs e)
-        {
-            _User = clsUser.FindUser(txtUserName.Text);
-
-
-            if (_User == null) {
-                e.Cancel = true;
-                errorProvider1.SetError(txtUserName, "Username is Not Fount");
-                return;
-            }
-            errorProvider1.SetError(txtUserName, null);
-
-        }
-
-        private void txtPassword_Validating(object sender, CancelEventArgs e)
-        {
-            _User = clsUser.FindUser(txtUserName.Text);
-            if (_User == null)
-            {
-                return;
-            }
-            if (_User.Password != txtPassword.Text)
-            {
-                e.Cancel = true;
-                errorProvider1.SetError(txtPassword, "Password is invalid");
-
-            }
-            else errorProvider1.SetError(txtPassword, null);
-        }
+       
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (!this.ValidateChildren()) {
-                MessageBox.Show("Invalid Data");
+         
 
+            clsUser _User = clsUser.FindByUsernameAndPassword(txtUserName.Text,txtPassword.Text);
+
+            if (_User == null) {
+                txtUserName.Focus();
+                MessageBox.Show("Invalid Username/Password.", "Wrong Credintials", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if ((!_User.IsActive))
             {
 
+
                 txtUserName.Focus();
-                MessageBox.Show("Your account is not Active, Contact Admin.", "In Active Account", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Your account is not Active, Contact Admin.", "Inactive Account", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (chkRememberMe.Checked) { 
-            clsGlobal.RememberMeUsernameAndPassword(txtUserName.Text, txtPassword.Text);
-            
-            }
-            else
-            {
-                clsGlobal.RememberMeUsernameAndPassword("", "");
 
-            }
+            if (chkRememberMe.Checked)
+                // store Username and password
+                clsGlobal.RememberMeUsernameAndPassword(txtUserName.Text, txtPassword.Text);
+
+            // store empty Username and password
+
+            else clsGlobal.RememberMeUsernameAndPassword("", "");
+
+
+
+
 
             clsGlobal.CurrentUser = _User;
             this.Hide();
-            frmMain Main = new frmMain();
-            Main.ShowDialog();
-            if (!chkRememberMe.Checked)
-            {
-                this.Close();
-            }
-            this.ShowDialog();
-            
+            frmMain frm = new frmMain(this);
+            frm.ShowDialog();
 
+            // if you logout you will back to the login screen if you close the form without logout you will finsh the program 
+            if(clsGlobal.CurrentUser == null)
+            {
+                return;
+            }
+            this.Close();
 
         }
 

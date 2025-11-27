@@ -42,7 +42,7 @@ namespace BusinessLayer
             this.CreatedByUserID = CreatedByUserID;
 
             PersonInfo = clsPerson.FindPerson(ApplicantPersonID);
-            CreateByUserInfo = clsUser.FindUser(CreatedByUserID);
+            CreateByUserInfo = clsUser.Find(CreatedByUserID);
             ApplcationType = clsApplicationType.Find(ApplicationTypeID);
             LicenseClassInfo = clsLicenseClass.Find(LicenseClassID);
 

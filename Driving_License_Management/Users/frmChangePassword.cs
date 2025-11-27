@@ -18,7 +18,7 @@ namespace Driving_License_Management.Users
         {
             InitializeComponent();
 
-            _User = clsUser.FindUser(UserID);
+            _User = clsUser.Find(UserID);
         }
 
         private void frmChangePassword_Load(object sender, EventArgs e)

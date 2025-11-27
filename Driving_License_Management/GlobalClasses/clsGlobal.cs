@@ -19,19 +19,25 @@ namespace Driving_License_Management.GlobalClasses
         {
             try
             {
+
+                // get the current project's path
                 string thisFolderPath = System.IO.Directory.GetCurrentDirectory();
+
+                // Define the path to the text file where you want save the data
                 string FilePath = thisFolderPath + "\\data";
 
                 if (Username == "" && File.Exists(FilePath))
                 {
+                    // if you dont want save data
                     File.Delete(FilePath);
                     return true;
                 }
 
 
-
+                // Concatonate username and password with seperator
                 string DataToSave = Username + "//##//" + Password;
 
+                // Write the data in the file for future retrieval
                 using (StreamWriter writer = new StreamWriter(FilePath))
                 {
                     writer.WriteLine(DataToSave);
@@ -52,14 +58,24 @@ namespace Driving_License_Management.GlobalClasses
 
         static public bool GetStoredCredintial(ref string Username,ref string Password) {
 
+            // This will get the stored username and password and will return true if found and false if not found
+
+
             try
             {
+                // Get the current project's directory path
                 string thisFolderPath = System.IO.Directory.GetCurrentDirectory();
+
+                // Path for the file contains the credential
                 string FilePath = thisFolderPath + "\\data";
+
+                // Check if the file exist before attempting to read it
                 if (File.Exists(FilePath))
                 {
+                    // Create a StreamReader for reading from the file
                     using (StreamReader reader = new StreamReader(FilePath))
                     {
+                        // Read data line by line until end of the file
                         string Line;
                         while ((Line = reader.ReadLine()) != null)
                         {

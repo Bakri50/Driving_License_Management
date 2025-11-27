@@ -1,6 +1,6 @@
 ﻿namespace Driving_License_Management.Tests
 {
-    partial class frmTestAppointment
+    partial class frmTestAppointments
     {
         /// <summary>
         /// Required designer variable.

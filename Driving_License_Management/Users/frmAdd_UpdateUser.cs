@@ -30,7 +30,7 @@ namespace Driving_License_Management.Login
         public frmAdd_UpdateUser(int ID)
         {
             InitializeComponent();
-            _User = clsUser.FindUser(ID);
+            _User = clsUser.Find(ID);
             _Mode = enMode.Update;
 
         }
@@ -139,7 +139,7 @@ namespace Driving_License_Management.Login
                 return;
             }
 
-            if (clsUser.FindUser(txbUsername.Text) != null && txbUsername.Text != _User.UserName)
+            if (clsUser.Find(txbUsername.Text) != null && txbUsername.Text != _User.UserName)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbUsername, "Username Already Exist!");

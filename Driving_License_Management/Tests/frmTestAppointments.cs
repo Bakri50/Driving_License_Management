@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace Driving_License_Management.Tests
 {
-    public partial class frmTestAppointment : Form
+    public partial class frmTestAppointments : Form
     {
         int _LDLApplicationID = -1;
         clsTestType.enTestType _TestType;
         clsLocalDrivingLicenseApplication LDLApplication;
-        public frmTestAppointment(int LDLApplicationID, clsTestType.enTestType TestType)
+        public frmTestAppointments(int LDLApplicationID, clsTestType.enTestType TestType)
         {
             _LDLApplicationID = LDLApplicationID;
             _TestType = TestType;
@@ -37,8 +37,8 @@ namespace Driving_License_Management.Tests
             }
 
             ucLocalDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(LDLApplication.LocalDrivingLicenseApplicationID);
-
             dgv.DataSource = clsTestAppointment.GetAllTestAppointmentsPerTestType(_LDLApplicationID, (int)_TestType);
+            lblRecords.Text = dgv.Rows.Count.ToString();
 
         }
         private void frmTestAppointment_Load(object sender, EventArgs e)
