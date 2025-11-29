@@ -92,7 +92,7 @@
             this.ucPersonInfoWithFilter1.FilterEnabeled = true;
             this.ucPersonInfoWithFilter1.Location = new System.Drawing.Point(55, 67);
             this.ucPersonInfoWithFilter1.Name = "ucPersonInfoWithFilter1";
-            this.ucPersonInfoWithFilter1.ShowAddPerson = true;
+            this.ucPersonInfoWithFilter1.ShowBtnAddPerson = true;
             this.ucPersonInfoWithFilter1.Size = new System.Drawing.Size(1144, 439);
             this.ucPersonInfoWithFilter1.TabIndex = 2;
             // 

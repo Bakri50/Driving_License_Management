@@ -427,7 +427,7 @@
             this.ucPersonInfoWithFilter1.Location = new System.Drawing.Point(27, 3);
             this.ucPersonInfoWithFilter1.Margin = new System.Windows.Forms.Padding(1);
             this.ucPersonInfoWithFilter1.Name = "ucPersonInfoWithFilter1";
-            this.ucPersonInfoWithFilter1.ShowAddPerson = true;
+            this.ucPersonInfoWithFilter1.ShowBtnAddPerson = true;
             this.ucPersonInfoWithFilter1.Size = new System.Drawing.Size(765, 286);
             this.ucPersonInfoWithFilter1.TabIndex = 8;
             // 

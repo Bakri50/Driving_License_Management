@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
+using Driving_License_Management.GlobalClasses;
 
 namespace Driving_License_Management
 {
@@ -187,15 +188,22 @@ namespace Driving_License_Management
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.ShowDialog();
+
             _RefreshPepoleData();
+            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[0];
+                
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonID = (int)dgv.CurrentRow.Cells[0].Value;
+
+            int CurrentRow = (int)dgv.CurrentRow.Index;
             frmAddUpdatePerson frm = new frmAddUpdatePerson(PersonID);
             frm.ShowDialog();
-            _RefreshPepoleData();
+            _RefreshPepoleData();     
+            // Focus on Updated Row
+             dgv.CurrentCell = dgv.Rows[CurrentRow].Cells[0];
         }
 
         private void showDetailsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -217,7 +225,6 @@ namespace Driving_License_Management
 
             int PersonID = (int)dgv.CurrentRow.Cells[0].Value;
             int CurrentIndex = (int)dgv.CurrentRow.Index;
-            int CurrentCellIndex = (int)dgv.CurrentCell.ColumnIndex;
 
             if ((MessageBox.Show($"Are you sure you want delete this Person[{PersonID}]", "Conferm", MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes))
             {
@@ -227,11 +234,7 @@ namespace Driving_License_Management
                     MessageBox.Show("Deleted Successfuly", "Delete",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     _RefreshPepoleData();
 
-                    // Put focus on the pervious row if the current row is not the first
-                    if(CurrentIndex -1 >= 0)
-                    {
-                        dgv.CurrentCell = dgv.Rows[CurrentIndex - 1].Cells[CurrentCellIndex];
-                    }
+                    clsUtil.FoucsOnPreviousRow(ref dgv, CurrentIndex);
 
                 }
                 else

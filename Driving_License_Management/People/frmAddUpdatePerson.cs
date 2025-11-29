@@ -265,7 +265,7 @@ namespace Driving_License_Management
         {
             if (_Person.ImagePath != pBoxPersonImage.ImageLocation) {
 
-                if (_Person.ImagePath != "") {
+                if (_Person.ImagePath != null) {
 
                     try
                     {
@@ -329,6 +329,7 @@ namespace Driving_License_Management
                 MessageBox.Show("Data Saved Successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _Mode = enMode.Update;
                 lblTitle.Text = " Update Person";
+                this.Text = "Update Person";
                 _PersonID = _Person.PersonID;
                 lblPersonID.Text = _PersonID.ToString();
 
@@ -339,37 +340,6 @@ namespace Driving_License_Management
                 MessageBox.Show("Data Saved Faild.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            //    else
-            //{
-            //    clsPerson newPerson = new clsPerson(PersonID, txbNationalNo.Text, txbFirstN.Text, txbSecondN.Text, txbThirdN.Text
-            //        , txbLastN.Text, txbAddress.Text, txbPhone.Text, txbEmail.Text, pBoxPersonImage.ImageLocation, (rbMale.Checked) ? Convert.ToByte(0) : Convert.ToByte(1),
-            //        dtpDateOfBirth.Value, cmbCountries.SelectedIndex + 1, PrevImagePath);
-
-            //    newPerson.PersonID = PersonID;
-            //    newPerson.NationalNo = txbNationalNo.Text.Trim();
-            //    newPerson.FirstName = txbFirstN.Text.Trim();
-            //    newPerson.SecondName = txbSecondN.Text.Trim();
-            //    newPerson.ThirdName = txbThirdN.Text.Trim();
-            //    newPerson.LastName = txbLastN.Text.Trim();
-            //    newPerson.Address = txbAddress.Text.Trim();
-            //    newPerson.Email = txbEmail.Text.Trim();
-            //    newPerson.Phone = txbPhone.Text.Trim();
-            //    newPerson.Gendor = (rbMale.Checked) ? Convert.ToByte(0) : Convert.ToByte(1);
-            //    newPerson.DateOfBirth = dtpDateOfBirth.Value;
-            //    newPerson.NationalityCountryID = clsCountry.Find(cmbCountries.Text).CountryID;
-            //    if (pBoxPersonImage.ImageLocation != null)
-            //        newPerson.ImagePath = pBoxPersonImage.ImageLocation; //pB = pictureBox
-            //    else newPerson.ImagePath = "";
-
-            //    if (newPerson.Save())
-            //    {
-            //        MessageBox.Show("Data Saved Successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Data Saved Faild.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
         }
 
      

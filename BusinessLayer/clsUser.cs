@@ -112,6 +112,16 @@ namespace BusinessLayer
             return clsUserAccess.IsExistWithPerson(PersonID);
         }
 
+        static public bool IsUserExist(int UserID)
+        {
+            return clsUserAccess.IsUserExist(UserID);
+        }
+
+        static public bool IsUserExist(string UserName)
+        {
+            return clsUserAccess.IsUserExist(UserName);
+        }
+
         static public clsUser FindByUsernameAndPassword(string UserName,string Password)
         {
             int UserID = -1;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucPersonInfoWithFilter));
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
             this.cmpFindby = new System.Windows.Forms.ComboBox();
@@ -59,6 +60,8 @@
             // 
             // btnAddNewPerson
             // 
+            this.btnAddNewPerson.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddNewPerson.BackgroundImage")));
+            this.btnAddNewPerson.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnAddNewPerson.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAddNewPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddNewPerson.Location = new System.Drawing.Point(696, 22);
@@ -86,6 +89,8 @@
             // btnFind
             // 
             this.btnFind.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFind.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFind.BackgroundImage")));
+            this.btnFind.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFind.Location = new System.Drawing.Point(635, 22);
             this.btnFind.Name = "btnFind";
@@ -121,7 +126,7 @@
             // 
             // ucPersonInfo1
             // 
-            this.ucPersonInfo1.Location = new System.Drawing.Point(8, 118);
+            this.ucPersonInfo1.Location = new System.Drawing.Point(5, 121);
             this.ucPersonInfo1.Name = "ucPersonInfo1";
             this.ucPersonInfo1.Size = new System.Drawing.Size(962, 330);
             this.ucPersonInfo1.TabIndex = 1;
@@ -151,9 +156,8 @@
         private System.Windows.Forms.Button btnAddNewPerson;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.TextBox txtFilterValue;
-       // private ucPersonInfo ucPersonInfo1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private ucPersonInfo ucPersonInfo1;
-        // private ucPersonInfo ucPersonInfo1;
+        //private ucPersonInfo ucPersonInfo1;
     }
 }

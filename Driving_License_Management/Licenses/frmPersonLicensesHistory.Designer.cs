@@ -48,7 +48,7 @@
             this.ucPersonInfoWithFilter1.FilterEnabeled = true;
             this.ucPersonInfoWithFilter1.Location = new System.Drawing.Point(193, -2);
             this.ucPersonInfoWithFilter1.Name = "ucPersonInfoWithFilter1";
-            this.ucPersonInfoWithFilter1.ShowAddPerson = true;
+            this.ucPersonInfoWithFilter1.ShowBtnAddPerson = true;
             this.ucPersonInfoWithFilter1.Size = new System.Drawing.Size(970, 456);
             this.ucPersonInfoWithFilter1.TabIndex = 1;
             this.ucPersonInfoWithFilter1.OnPersonSelected += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnPersonSelected);

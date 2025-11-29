@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsersLists));
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txbFilter = new System.Windows.Forms.TextBox();
@@ -142,65 +143,58 @@
             this.sendEmailToolStripMenuItem1,
             this.callPhoneToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(233, 234);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(225, 234);
             // 
             // showDetailsToolStripMenuItem1
             // 
-            ////   this.showDetailsToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.PersonDetails_32;
             this.showDetailsToolStripMenuItem1.Name = "showDetailsToolStripMenuItem1";
-            this.showDetailsToolStripMenuItem1.Size = new System.Drawing.Size(232, 32);
+            this.showDetailsToolStripMenuItem1.Size = new System.Drawing.Size(224, 32);
             this.showDetailsToolStripMenuItem1.Text = "Show Details";
             this.showDetailsToolStripMenuItem1.Click += new System.EventHandler(this.showDetailsToolStripMenuItem1_Click);
             // 
             // addNewPersonToolStripMenuItem
             // 
-            ////    this.addNewPersonToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.AddPerson_32;
             this.addNewPersonToolStripMenuItem.Name = "addNewPersonToolStripMenuItem";
-            this.addNewPersonToolStripMenuItem.Size = new System.Drawing.Size(232, 32);
+            this.addNewPersonToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.addNewPersonToolStripMenuItem.Text = "Add New Person";
             this.addNewPersonToolStripMenuItem.Click += new System.EventHandler(this.addNewUserToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
-            ////  this.editToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.edit_32;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(232, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
-        ////    this.deleteToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.Delete_32;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // changePasswordToolStripMenuItem
             // 
-         ////   this.changePasswordToolStripMenuItem.Image = global::Driving_License_Management.Properties.Resources.Password_32;
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(232, 32);
+            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(224, 32);
             this.changePasswordToolStripMenuItem.Text = "Change Password";
             this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(229, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
             // 
             // sendEmailToolStripMenuItem1
             // 
-           //// this.sendEmailToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.send_email_32;
             this.sendEmailToolStripMenuItem1.Name = "sendEmailToolStripMenuItem1";
-            this.sendEmailToolStripMenuItem1.Size = new System.Drawing.Size(232, 32);
+            this.sendEmailToolStripMenuItem1.Size = new System.Drawing.Size(224, 32);
             this.sendEmailToolStripMenuItem1.Text = "Send Email";
             // 
             // callPhoneToolStripMenuItem1
             // 
-         ////   this.callPhoneToolStripMenuItem1.Image = global::Driving_License_Management.Properties.Resources.call_32;
             this.callPhoneToolStripMenuItem1.Name = "callPhoneToolStripMenuItem1";
-            this.callPhoneToolStripMenuItem1.Size = new System.Drawing.Size(232, 32);
+            this.callPhoneToolStripMenuItem1.Size = new System.Drawing.Size(224, 32);
             this.callPhoneToolStripMenuItem1.Text = "Call Phone";
             // 
             // cmpIsActive
@@ -254,7 +248,7 @@
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-         ////   this.btnClose.Image = global::Driving_License_Management.Properties.Resources.Close_32;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnClose.Location = new System.Drawing.Point(752, 651);
@@ -268,10 +262,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-      ////      this.pictureBox1.Image = global::Driving_License_Management.Properties.Resources.Users_2_4001;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(253, 26);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(458, 155);
+            this.pictureBox1.Size = new System.Drawing.Size(427, 155);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 93;
             this.pictureBox1.TabStop = false;
@@ -281,7 +275,7 @@
             this.btnAddNew.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnAddNew.AutoSize = true;
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-//// this.btnAddNew.Image = global::Driving_License_Management.Properties.Resources.Add_New_User_32;
+            this.btnAddNew.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.Image")));
             this.btnAddNew.Location = new System.Drawing.Point(849, 231);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(56, 44);

@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
 using Driving_License_Management.Login;
+using Driving_License_Management.GlobalClasses;
 
 namespace Driving_License_Management.Users
 {
     public partial class frmUsersLists : Form
     {
 
-        DataTable UsersData;
+        DataTable _UsersData;
         public frmUsersLists()
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace Driving_License_Management.Users
 
         private void _RefreshData()
         {
-            UsersData = clsUser.GetAllUsers();
-            dgv.DataSource = UsersData;
+            _UsersData = clsUser.GetAllUsers();
+            dgv.DataSource = _UsersData;
             lbRecords.Text = dgv.Rows.Count.ToString();
 
         }
@@ -35,6 +36,7 @@ namespace Driving_License_Management.Users
         {
 
             _RefreshData();
+
             cmpFilterBy.SelectedIndex = 0;
             cmpIsActive.SelectedIndex = 0;
             txbFilter.Visible = false;
@@ -87,15 +89,21 @@ namespace Driving_License_Management.Users
         {
             frmAdd_UpdateUser frm = new frmAdd_UpdateUser();
             frm.ShowDialog();
+            // Focus on the New Row
+            dgv.CurrentCell = dgv.Rows[dgv.Rows.Count - 1].Cells[0];
+
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int UserID = (int)dgv.CurrentRow.Cells[0].Value;
+            int CurrentRow = (int)dgv.CurrentRow.Index;
 
             frmAdd_UpdateUser frm = new frmAdd_UpdateUser(UserID);
             frm.ShowDialog();
             _RefreshData();
+            // Focus on the Updated Row
+            dgv.CurrentCell = dgv.Rows[CurrentRow].Cells[0];
           
         }
 
@@ -151,52 +159,33 @@ namespace Driving_License_Management.Users
                     break;
             }
 
-            if(CurrentFilter == "" || CurrentFilter == "None")
+            
+            if (txbFilter.Text.Trim() == "" || CurrentFilter == "None")
             {
-                UsersData.DefaultView.RowFilter = "";
+                //show all of the data
+                _UsersData.DefaultView.RowFilter = "";
                 lbRecords.Text = dgv.Rows.Count.ToString();
                 return;
             }
 
-            if(CurrentFilter == "FullName" || CurrentFilter == "UserName")
-            {
-                if (string.IsNullOrWhiteSpace(txbFilter.Text))
-                {
-                    UsersData.DefaultView.RowFilter = "";
-                }
-                else
-                {
-                    try
-                    {
-                        UsersData.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", CurrentFilter, txbFilter.Text.Trim());
 
-                    }
-                    catch (Exception)
-                    {
-                        UsersData.DefaultView.RowFilter = "1=0";
-                    }
-                }
+            else if (CurrentFilter == "FullName" || CurrentFilter == "UserName")
+            {
+                //In this case we deal with string
+                _UsersData.DefaultView.RowFilter = string.Format("[{0}] LIKE  '{1}%'", CurrentFilter, txbFilter.Text.Trim());
+
             }
-            
+
             else
             {
-                if (string.IsNullOrWhiteSpace(txbFilter.Text))
-                {
-                    UsersData.DefaultView.RowFilter = "";
-                }
-                else
-                {
-                    try
-                    {
-                        UsersData.DefaultView.RowFilter = string.Format("[{0}] = {1}", CurrentFilter, txbFilter.Text.Trim());
-                    }
-                    catch (Exception)
-                    {
-                        UsersData.DefaultView.RowFilter = "1=0";
-                    }
-                }
+
+                //In this case we deal with integer
+                _UsersData.DefaultView.RowFilter = string.Format("[{0}] = {1}", CurrentFilter, txbFilter.Text.Trim());
+
             }
-            lbRecords.Text = dgv.Rows.Count.ToString();
+
+            lbRecords.Text = dgv.RowCount.ToString();
+          
 
         }
 
@@ -204,6 +193,7 @@ namespace Driving_License_Management.Users
         {
             string ColoumnName = "IsActive";
             string CurrentFilter = "";
+
             switch (cmpIsActive.Text)
             {
                 case "All":
@@ -222,14 +212,14 @@ namespace Driving_License_Management.Users
 
             if (CurrentFilter == "" || CurrentFilter == "All")
             {
-                UsersData.DefaultView.RowFilter = "";
+                _UsersData.DefaultView.RowFilter = "";
                 lbRecords.Text = dgv.Rows.Count.ToString();
                 return;
             }
          
             else
             {
-                UsersData.DefaultView.RowFilter = string.Format("{0} = {1}", ColoumnName, CurrentFilter);
+                _UsersData.DefaultView.RowFilter = string.Format("{0} = {1}", ColoumnName, CurrentFilter);
 
             }
             lbRecords.Text = dgv.Rows.Count.ToString();
@@ -238,11 +228,18 @@ namespace Driving_License_Management.Users
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(DialogResult.Yes == MessageBox.Show("Are you sure you want to delete this user","Confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
+
+            int UserID = (int)dgv.CurrentRow.Cells[0].Value;
+            int CurrentRow = (int)dgv.CurrentRow.Index;
+
+            if (DialogResult.Yes == MessageBox.Show("Are you sure you want to delete this user","Confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
             {
-                if (clsUser.Delete((int)dgv.CurrentRow.Cells[0].Value)){
+                if (clsUser.Delete(UserID)){
                     MessageBox.Show("Deleted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _RefreshData();
+
+                    clsUtil.FoucsOnPreviousRow(ref dgv, CurrentRow);
+
                 }
                 else
                 {

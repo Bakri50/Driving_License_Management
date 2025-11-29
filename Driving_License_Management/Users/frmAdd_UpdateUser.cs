@@ -14,9 +14,12 @@ namespace Driving_License_Management.Login
     public partial class frmAdd_UpdateUser : Form
     {
         enum enMode { AddNew = 0, Update = 1 }
-
-        clsUser _User;
         enMode _Mode;
+
+
+        int _UserID;
+        clsUser _User;
+
         public frmAdd_UpdateUser()
         {
             InitializeComponent();
@@ -27,29 +30,31 @@ namespace Driving_License_Management.Login
 
         }
 
-        public frmAdd_UpdateUser(int ID)
+        public frmAdd_UpdateUser(int UserID)
         {
             InitializeComponent();
-            _User = clsUser.Find(ID);
+            _UserID = UserID;
             _Mode = enMode.Update;
 
         }
         private void _ReastDefualtValues()
         {
             if (_Mode == enMode.AddNew) {
-                _Mode = enMode.AddNew;
-                lbHeader.Text = "Add New Person";
+
+                lbHeader.Text = "Add New User";
                 this.Text = lbHeader.Text;
+                _User = new clsUser();
                 ucPersonInfoWithFilter1.FilterFocus();
-                
+
             }
 
             else if (_Mode == enMode.Update) {
-                _Mode = enMode.Update;
+
                 lbHeader.Text = "   Update User";
-                this.Text = lbHeader.Text;
+                this.Text = this.Text = "Update User";
                 ucPersonInfoWithFilter1.FilterFocus();
                 ucPersonInfoWithFilter1.FilterEnabeled = false;
+                _User = clsUser.Find(_UserID);
                 _LoadData();
             }
             btnSave.Enabled = false;
@@ -69,42 +74,56 @@ namespace Driving_License_Management.Login
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (_Mode == enMode.AddNew) { 
 
-            if (ucPersonInfoWithFilter1.PersonID == -1)
+        
+
+            if(_Mode == enMode.Update)
+            {
+                // go to the next tab
+                tabControl1.SelectedIndex++;
+                btnSave.Enabled = true;
+            }
+
+            if (ucPersonInfoWithFilter1.PersonID != -1)
             {
 
+                if (!clsUser.IsUserExistWithPersonID(ucPersonInfoWithFilter1.PersonID))
+                {
+                    // go to the next tab
+                    tabControl1.SelectedIndex++;
+                    btnSave.Enabled = true;
+                    return;
+                }
+
+                MessageBox.Show("The person you selected is already a user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            else { 
                 MessageBox.Show("You Must Choose or Add Person", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             
 
-            if (clsUser.IsUserExistWithPersonID(ucPersonInfoWithFilter1.PersonID))
-            {
-                MessageBox.Show("The person you selected is already a user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             
-            }
             
-            if (tabControl1.SelectedIndex < tabControl1.TabPages.Count - 1) {
+            
+            
+        
+            
 
-                tabControl1.SelectedIndex++;
-                btnSave.Enabled = true;
-            }
         }
 
         private void frmAdd_UpdateUser_Load(object sender, EventArgs e)
         {
             _ReastDefualtValues();
 
-            // For Form Design
+            // For Taps Design
             this.Size = new System.Drawing.Size(880, 560);
             tabControl1.Appearance = TabAppearance.FlatButtons;
             tabControl1.ItemSize = new Size(0, 1);
             tabControl1.SizeMode = TabSizeMode.Fixed;
-            //-----------------------
+            
 
             
 
@@ -113,19 +132,17 @@ namespace Driving_License_Management.Login
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex > 0)
-            {
-
+           
+                // Go to the previous tap
                 tabControl1.SelectedIndex--;
                 btnSave.Enabled = false;
 
-            }
         }
 
         private void txbUsername_Validating(object sender, CancelEventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(txbUsername.Text))
+            if (string.IsNullOrEmpty(txbUsername.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbUsername, "This field requaierd!");
@@ -135,23 +152,45 @@ namespace Driving_License_Management.Login
             if (txbUsername.Text.Contains(" "))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txbUsername, "Username must not contain space!");
+                errorProvider1.SetError(txbUsername, "Username must not contain a space!");
                 return;
             }
 
-            if (clsUser.Find(txbUsername.Text) != null && txbUsername.Text != _User.UserName)
+
+            if (_Mode == enMode.AddNew)
             {
-                e.Cancel = true;
-                errorProvider1.SetError(txbUsername, "Username Already Exist!");
-                return;
+                if (clsUser.IsUserExist(txbUsername.Text))
+                {
+                    e.Cancel = true;
+                    errorProvider1.SetError(txbUsername, "Username Already Exist!");
+                    return;
+                }
+
+            }
+            else
+            {
+                // Update mode
+
+                if (txbUsername.Text != _User.UserName)
+                {
+                    if (clsUser.IsUserExist(txbUsername.Text))
+                    {
+                        e.Cancel = true;
+                        errorProvider1.SetError(txbUsername, "Username Already Exist!");
+                        return;
+                    }
+                    errorProvider1.SetError(txbUsername, null);
+
+                }
             }
 
-            errorProvider1.SetError(txbUsername, null);
         }
+
+
 
         private void txbPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txbPassword.Text))
+            if (string.IsNullOrEmpty(txbPassword.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbPassword, "This field requaierd!");
@@ -187,6 +226,7 @@ namespace Driving_License_Management.Login
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
             if (!this.ValidateChildren())
             {
                 return;

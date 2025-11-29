@@ -13,24 +13,31 @@ namespace Driving_License_Management.Users
 {
     public partial class frmChangePassword : Form
     {
+        int _UserID;
         clsUser _User;
         public frmChangePassword(int UserID)
         {
             InitializeComponent();
 
-            _User = clsUser.Find(UserID);
+            _UserID = UserID;
         }
 
         private void frmChangePassword_Load(object sender, EventArgs e)
         {
             // Design Setting
             this.Size = new System.Drawing.Size(690, 510);
-            //----------
 
-            if (_User != null) {
-                ucUserInformation1.LoadUserInfo(_User.UserID);
-                txbCurrentPassword.Focus();
+            _User = clsUser.Find(_UserID);
+
+            if (_User == null) {
+
+                MessageBox.Show("Could not find user with ID = " + _UserID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
             }
+            ucUserInformation1.LoadUserInfo(_User.UserID);
+            txbCurrentPassword.Focus();
+
 
 
         }
@@ -38,7 +45,7 @@ namespace Driving_License_Management.Users
         private void txbCurrentPassword_Validating(object sender, CancelEventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(txbCurrentPassword.Text))
+            if (string.IsNullOrEmpty(txbCurrentPassword.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbCurrentPassword, "This field requaierd!");
@@ -57,7 +64,7 @@ namespace Driving_License_Management.Users
 
         private void txbNewPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txbNewPassword.Text))
+            if (string.IsNullOrEmpty(txbNewPassword.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbNewPassword, "This field requaierd!");
@@ -73,7 +80,7 @@ namespace Driving_License_Management.Users
                 errorProvider1.SetError(txbConfirmPassword, "Not Matched");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(txbConfirmPassword.Text))
+            if (string.IsNullOrEmpty(txbConfirmPassword.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txbConfirmPassword, "This field requaierd!");
@@ -92,9 +99,11 @@ namespace Driving_License_Management.Users
             if (!this.ValidateChildren()) {
                 return;
             }
+
             if (_User == null) {
 
                 MessageBox.Show("An error Occurred!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
             }
 
             _User.Password = txbNewPassword.Text;

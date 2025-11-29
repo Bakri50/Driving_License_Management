@@ -33,14 +33,14 @@ namespace Driving_License_Management.Controls
             cmpFindby.SelectedIndex = 0;
         }
 
-        bool _ShowAddPerson = true;
-        public bool ShowAddPerson
+        bool _ShowBtnAddPerson = true;
+        public bool ShowBtnAddPerson
         {
-            get { return _ShowAddPerson; }
+            get { return _ShowBtnAddPerson; }
             set
             {
-                _ShowAddPerson = value;
-                btnAddNewPerson.Visible = _ShowAddPerson;
+                _ShowBtnAddPerson = value;
+                btnAddNewPerson.Visible = _ShowBtnAddPerson;
             }
         }
 

@@ -10,6 +10,17 @@ namespace Driving_License_Management.GlobalClasses
 {
     public class clsUtil
     {
+
+        static public void FoucsOnPreviousRow(ref DataGridView dgv, int CurrentIndex)
+        {
+            //Put focus on the pervious row if the current row is not the first
+
+            if (CurrentIndex > 0)
+            {
+                dgv.CurrentCell = dgv.Rows[CurrentIndex - 1].Cells[0];
+
+            }
+        }
         static public string GenerateGUID()
         {
             Guid NewGiud =  Guid.NewGuid();

@@ -325,6 +325,71 @@ namespace DataAccessLayer_DLVD
         }
 
 
+        public static bool IsUserExist(int UserID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+
+            string query = "SELECT Found=1 FROM Users WHERE UserID = @UserID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UserID", UserID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
+        public static bool IsUserExist(string UserName)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
+
+            string query = "SELECT Found=1 FROM Users WHERE UserName = @UserName";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@UserName", UserName);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                isFound = reader.HasRows;
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
         static public int Delete(int UserID)
         {
 
