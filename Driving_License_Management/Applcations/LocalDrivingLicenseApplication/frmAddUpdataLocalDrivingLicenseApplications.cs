@@ -18,7 +18,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
         enMode _Mode = enMode.AddNew;
 
         int _LocalDrivingLicenseApplicationID;
-        clsLocalDrivingLicenseApplication LDLApication;
+        clsLocalDrivingLicenseApplication LDLApplication;
         clsApplication Application;
         public frmAddUpdataLocalDrivingLicenseApplications()
         {
@@ -40,6 +40,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
             {
                 cmbLicenseClass.Items.Add(r["ClassName"]);
             }
+
         }
 
         private void _ResatDefaultValues()
@@ -49,7 +50,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 
             if (_Mode == enMode.AddNew)
             {
-                LDLApication = new clsLocalDrivingLicenseApplication();
+                LDLApplication = new clsLocalDrivingLicenseApplication();
                 lbApplicationDate.Text = DateTime.Now.ToShortDateString();
                 lbApplicationFees.Text = ((int)(clsApplicationType.Find((int)clsApplication.enApplicationType.NewLocalDrivingLicenseService)).Fees).ToString();
                 lbCreatedBy.Text = clsGlobal.CurrentUser.UserName;
@@ -63,7 +64,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
                 lbHeader.Text = "Update Local Driving License Applications";
                 ucPersonInfoWithFilter1.FilterEnabeled = false;
 
-                LDLApication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+                LDLApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
             }
 
 
@@ -112,33 +113,23 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 
         }
 
-        private void _LoadApplicationsData()
-        {
-            Application.ApplicantPersonID = ucPersonInfoWithFilter1.PersonID;
-            Application.ApplicationStatus = 1; //New;
-            Application.ApplicationDate = DateTime.Now;
-            Application.ApplicationTypeID = 1; //New License
-            Application.LastStatusDate = DateTime.Now;
-            Application.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            Application.PaidFees = clsApplicationType.Find(Application.ApplicationTypeID).Fees;
-        }
+        
         private void _LoadData()
         {
-            if (LDLApication == null) {
+            if (LDLApplication == null) {
                 MessageBox.Show("No Local drivig license application with ID = " + _LocalDrivingLicenseApplicationID);
                 return;
             }
 
-            lbDLApplicationID.Text = LDLApication.LocalDrivingLicenseApplicationID.ToString();
-            lbApplicationDate.Text = LDLApication.ApplicationDate.ToString();
-            lbApplicationFees.Text = LDLApication.PaidFees.ToString();
-            clsUser CurrentUser = clsUser.Find(LDLApication.CreatedByUserID);
+            lbDLApplicationID.Text = LDLApplication.LocalDrivingLicenseApplicationID.ToString();
+            lbApplicationDate.Text = LDLApplication.ApplicationDate.ToString();
+            lbApplicationFees.Text = LDLApplication.PaidFees.ToString();
+            clsUser CreatedByUser = clsUser.Find(LDLApplication.CreatedByUserID);
+            lbCreatedBy.Text = CreatedByUser.UserName;
 
-            if (CurrentUser != null) lbCreatedBy.Text = CurrentUser.UserName; else lbCreatedBy.Text = "";
-
-            cmbLicenseClass.SelectedIndex = cmbLicenseClass.FindString(clsLicenseClass.Find(LDLApication.LicenseClassID).ClassName);
+            cmbLicenseClass.SelectedIndex = cmbLicenseClass.FindString(clsLicenseClass.Find(LDLApplication.LicenseClassID).ClassName);
             if(_Mode == enMode.Update)
-            ucPersonInfoWithFilter1.LoadPersonInfo(LDLApication.ApplicantPersonID);
+            ucPersonInfoWithFilter1.LoadPersonInfo(LDLApplication.ApplicantPersonID);
 
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -150,18 +141,18 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
                 return; }
 
 
-            LDLApication.ApplicantPersonID = ucPersonInfoWithFilter1.PersonID;
-            LDLApication.ApplicationTypeID = (int)clsApplication.enApplicationType.NewLocalDrivingLicenseService;
-            LDLApication.ApplicationDate = DateTime.Now;
-            LDLApication.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-            LDLApication.ApplicationStatus = Convert.ToByte(clsApplication.enStatus.New);
-            LDLApication.LastStatusDate = DateTime.Now;
-            LDLApication.LicenseClassID = clsLicenseClass.Find(cmbLicenseClass.Text).LicenseClassID;
-            LDLApication.PaidFees = Convert.ToDecimal(lbApplicationFees.Text);
+            LDLApplication.ApplicantPersonID = ucPersonInfoWithFilter1.PersonID;
+            LDLApplication.ApplicationTypeID = (int)clsApplication.enApplicationType.NewLocalDrivingLicenseService;
+            LDLApplication.ApplicationDate = DateTime.Now;
+            LDLApplication.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+            LDLApplication.ApplicationStatus = Convert.ToByte(clsApplication.enStatus.New);
+            LDLApplication.LastStatusDate = DateTime.Now;
+            LDLApplication.LicenseClassID = clsLicenseClass.Find(cmbLicenseClass.Text).LicenseClassID;
+            LDLApplication.PaidFees = Convert.ToDecimal(lbApplicationFees.Text);
             
 
 
-            if (LDLApication.Save())
+            if (LDLApplication.Save())
             {
                 _LoadData();
                 _Mode = enMode.Update;

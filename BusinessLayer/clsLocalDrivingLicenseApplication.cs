@@ -121,6 +121,10 @@ namespace BusinessLayer
         {
             return clsLocalDrivingLicenseApplicationAccess.DoesPassTestType(LocalDrivingLicenseApplicationID, (int)TestType);
         }
+        public bool DoesPassTestType(clsTestType.enTestType TestType)
+        {
+            return clsLocalDrivingLicenseApplicationAccess.DoesPassTestType(this.LocalDrivingLicenseApplicationID, (int)TestType);
+        }
 
         public bool DosePassAllTest()
         {
