@@ -160,14 +160,14 @@ namespace DataAccessLayer_DLVD
             return dt;
         }
 
-        public static bool IsApplicationExsistOrComplated(int ApplicantPersonID, int LicenseClassID)
+        public static bool DosePersonHaveAnActiveApplication(int ApplicantPersonID, int LicenseClassID)
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsConnectionString.connectionString);
             string query = "select Found = 1 from Applications inner join LocalDrivingLicenseApplications "+
                 "on Applications.ApplicationID = LocalDrivingLicenseApplications.ApplicationID inner join LicenseClasses "+
                 "on LocalDrivingLicenseApplications.LicenseClassID = LicenseClasses.LicenseClassID " +
-                "where ApplicantPersonID = @ApplicantPersonID and LicenseClasses.LicenseClassID = @LicenseClassID and(ApplicationStatus in (1, 3))";
+                "where ApplicantPersonID = @ApplicantPersonID and LicenseClasses.LicenseClassID = @LicenseClassID and ApplicationStatus = 1";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 

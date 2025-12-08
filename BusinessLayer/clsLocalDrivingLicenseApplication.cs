@@ -54,9 +54,9 @@ namespace BusinessLayer
             return clsLocalDrivingLicenseApplicationAccess.GetAllLocalDrivigLicenseApplications();
         }
 
-        public static bool IsApplicationExsistOrComplated(int ApplicantPersonID, int LicenseClassID)
+        public static bool DosePersonHaveAnActiveApplication(int ApplicantPersonID, int LicenseClassID)
         {
-            return clsLocalDrivingLicenseApplicationAccess.IsApplicationExsistOrComplated(ApplicantPersonID, LicenseClassID);
+            return clsLocalDrivingLicenseApplicationAccess.DosePersonHaveAnActiveApplication(ApplicantPersonID, LicenseClassID);
         }
         static public clsLocalDrivingLicenseApplication FindByLocalDrivingAppLicenseID(int LocalDrivingLicenseApplicationID)
         {

@@ -17,6 +17,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
 {
     public partial class frmListLocalDrivingLicenseApplication : Form
     {
+
         DataTable _dt;
 
         public frmListLocalDrivingLicenseApplication()

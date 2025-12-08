@@ -68,6 +68,10 @@ namespace Driving_License_Management.Controls
             txtFilterValue.Focus();
         }
 
+        public void BtnFindFocus()
+        {
+            btnFind.Focus();
+        }
         public void LoadPersonInfo(int PersonID)
         {
             cmpFindby.SelectedIndex = 0;
