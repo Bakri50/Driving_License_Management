@@ -102,7 +102,7 @@ namespace Driving_License_Management.Controls
             {
 
                 gbRetakeTestInfo.Enabled = true;
-                lblRetakeAppFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees.ToString();
+                lblRetakeAppFees.Text = ((int)clsApplicationType.Find((int)clsApplication.enApplicationType.RetakeTest).Fees).ToString();
                 lblTitle.Text = "Scheduale Retake Test";
                 lblRetakeTestAppID.Text = "0";
             }
@@ -122,7 +122,7 @@ namespace Driving_License_Management.Controls
             if(_Mode == enMode.AddNew)
             {
                 dtpTestDate.Value = DateTime.Now;
-                lblFees.Text = clsTestType.Find((int)_TestType).Fees.ToString();
+                lblFees.Text = ((int)clsTestType.Find((int)_TestType).Fees).ToString();
 
                 _TestAppointment = new clsTestAppointment();
             }
@@ -131,7 +131,7 @@ namespace Driving_License_Management.Controls
                 if (!_LoadTestAppointmentData()) { return; }
             }
 
-            lblTotalFees.Text = (Convert.ToDecimal(lblFees.Text) + Convert.ToDecimal(lblRetakeAppFees.Text)).ToString();
+            lblTotalFees.Text = (Convert.ToInt32(lblFees.Text) + Convert.ToInt32(lblRetakeAppFees.Text)).ToString();
 
             if (!_HandleActiveTestAppointmentConstraint()) { 
              return;
@@ -179,7 +179,6 @@ namespace Driving_License_Management.Controls
             {
                 gbRetakeTestInfo.Enabled = true ;
                 lblRetakeTestAppID.Text = _TestAppointment.RetakeTestApplicationID.ToString();
-                lblRetakeAppFees.Text = _TestAppointment.RetakeTestApplicationInfo.PaidFees.ToString();
                 lblTitle.Text = "Schedule Retake Test";
 
             }

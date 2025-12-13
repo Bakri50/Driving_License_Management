@@ -1,6 +1,6 @@
 ﻿namespace Driving_License_Management.Tests
 {
-    partial class frmTestAppointments
+    partial class frmListTestAppointments
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListTestAppointments));
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblRecords = new System.Windows.Forms.Label();
@@ -125,16 +126,14 @@
             this.editToolStripMenuItem,
             this.takeTestToolStripMenuItem});
             this.cmsApplications.Name = "contextMenuStrip1";
-            this.cmsApplications.Size = new System.Drawing.Size(241, 101);
+            this.cmsApplications.Size = new System.Drawing.Size(154, 68);
             this.cmsApplications.Opening += new System.ComponentModel.CancelEventHandler(this.cmsApplications_Opening);
-
-
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(153, 32);
             this.editToolStripMenuItem.Text = "&Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -142,7 +141,7 @@
             // 
             this.takeTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.takeTestToolStripMenuItem.Name = "takeTestToolStripMenuItem";
-            this.takeTestToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.takeTestToolStripMenuItem.Size = new System.Drawing.Size(153, 32);
             this.takeTestToolStripMenuItem.Text = "Take Test";
             this.takeTestToolStripMenuItem.Click += new System.EventHandler(this.takeTestToolStripMenuItem_Click);
             // 
@@ -158,7 +157,9 @@
             // 
             // btnAddNewAppointment
             // 
+            this.btnAddNewAppointment.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnAddNewAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNewAppointment.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNewAppointment.Image")));
             this.btnAddNewAppointment.Location = new System.Drawing.Point(958, 658);
             this.btnAddNewAppointment.Name = "btnAddNewAppointment";
             this.btnAddNewAppointment.Size = new System.Drawing.Size(49, 36);
@@ -169,6 +170,7 @@
             // pbTestTypeImage
             // 
             this.pbTestTypeImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbTestTypeImage.Image = ((System.Drawing.Image)(resources.GetObject("pbTestTypeImage.Image")));
             this.pbTestTypeImage.InitialImage = null;
             this.pbTestTypeImage.Location = new System.Drawing.Point(518, 19);
             this.pbTestTypeImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -180,12 +182,12 @@
             // 
             // ucLocalDrivingLicenseApplicationInfo1
             // 
-            this.ucLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(7, 183);
+            this.ucLocalDrivingLicenseApplicationInfo1.Location = new System.Drawing.Point(12, 187);
             this.ucLocalDrivingLicenseApplicationInfo1.Name = "ucLocalDrivingLicenseApplicationInfo1";
             this.ucLocalDrivingLicenseApplicationInfo1.Size = new System.Drawing.Size(1124, 469);
             this.ucLocalDrivingLicenseApplicationInfo1.TabIndex = 146;
             // 
-            // frmTestAppointment
+            // frmTestAppointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -201,9 +203,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmTestAppointment";
+            this.MinimizeBox = false;
+            this.Name = "frmTestAppointments";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmTestAppointment";
+            this.Text = "Test Appointments";
             this.Load += new System.EventHandler(this.frmTestAppointment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.cmsApplications.ResumeLayout(false);
@@ -223,7 +226,6 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem takeTestToolStripMenuItem;
         private System.Windows.Forms.PictureBox pbTestTypeImage;
-     //   private Controls.ucLocalDrivingLicenseApplicationInfo ucLocalDrivingLicenseApplicationInfo1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAddNewAppointment;
         private Controls.ucLocalDrivingLicenseApplicationInfo ucLocalDrivingLicenseApplicationInfo1;

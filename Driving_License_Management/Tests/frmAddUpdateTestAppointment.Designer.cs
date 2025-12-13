@@ -61,7 +61,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ucSchedule1);
             this.Name = "frmAddTestAppointment";
-            this.Text = "frmAddTestAppointment";
+            this.Text = "Add Appointment";
             this.Load += new System.EventHandler(this.frmAddTestAppointment_Load);
             this.ResumeLayout(false);
 

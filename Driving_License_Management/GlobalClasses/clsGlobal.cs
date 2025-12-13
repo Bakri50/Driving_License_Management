@@ -13,6 +13,8 @@ namespace Driving_License_Management.GlobalClasses
     internal static class clsGlobal
     {
 
+        static public string IconsDirectoryPath = @"..\..\..\Storge\Icons\Icons\";
+
         static public clsUser CurrentUser;
 
         static public bool RememberMeUsernameAndPassword(string Username, string Password)

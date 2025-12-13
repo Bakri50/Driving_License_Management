@@ -231,7 +231,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
         {
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
 
-            frmTestAppointments frm = new frmTestAppointments(ID,clsTestType.enTestType.Vision) ;
+            frmListTestAppointments frm = new frmListTestAppointments(ID,clsTestType.enTestType.Vision) ;
            
             frm.ShowDialog() ;
 
@@ -243,7 +243,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
         {
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
 
-            frmTestAppointments frm = new frmTestAppointments(ID, clsTestType.enTestType.Written);
+            frmListTestAppointments frm = new frmListTestAppointments(ID, clsTestType.enTestType.Written);
 
             frm.ShowDialog();
 
@@ -258,7 +258,7 @@ namespace Driving_License_Management.Applcations.LocalDrivingLicenseApplication
         {
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
 
-            frmTestAppointments frm = new frmTestAppointments(ID, clsTestType.enTestType.Street);
+            frmListTestAppointments frm = new frmListTestAppointments(ID, clsTestType.enTestType.Street);
 
             frm.ShowDialog();
 

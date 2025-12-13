@@ -106,14 +106,14 @@ namespace BusinessLayer
                 return null;
 
         }
-        static public clsTest FindTestByPersonIDAndLicenseClass(int PersonID, int LicenseClassID,clsTestType.enTestType TestType)
+        static public clsTest FindTestByPersonIDAndLicenseClass(int LocalDrivingLicenseApplications,int PersonID, int LicenseClassID,clsTestType.enTestType TestType)
         {
             int TestID = -1;
             int TestAppointmentID = -1;
             byte TestResult = 0; string Notes = ""; int CreatedByUserID = -1;
 
             if (clsTestAccess.GetLastTestPerPersonIDAndClassLicenseIDAndTestTypeID
-                (PersonID, LicenseClassID, (int)TestType, ref TestID,
+                (LocalDrivingLicenseApplications,PersonID, LicenseClassID, (int)TestType, ref TestID,
             ref TestAppointmentID, ref TestResult,
             ref Notes, ref CreatedByUserID))
 

@@ -38,6 +38,7 @@ namespace BusinessLayer
             PaidFees = 0;
             CreatedByUserID = -1;
             this.RetakeTestApplicationID = -1;
+            RetakeTestApplicationInfo = null;
             _Mode = enMode.AddNew;
 
         }

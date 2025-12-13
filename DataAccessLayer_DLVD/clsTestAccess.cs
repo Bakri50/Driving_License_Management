@@ -70,7 +70,7 @@ namespace DataAccessLayer_DLVD
             return IsFound;
         }
 
-        static public bool GetLastTestPerPersonIDAndClassLicenseIDAndTestTypeID(int PersonID, int LicenseClassID, int TestTypeID, ref int TestID, ref int TestAppointmentID,
+        static public bool GetLastTestPerPersonIDAndClassLicenseIDAndTestTypeID(int LocalDrivingLicenseApplicationID, int PersonID, int LicenseClassID, int TestTypeID, ref int TestID, ref int TestAppointmentID,
           ref byte TestResult, ref string Notes, ref int CreatedByUserID)
         {
             bool IsFound = false;
@@ -88,10 +88,12 @@ namespace DataAccessLayer_DLVD
                 WHERE        (Applications.ApplicantPersonID = @PersonID) 
                         AND (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID)
                         AND ( TestAppointments.TestTypeID=@TestTypeID)
+                        AND LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
                 ORDER BY Tests.TestAppointmentID DESC"; ;
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
+            cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
             cmd.Parameters.AddWithValue("@PersonID", PersonID);
             cmd.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
             cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);

@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Driving_License_Management.GlobalClasses;
 
 namespace Driving_License_Management.Tests
 {
-    public partial class frmTestAppointments : Form
+    public partial class frmListTestAppointments : Form
     {
         int _LDLApplicationID = -1;
         clsTestType.enTestType _TestType;
+
         clsLocalDrivingLicenseApplication LDLApplication;
-        public frmTestAppointments(int LDLApplicationID, clsTestType.enTestType TestType)
+        public frmListTestAppointments(int LDLApplicationID, clsTestType.enTestType TestType)
         {
+
             _LDLApplicationID = LDLApplicationID;
             _TestType = TestType;
             InitializeComponent();
@@ -30,10 +33,26 @@ namespace Driving_License_Management.Tests
             if (LDLApplication == null)
             {
                 MessageBox.Show("Application not exist!");
-                btnAddNewAppointment.Enabled = false;
-                takeTestToolStripMenuItem.Enabled = false;
-                editToolStripMenuItem.Enabled = false;
+                this.Close();
+                return;
+            }
 
+            switch (_TestType)
+            {
+                case clsTestType.enTestType.Vision:
+                    lblTitle.Text = "Vision Test";
+                    pbTestTypeImage.ImageLocation = clsGlobal.IconsDirectoryPath + "Vision 512.png";
+                    break;
+                case clsTestType.enTestType.Written:
+                    lblTitle.Text = "Written Test";
+                    pbTestTypeImage.ImageLocation = clsGlobal.IconsDirectoryPath + "Written 512.png";
+                    break;
+                case clsTestType.enTestType.Street:
+                    lblTitle.Text = "Street Test";
+                    pbTestTypeImage.ImageLocation = clsGlobal.IconsDirectoryPath + "driving-test 512.png";
+                    break;
+                default:
+                    break;
             }
 
             ucLocalDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(LDLApplication.LocalDrivingLicenseApplicationID);
@@ -51,14 +70,15 @@ namespace Driving_License_Management.Tests
         {
 
 
-
+            //If this person already has an active test,
             if (LDLApplication.IsThereAnActiveTestApointments(_TestType))
             {
 
-                MessageBox.Show("This Application Already Has An Active Appointment", "Not Allow", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("This Person Already Has An Active Appointment", "Not Allow", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
 
+            // get last test
             clsTest LastTest = LDLApplication.GetLastTestPerTestType(_TestType);
 
             if (LastTest == null)
@@ -101,7 +121,7 @@ namespace Driving_License_Management.Tests
             int ID = (int)dgv.CurrentRow.Cells[0].Value;
             //frmT frm = new frmTakeTest(ID);
             //frm.ShowDialog();
-            frmTakeTest1 frm = new frmTakeTest1(ID, _TestType);
+            frmTakeTest frm = new frmTakeTest(ID, _TestType);
             frm.ShowDialog();
             _LoadData();
         }

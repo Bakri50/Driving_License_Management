@@ -136,7 +136,7 @@ namespace BusinessLayer
         }
         public clsTest GetLastTestPerTestType(clsTestType.enTestType TestType)
         {
-            return clsTest.FindTestByPersonIDAndLicenseClass(this.ApplicantPersonID, this.LicenseClassID, TestType);
+            return clsTest.FindTestByPersonIDAndLicenseClass(this.LocalDrivingLicenseApplicationID,this.ApplicantPersonID, this.LicenseClassID, TestType);
         }
 
         public int TotalTrialPerTest(clsTestType.enTestType TestType)
